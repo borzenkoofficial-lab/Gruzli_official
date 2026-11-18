@@ -445,3 +445,22 @@ body.lightbox-open{overflow:hidden}
 @media(max-width:780px){.hero-release{margin-top:23px}.hero-meta{margin-top:19px}}
 @media(max-width:430px){.hero-eyebrow{min-height:27px;padding:0 10px;font-size:8px}.hero-project-type{font-size:7px}.hero-release{column-gap:13px;margin-top:21px;padding:11px 13px}.hero-release strong{font-size:28px}.hero-release-note{padding-left:11px;font-size:6px;letter-spacing:.08em}}
 @media(prefers-reduced-motion:reduce){.hero-eyebrow .live-dot{animation:none}}
+
+
+/* HERO / Two ways to use GRUZLI */
+.hero-entry-choice{display:grid;grid-template-columns:1fr 1fr;gap:9px;width:min(100%,610px);margin-top:30px}
+.hero-entry-card{position:relative;min-width:0;min-height:112px;display:flex;align-items:flex-start;gap:12px;padding:15px 35px 14px 14px;border:1px solid rgba(255,255,255,.14);border-radius:15px;background:linear-gradient(145deg,rgba(255,255,255,.095),rgba(255,255,255,.035));color:#fff;text-decoration:none;overflow:hidden;transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease}
+.hero-entry-card:before{position:absolute;inset:0;content:"";background:radial-gradient(circle at 0 0,rgba(240,189,24,.13),transparent 65%);opacity:0;transition:opacity .22s ease;pointer-events:none}
+.hero-entry-card:hover{transform:translateY(-3px);border-color:rgba(240,189,24,.48);background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.055));box-shadow:0 14px 32px rgba(0,0,0,.16)}
+.hero-entry-card:hover:before{opacity:1}
+.hero-entry-service{border-color:rgba(240,189,24,.38);background:linear-gradient(145deg,rgba(240,189,24,.13),rgba(255,255,255,.045))}
+.hero-entry-icon{position:relative;z-index:1;flex:0 0 31px;width:31px;height:31px;display:grid;place-items:center;border:1px solid rgba(240,189,24,.32);border-radius:9px;background:rgba(240,189,24,.12);color:var(--yellow);font-size:16px}
+.hero-entry-content{position:relative;z-index:1;display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:5px}
+.hero-entry-kicker{color:rgba(255,255,255,.46);font-size:7px;font-weight:850;letter-spacing:.14em;line-height:1.4}
+.hero-entry-content strong{font-size:clamp(11px,1.05vw,13px);font-weight:800;letter-spacing:-.025em;line-height:1.25}
+.hero-entry-content small{max-width:220px;color:rgba(255,255,255,.57);font-size:9px;line-height:1.5}
+.hero-entry-arrow{position:absolute;right:13px;top:13px;color:var(--yellow);font-size:15px;transition:transform .22s ease}
+.hero-entry-card:hover .hero-entry-arrow{transform:translate(2px,-2px)}
+@media(max-width:1050px){.hero-entry-choice{max-width:560px}}
+@media(max-width:600px){.hero-entry-choice{grid-template-columns:1fr;gap:8px;margin-top:25px}.hero-entry-card{min-height:88px;padding:13px 36px 12px 13px}.hero-entry-content strong{font-size:12px}.hero-entry-content small{font-size:9px;max-width:270px}}
+@media(prefers-reduced-motion:reduce){.hero-entry-card,.hero-entry-card:before,.hero-entry-arrow{transition:none}}
