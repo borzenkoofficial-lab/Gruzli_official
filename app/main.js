@@ -45,7 +45,7 @@ const deviceData={
 const tabs=[...document.querySelectorAll(".device-tab")];
 const stepButtons=[...document.querySelectorAll(".guide-step")];
 const dots=[...document.querySelectorAll(".step-dots button")];
-const fields={eyebrow:document.querySelector("#panel-eyebrow"),title:document.querySelector("#panel-title"),intro:document.querySelector("#panel-intro"),steps:document.querySelector("#step-list"),actions:document.querySelector("#guide-actions"),disclaimer:document.querySelector("#guide-disclaimer"),image:document.querySelector("#phone-screen-image"),callout:document.querySelector("#instruction-callout"),visualLabel:document.querySelector("#visual-label"),phone:document.querySelector("#phone-mockup"),desktop:document.querySelector("#desktop-mockup"),prev:document.querySelector("#prev-step"),next:document.querySelector("#next-step"),dots:document.querySelector("#step-dots")};
+const fields={overlay:document.querySelector("#phone-guide-overlay"),eyebrow:document.querySelector("#panel-eyebrow"),title:document.querySelector("#panel-title"),intro:document.querySelector("#panel-intro"),steps:document.querySelector("#step-list"),actions:document.querySelector("#guide-actions"),disclaimer:document.querySelector("#guide-disclaimer"),image:document.querySelector("#phone-screen-image"),callout:document.querySelector("#instruction-callout"),visualLabel:document.querySelector("#visual-label"),phone:document.querySelector("#phone-mockup"),desktop:document.querySelector("#desktop-mockup"),prev:document.querySelector("#prev-step"),next:document.querySelector("#next-step"),dots:document.querySelector("#step-dots")};
 let currentDevice="ios",currentStep=0;
 function renderStep(){
  const data=deviceData[currentDevice],step=data.steps[currentStep];
