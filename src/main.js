@@ -278,3 +278,58 @@ lightbox.addEventListener("click", (event) => {
   if (event.target === lightbox) closeLightbox();
 });
 lightbox.addEventListener("close", () => document.body.classList.remove("lightbox-open"));
+
+/* Signature Experience — deterministic local demo, no production data or network calls. */
+(() => {
+  const root = document.querySelector("#signature");
+  if (!root) return;
+  const stages = [
+    {client:["Сформулируйте задачу.","Клиент описывает работу, указывает адрес, дату и необходимое количество людей.","Создать заявку","Клиент создал заявку","Задача передана в рабочий процесс."],dispatcher:["Проверьте запрос и условия.","Диспетчер рассматривает детали заявки и организует дальнейшую коммуникацию.","Обработать заявку","Диспетчер получил запрос","Условия и детали переходят к координации."],worker:["Увидьте условия заказа.","Исполнитель просматривает доступные условия и может отправить отклик на подходящую заявку.","Посмотреть заявку","Заявка доступна исполнителю","Можно изучить условия и принять решение об отклике."]},
+    {client:["Получите предложение.","После обработки запроса можно обсудить условия и состав команды с диспетчером.","Рассмотреть предложение","Идёт координация","Детали заказа уточняются перед подтверждением."],dispatcher:["Согласуйте состав команды.","Диспетчер работает с откликами, базой исполнителей и коммуникацией по заказу.","Подобрать исполнителей","Диспетчер координирует заказ","Отклики и участники рассматриваются в рабочем пространстве."],worker:["Отправьте отклик.","Грузчик откликается на заявку и открывает чат с назначенным диспетчером для обсуждения деталей.","Откликнуться","Исполнитель отправил отклик","Отклик и дальнейшее общение связаны с заявкой."]},
+    {client:["Следите за ходом заказа.","Участники продолжают согласование в контексте заказа и могут уточнять детали в переписке.","Открыть заказ","Участники на связи","Коммуникация остаётся рядом с заказом."],dispatcher:["Ведите заказ по этапам.","Диспетчер видит отклики, ведёт коммуникацию и контролирует работу с заказом.","Продолжить координацию","Заказ в работе","Диспетчер сопровождает взаимодействие участников."],worker:["Работайте по согласованным условиям.","Исполнитель видит свои заказы и может общаться с диспетчером по деталям выполнения.","Открыть свои заказы","Исполнитель взаимодействует с диспетчером","Рабочая информация собрана в приложении."]},
+    {client:["Оцените результат взаимодействия.","После завершения заказа остаётся история работы и обратная связь участников.","Вернуться к заказу","Сценарий завершён","История и оценки помогают учитывать предыдущий опыт."],dispatcher:["Зафиксируйте итог работы.","Завершённые заказы и оценки исполнителей помогают формировать рабочую историю.","Посмотреть историю","Заказ завершён","Результат сохраняется в истории заказов."],worker:["Сохраните историю выполненной работы.","Завершённые заказы и оценки формируют рабочую историю исполнителя.","Посмотреть профиль","Работа завершена","В профиле отражается история заказов и оценок."]}
+  ];
+  const roles = {client:["CLIENT VIEW / 01","Клиент"],dispatcher:["DISPATCH VIEW / 02","Диспетчер"],worker:["WORKER VIEW / 03","Грузчик"]};
+  const roleButtons = [...root.querySelectorAll("[data-signature-role]")];
+  const title = root.querySelector("#signature-perspective-title");
+  const copy = root.querySelector("#signature-perspective-copy");
+  const roleLabel = root.querySelector("#signature-role-label");
+  const stageLabel = root.querySelector("#signature-stage-label");
+  const action = root.querySelector("#signature-action-text");
+  const icon = root.querySelector("#signature-action-icon");
+  const eventTitle = root.querySelector("#signature-stage-event b");
+  const eventCopy = root.querySelector("#signature-stage-event p");
+  const eventIndex = root.querySelector("#signature-stage-event .event-index");
+  const fill = root.querySelector("#signature-progress-fill");
+  const progressLabels = [...root.querySelectorAll("[data-progress-label]")];
+  const nodes = {client:root.querySelector(".node-client"),dispatcher:root.querySelector(".node-dispatcher"),worker:root.querySelector(".node-worker")};
+  const next = root.querySelector("#signature-next"), prev = root.querySelector("#signature-prev");
+  const count = root.querySelector("#signature-step-count");
+  let role = "client", stage = 0;
+  const render = () => {
+    const data = stages[stage][role];
+    root.querySelector(".signature-perspective").classList.add("is-changing");
+    window.setTimeout(() => {
+      title.textContent = data[0]; copy.textContent = data[1]; action.textContent = data[2];
+      roleLabel.textContent = roles[role][0]; stageLabel.textContent = "ЭТАП 0"+(stage+1);
+      icon.textContent = role==="client"?"↗":role==="dispatcher"?"⌘":"✓";
+      eventTitle.textContent = stages[stage][role][3]; eventCopy.textContent = stages[stage][role][4];
+      eventIndex.textContent = "0"+(stage+1); count.textContent = "0"+(stage+1)+" / 04";
+      fill.style.width = ((stage+1)*25)+"%";
+      progressLabels.forEach((el,i)=>el.classList.toggle("is-current",i===stage));
+      progressLabels.forEach((el,i)=>el.classList.toggle("is-done",i<stage));
+      Object.entries(nodes).forEach(([key,node])=>node.classList.toggle("is-active",key===role));
+      prev.disabled = stage===0;
+      next.innerHTML = stage===3 ? "Повторить сценарий <span>↻</span>" : "Следующий этап <span>→</span>";
+      root.querySelector(".signature-perspective").classList.remove("is-changing");
+    }, 120);
+  };
+  roleButtons.forEach(button=>button.addEventListener("click",()=>{
+    role=button.dataset.signatureRole;
+    roleButtons.forEach(b=>{const active=b===button;b.classList.toggle("is-active",active);b.setAttribute("aria-selected",String(active));});
+    render();
+  }));
+  next.addEventListener("click",()=>{stage=stage===3?0:Math.min(3,stage+1);render();});
+  prev.addEventListener("click",()=>{stage=Math.max(0,stage-1);render();});
+  render();
+})();
