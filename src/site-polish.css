@@ -1,0 +1,96 @@
+
+/* GRUZLI GLOBAL DESIGN SYSTEM — unified finishing pass */
+:root{
+  --gruzli-ink:#17181b;
+  --gruzli-paper:#f7f7f5;
+  --gruzli-line:#deded9;
+  --gruzli-muted:#73757a;
+  --gruzli-yellow:#f0bd18;
+  --gruzli-radius-sm:12px;
+  --gruzli-radius-md:18px;
+  --gruzli-radius-lg:26px;
+  --gruzli-shadow-soft:0 14px 38px rgba(23,24,27,.055);
+  --gruzli-shadow-hover:0 22px 54px rgba(23,24,27,.095);
+}
+html{scroll-padding-top:88px}
+body{font-feature-settings:"ss01" on,"cv11" on}
+a,button{-webkit-tap-highlight-color:transparent}
+:where(a,button,[tabindex]):focus-visible{outline:3px solid #d9a900;outline-offset:4px}
+button:disabled{cursor:not-allowed}
+::selection{background:#f0bd18;color:#17181b}
+.site-header{transition:background .28s ease,border-color .28s ease,box-shadow .28s ease}
+.site-header.is-scrolled .header-inner{border-bottom-color:transparent}
+.nav-links>a[aria-current="location"]:not(.nav-cta){font-weight:800}
+.nav-cta{min-height:42px}
+.hero{isolation:isolate}
+.hero-copy{max-width:660px}
+.hero-lead{max-width:520px}
+.hero-release,.hero-entry-card{isolation:isolate}
+.hero-entry-card{min-height:136px}
+.hero-entry-content strong{max-width:100%;text-wrap:balance}
+.hero-entry-content small{max-width:265px}
+.hero-entry-service{color:#17181b}
+.hero-entry-app{color:#17181b}
+.hero-entry-card:focus-visible{outline-color:#f0bd18;outline-offset:5px}
+.hero-meta{letter-spacing:.015em}
+.section-kicker,.story-topline,.contrast-topline,.signature-kicker,.download-top{line-height:1.6}
+.intro-section,.roles-section,.features-section,.faq-section{position:relative}
+.intro-inner{padding-top:clamp(72px,8vw,108px);padding-bottom:clamp(76px,8vw,112px)}
+.section-heading{gap:clamp(24px,5vw,64px)}
+.role-tabs{box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+.role-tab{min-height:64px}
+.role-panel{box-shadow:var(--gruzli-shadow-soft);transition:border-color .25s,box-shadow .25s}
+.role-panel:hover{border-color:#d9d5c6;box-shadow:var(--gruzli-shadow-hover)}
+.role-visual{border:1px solid rgba(23,24,27,.045)}
+.story-section{background:#f7f7f5}
+.story-chapter{scroll-margin-top:100px}
+.story-chapter-copy>p{max-width:760px}
+.story-triad>div,.story-statuses>div{transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.story-triad>div:hover{transform:translateY(-3px);border-color:#e0c96c;background:#fff}
+.contrast-card,.workflow-card,.feature-card,.faq-item,.screen-card{min-width:0}
+.contrast-card{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.contrast-card:hover{transform:translateY(-3px);box-shadow:0 18px 42px rgba(23,24,27,.07)}
+.contrast-tab{min-height:48px}
+.contrast-tab:focus-visible,.role-tab:focus-visible,.signature-role:focus-visible{outline-offset:2px}
+.workflow-card{transition:transform .35s var(--ease),border-color .25s,background .25s,box-shadow .25s}
+.workflow-card:hover{transform:translateY(-5px)}
+.signature-section{scroll-margin-top:30px}
+.signature-role{min-height:54px}
+.signature-next,.signature-prev,.faq-item>button{min-height:54px}
+.signature-stage{min-width:0}
+.signature-stage svg{max-width:100%}
+.feature-card{min-height:230px;box-shadow:0 6px 22px rgba(23,24,27,.025)}
+.feature-card:focus-within{border-color:#d9b83e}
+.screens-rail{scroll-snap-type:x mandatory;scroll-padding-inline:24px}
+.screen-card{scroll-snap-align:start}
+.screen-photo img{transition:transform .55s var(--ease),filter .35s ease}
+.screen-card:hover .screen-photo img{transform:translateY(-3px) scale(1.015)}
+.screen-caption{gap:7px}
+.download-section{isolation:isolate}
+.download-roles>a{min-height:88px;transition:transform .25s var(--ease),background .25s,border-color .25s}
+.download-roles>a:hover{transform:translateX(5px)}
+.faq-item>button{transition:color .2s ease}
+.faq-item>button:hover{color:#9a7600}
+.faq-item>button:focus-visible{outline-offset:-3px}
+.site-footer a:focus-visible{outline-color:#f0bd18}
+@media(max-width:780px){
+  html{scroll-padding-top:72px}
+  .hero-entry-card{min-height:102px}
+  .role-panel{box-shadow:0 12px 32px rgba(23,24,27,.045)}
+  .contrast-card:hover,.workflow-card:hover{transform:none}
+  .signature-section{scroll-margin-top:12px}
+  .feature-card{min-height:195px}
+  .download-roles>a:hover{transform:none}
+}
+@media(max-width:430px){
+  .hero-entry-card{min-height:96px}
+  .hero-entry-content small{max-width:calc(100% - 4px)}
+  .hero-release-note{white-space:normal;max-width:100px;line-height:1.5}
+  .story-statuses{gap:10px}
+  .signature-kicker,.signature-bottomline{font-size:7px;letter-spacing:.1em}
+  .faq-item>button{grid-template-columns:25px 1fr 22px;gap:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}

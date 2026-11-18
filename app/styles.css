@@ -21,4 +21,4 @@
 .phone-guide-sheet .home-icon{width:34px;height:34px;margin:8px auto;border-radius:9px;background:#f0bd18;display:grid;place-items:center;font-weight:900}
 .phone-bottom-bar .share-control{color:#b18600;font-weight:900}
 @media(max-width:640px){.phone-guide-overlay{inset:47px 0 0;padding:6px}.phone-guide-sheet{padding:10px 8px}.phone-guide-sheet h4{font-size:9px}.phone-guide-sheet p{font-size:7px}}
-\n.phone-bottom-bar .share-control.is-highlighted{background:#fff1bd;border-radius:6px;box-shadow:0 0 0 4px #fff1bd}\n
+.phone-bottom-bar .share-control.is-highlighted{background:#fff1bd;border-radius:6px;box-shadow:0 0 0 4px #fff1bd}

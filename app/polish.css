@@ -1,0 +1,59 @@
+
+/* GRUZLI APP GUIDE — unified finishing pass */
+:root{
+  --guide-ink:#17181b;
+  --guide-paper:#f7f7f5;
+  --guide-line:#deded9;
+  --guide-yellow:#f0bd18;
+  --guide-shadow:0 18px 48px rgba(23,24,27,.07);
+}
+html{scroll-padding-top:86px}
+body{font-feature-settings:"ss01" on,"cv11" on}
+a,button{-webkit-tap-highlight-color:transparent}
+:where(a,button,[tabindex]):focus-visible{outline:3px solid #d5a600;outline-offset:4px}
+.header-action,.hero-button,.primary-button{min-height:48px}
+.header-action{display:inline-flex;align-items:center;gap:12px;transition:background .22s,border-color .22s,color .22s,transform .22s}
+.header-action:hover{background:#f0bd18;border-color:#f0bd18;color:#17181b;transform:translateY(-2px)}
+.hero-copy>p{max-width:530px}
+.hero-button{box-shadow:0 12px 28px rgba(240,189,24,.14)}
+.hero-art{min-width:0}
+.device-tabs{box-shadow:inset 0 1px 0 rgba(255,255,255,.75)}
+.device-tab{min-height:72px}
+.device-tab:hover{border-color:#e5d9a9;background:rgba(255,255,255,.58)}
+.device-tab.is-active{box-shadow:0 9px 25px rgba(23,24,27,.07)}
+.device-panel{box-shadow:var(--guide-shadow)}
+.guide-copy{min-width:0}
+.guide-step{min-height:64px;border-color:transparent}
+.guide-step:hover{transform:translateX(2px);background:#fffdf7}
+.guide-step:focus-visible{outline-offset:1px}
+.guide-step.is-active{box-shadow:0 7px 20px rgba(190,151,18,.09)}
+.guide-visual{min-width:0}
+.instruction-callout{border-color:#e2d7b5;box-shadow:0 18px 42px rgba(30,30,20,.13)}
+.visual-controls>button{width:42px;height:42px;transition:transform .2s,border-color .2s,background .2s}
+.visual-controls>button:not(:disabled):hover{transform:translateY(-2px);border-color:#d8b331;background:#fffaf0}
+.step-dots button{min-width:8px;min-height:8px}
+.primary-button{transition:transform .22s var(--ease),box-shadow .22s,background .22s}
+.primary-button:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 15px 34px rgba(240,189,24,.2)}
+.primary-button.is-disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
+.desktop-showcase{box-shadow:0 35px 90px rgba(0,0,0,.28)}
+.showcase-window{box-shadow:0 1px 0 rgba(255,255,255,.55)}
+.access-section{position:relative;overflow:hidden}
+.access-section:after{content:"";position:absolute;right:-190px;bottom:-330px;width:540px;height:540px;border:1px solid rgba(160,130,30,.12);border-radius:50%;box-shadow:0 0 0 28px rgba(160,130,30,.025),0 0 0 58px rgba(160,130,30,.02);pointer-events:none}
+.access-inner{position:relative;z-index:1}
+.access-actions>a:first-child{min-height:52px;display:inline-flex;align-items:center;transition:transform .22s,background .22s}
+.access-actions>a:first-child:hover{transform:translateY(-2px);background:#303135}
+.app-footer a:focus-visible{outline-color:#f0bd18}
+@media(max-width:900px){
+  .guide-visual{border-top-color:#e6e4dd}
+}
+@media(max-width:640px){
+  html{scroll-padding-top:68px}
+  .device-tab{min-height:76px}
+  .guide-step{min-height:62px}
+  .visual-controls>button{width:40px;height:40px}
+  .access-actions{gap:12px}
+  .app-footer{row-gap:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
