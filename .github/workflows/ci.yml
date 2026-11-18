@@ -2,7 +2,7 @@ name: Build official site
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'feature/**']
   pull_request:
     branches: [main]
 

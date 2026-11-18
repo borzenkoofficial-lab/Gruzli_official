@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f7f5" />
+  <meta name="description" content="Как пользоваться Gruzli на iPhone, Android и компьютере. Простая интерактивная инструкция по установке и работе." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750;800;850;900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://raw.githubusercontent.com/borzenkoofficial-lab/gruzli-b99e57fd/main/public/favicon.jpeg" type="image/jpeg" />
+  <link rel="stylesheet" href="/app/styles.css" />
+  <title>Приложение Gruzli — iPhone, Android и компьютер</title>
+</head>
+<body>
+  <a class="skip-link" href="#guide">Перейти к инструкции</a>
+  <header class="app-header" id="top">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Gruzli — на главную"><span class="brand-symbol"><i></i></span><span class="brand-name">gruzli<span>.</span></span></a>
+      <nav class="header-nav" aria-label="Навигация">
+        <a href="/">О платформе</a>
+        <a href="#guide">Установка</a>
+        <a href="#desktop">Версия для ПК</a>
+      </nav>
+      <a class="header-action" href="https://gruzli-b99e57fd.vercel.app/" target="_blank" rel="noreferrer">Открыть Gruzli <span>↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="app-hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><i></i> GRUZLI / ДОСТУП НА ЛЮБОМ УСТРОЙСТВЕ</div>
+          <h1>Один Gruzli.<br><em>Ваше устройство.</em></h1>
+          <p>Откройте Gruzli на телефоне или компьютере. Ниже — простая инструкция: выберите своё устройство и повторяйте шаги на экране.</p>
+          <a class="hero-button" href="#guide">Выбрать устройство <span>↓</span></a>
+          <div class="hero-meta"><span><b>01</b> iPhone</span><span><b>02</b> Android</span><span><b>03</b> Компьютер</span></div>
+        </div>
+        <div class="hero-art" aria-label="Экраны приложения Gruzli">
+          <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+          <div class="art-phone art-phone-back"><div class="art-frame"><img src="/images/gruzli-new-profile.webp" alt="Профиль исполнителя в Gruzli" /></div></div>
+          <div class="art-phone art-phone-front"><div class="art-frame"><img src="/images/gruzli-new-feed.webp" alt="Лента заявок в Gruzli" /></div></div>
+          <div class="art-note"><span class="note-dot"></span><div><b>Три роли в одной платформе</b><small>Клиент · Диспетчер · Грузчик</small></div></div>
+          <div class="art-index">APP EXPERIENCE / 2026</div>
+        </div>
+      </div>
+      <div class="hero-bottom"><span>ПОНЯТНО ДЛЯ КАЖДОГО</span><i></i><span>ТЕЛЕФОН · ПЛАНШЕТ · КОМПЬЮТЕР</span></div>
+    </section>
+
+    <section class="guide-section" id="guide">
+      <div class="section-shell">
+        <div class="section-kicker"><span>01 / ВЫБЕРИТЕ УСТРОЙСТВО</span><span>ИНСТРУКЦИЯ ПО ШАГАМ</span></div>
+        <div class="section-heading"><h2>Как вы будете<br><em>пользоваться Gruzli?</em></h2><p>Выберите устройство. Мы покажем подходящий способ входа и установки.</p></div>
+        <div class="device-tabs" role="tablist" aria-label="Выбор устройства">
+          <button class="device-tab is-active" role="tab" aria-selected="true" aria-controls="device-panel" id="tab-ios" data-device="ios"><span class="device-icon"></span><span><b>iPhone</b><small>Установка PWA</small></span><i>01</i></button>
+          <button class="device-tab" role="tab" aria-selected="false" aria-controls="device-panel" id="tab-android" data-device="android"><span class="device-icon android-icon">◉</span><span><b>Android</b><small>APK для установки</small></span><i>02</i></button>
+          <button class="device-tab" role="tab" aria-selected="false" aria-controls="device-panel" id="tab-desktop" data-device="desktop"><span class="device-icon desktop-icon">▣</span><span><b>Компьютер</b><small>Веб-версия</small></span><i>03</i></button>
+        </div>
+
+        <div class="device-panel" id="device-panel" role="tabpanel" aria-live="polite" tabindex="0">
+          <div class="guide-copy">
+            <div class="panel-eyebrow" id="panel-eyebrow">IPHONE / PWA</div>
+            <h3 id="panel-title">Добавьте Gruzli<br>на экран iPhone.</h3>
+            <p class="panel-intro" id="panel-intro">На iPhone Gruzli работает как веб-приложение. Устанавливать его из App Store не нужно.</p>
+            <div class="step-list" id="step-list">
+              <button class="guide-step is-active" type="button" data-step="0"><span class="step-number">1</span><span><b>Откройте Safari</b><small>Перейдите на сайт Gruzli по кнопке ниже.</small></span><i>↗</i></button>
+              <button class="guide-step" type="button" data-step="1"><span class="step-number">2</span><span><b>Нажмите «Поделиться»</b><small>Значок квадрата со стрелкой вверх в Safari.</small></span><i>↗</i></button>
+              <button class="guide-step" type="button" data-step="2"><span class="step-number">3</span><span><b>Выберите «На экран Домой»</b><small>Если пункта нет, прокрутите список действий вниз.</small></span><i>↗</i></button>
+              <button class="guide-step" type="button" data-step="3"><span class="step-number">4</span><span><b>Нажмите «Добавить»</b><small>Иконка Gruzli появится среди приложений.</small></span><i>✓</i></button>
+            </div>
+            <div class="guide-actions" id="guide-actions"><a class="primary-button" href="https://gruzli-b99e57fd.vercel.app/" target="_blank" rel="noreferrer">Открыть Gruzli в Safari <span>↗</span></a><span class="action-note">Важно: для установки используйте Safari, не встроенный браузер мессенджера.</span></div>
+          </div>
+          <div class="guide-visual" id="guide-visual">
+            <div class="visual-topline"><span id="visual-label">ШАГ 01 / 04</span><b>LIVE GUIDE</b></div>
+            <div class="device-stage">
+              <div class="phone-mockup" id="phone-mockup">
+                <div class="phone-hardware"><span class="phone-island"></span><div class="phone-screen">
+                  <div class="phone-status"><b>9:41</b><span>●●●　 Wi-Fi　▰</span></div>
+                  <div class="phone-browser"><span>◉</span><b>gruzli-b99e57fd.vercel.app</b><span>↻</span></div>
+                  <img id="phone-screen-image" src="/images/gruzli-new-feed.webp" alt="Реальный экран ленты заявок Gruzli" />
+                  <div class="phone-bottom-bar"><span>‹</span><span>□</span><span class="share-control">⇧</span><span>▣</span></div><div class="phone-guide-overlay" id="phone-guide-overlay" hidden></div>
+                </div></div>
+              </div>
+              <div class="instruction-callout" id="instruction-callout"><span class="callout-pointer">↗</span><div><small>ВАШЕ ДЕЙСТВИЕ</small><b>Откройте Gruzli в Safari</b><p>Нажмите кнопку «Открыть Gruzli в Safari» слева.</p></div></div>
+              <div class="desktop-mockup" id="desktop-mockup" hidden>
+                <div class="desktop-window"><div class="window-bar"><i></i><i></i><i></i><span>gruzli — рабочее пространство</span></div><div class="window-body"><aside><b>G</b><span class="nav-active">⌂</span><span>▤</span><span>◌</span><span>▱</span><span>♙</span></aside><div class="window-main"><div class="window-heading"><div><small>РАБОЧАЯ ОБЛАСТЬ</small><b>Мои заказы</b></div><span>＋ Создать заказ</span></div><div class="window-stats"><div><small>АКТИВНЫЕ</small><b>08</b></div><div><small>НОВЫЕ ЗАЯВКИ</small><b>12</b></div><div><small>СООБЩЕНИЯ</small><b>04</b></div></div><div class="window-table"><div>ЗАКАЗ <span>СТАТУС</span> <em>ДАТА</em></div><p>Разгрузка материалов <b>В работе</b><small>Сегодня</small></p><p>Переезд офиса <b>Новая</b><small>Завтра</small></p><p>Подъём мебели <b>Завершён</b><small>Вчера</small></p></div></div></div></div>
+              </div>
+            </div>
+            <div class="visual-controls"><button type="button" id="prev-step" aria-label="Предыдущий шаг" disabled>←</button><div class="step-dots" id="step-dots"><button class="is-active" aria-label="Шаг 1"></button><button aria-label="Шаг 2"></button><button aria-label="Шаг 3"></button><button aria-label="Шаг 4"></button></div><button type="button" id="next-step" aria-label="Следующий шаг">→</button></div>
+          </div>
+        </div>
+        <p class="guide-disclaimer" id="guide-disclaimer">Gruzli на iPhone — это PWA: веб-приложение, которое открывается с отдельной иконки и работает через интернет. Это не приложение из App Store.</p>
+      </div>
+    </section>
+
+    <section class="desktop-section" id="desktop">
+      <div class="section-shell">
+        <div class="section-kicker light-kicker"><span>02 / БОЛЬШОЙ ЭКРАН</span><span>GRUZLI WEB</span></div>
+        <div class="desktop-heading"><div><h2>Для работы за компьютером.<br><em>Всё пространство — перед вами.</em></h2><p>Веб-версия открывается в браузере. На большом экране удобнее одновременно видеть рабочие разделы, список заказов и детали выбранной заявки.</p></div><a class="primary-button" href="https://gruzli-b99e57fd.vercel.app/" target="_blank" rel="noreferrer">Открыть веб-версию <span>↗</span></a></div>
+        <div class="desktop-showcase">
+          <div class="showcase-window">
+            <div class="showcase-window-top"><div class="window-lights"><i></i><i></i><i></i></div><span>GRUZLI / WEB WORKSPACE</span><b>DESKTOP PREVIEW</b></div>
+            <div class="showcase-window-body">
+              <aside class="showcase-sidebar"><div class="sidebar-brand"><b>G</b><span>gruzli</span></div><small>РАБОЧАЯ ОБЛАСТЬ</small><div class="side-item active">⌂ <span>Рабочий стол</span></div><div class="side-item">▤ <span>Мои заказы</span></div><div class="side-item">◌ <span>Сообщения</span></div><div class="side-item">▱ <span>Картотека</span></div><div class="side-separator"></div><small>СЕРВИС</small><div class="side-item">♧ <span>Уведомления</span></div><div class="side-item">⚙ <span>Настройки</span></div><div class="sidebar-user"><i>АМ</i><span><b>Алексей Морозов</b><small>Профиль исполнителя</small></span></div></aside>
+              <div class="showcase-workspace"><div class="workspace-top"><div><small>СРЕДА, 18 НОЯБРЯ</small><h3>Рабочий стол</h3></div><span class="create-order">＋ Создать заказ</span></div><div class="workspace-metrics"><div><small>АКТИВНЫЕ ЗАКАЗЫ</small><b>08</b><span>Текущая работа</span></div><div><small>НОВЫЕ ЗАЯВКИ</small><b>12</b><span>Требуют внимания</span></div><div><small>СООБЩЕНИЯ</small><b>04</b><span>Непрочитанные</span></div></div><div class="workspace-content"><div class="orders-panel"><div class="panel-title"><b>Последние заказы</b><span>Все заказы ↗</span></div><div class="order-line"><i class="order-dot yellow"></i><span><b>Разгрузка материалов</b><small>Москва · Сегодня, 14:00</small></span><em>В работе</em></div><div class="order-line"><i class="order-dot green"></i><span><b>Переезд офиса</b><small>Москва · Завтра, 09:00</small></span><em>Новая</em></div><div class="order-line"><i class="order-dot gray"></i><span><b>Подъём мебели</b><small>Москва · Вчера</small></span><em>Завершён</em></div></div><div class="detail-panel"><small>ВЫБРАННЫЙ ЗАКАЗ</small><b>Разгрузка<br>материалов</b><span>3 исполнителя · 5 часов</span><div class="detail-total">4 250 ₽</div><div class="detail-status">● В РАБОТЕ</div></div></div></div>
+            </div>
+          </div>
+          <div class="showcase-caption"><span>ИНТЕРАКТИВНАЯ СХЕМА РАБОЧЕГО ПРОСТРАНСТВА</span><span>УСЛОВНЫЕ ДАННЫЕ / НЕ СКРИНШОТ</span></div>
+        </div>
+        <div class="desktop-benefits">
+          <article><span>01</span><b>Больше информации</b><p>Список заказов и подробности не приходится постоянно переключать.</p></article>
+          <article><span>02</span><b>Удобная навигация</b><p>Основные разделы находятся в боковом меню.</p></article>
+          <article><span>03</span><b>Без отдельной установки</b><p>Откройте сайт в браузере на Windows, macOS или другом компьютере.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="access-section">
+      <div class="access-inner"><div><div class="eyebrow"><i></i> НАЧАТЬ ПРОСТО</div><h2>Выберите устройство.<br><em>Остальное подскажет Gruzli.</em></h2></div><div class="access-actions"><a href="https://gruzli-b99e57fd.vercel.app/" target="_blank" rel="noreferrer">Открыть Gruzli <span>↗</span></a><a href="/" class="back-link">Вернуться на главную</a></div></div>
+    </section>
+  </main>
+
+  <footer class="app-footer"><a class="brand" href="/"><span class="brand-symbol"><i></i></span><span class="brand-name">gruzli<span>.</span></span></a><span>© 2026 GRUZLI. ЛЮДИ · ЗАКАЗЫ · КОМАНДЫ</span><a href="#top">НАВЕРХ ↑</a></footer>
+  <script type="module" src="/app/main.js"></script>
+</body>
+</html>
