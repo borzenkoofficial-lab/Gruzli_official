@@ -333,3 +333,70 @@ lightbox.addEventListener("close", () => document.body.classList.remove("lightbo
   prev.addEventListener("click",()=>{stage=Math.max(0,stage-1);render();});
   render();
 })();
+
+
+/* Role-based comparison: illustrative workflow contrast, not a performance claim. */
+(() => {
+  const root = document.querySelector("#contrast");
+  if (!root) return;
+  const content = {
+    worker: {
+      beforeTitle: "Поиск смены в потоке сообщений.",
+      before: ["Просматривать несколько чатов и каналов", "Отдельно уточнять ставку, адрес и длительность", "Самостоятельно хранить историю договорённостей"],
+      afterTitle: "Заявки собраны в рабочей ленте.",
+      after: ["Смотреть карточки заявок и основные условия", "Откликаться на подходящую смену", "Возвращаться к своим заказам и их статусам"]
+    },
+    dispatcher: {
+      beforeTitle: "Команда собирается вручную.",
+      before: ["Публиковать одну заявку в разных местах", "Сводить отклики и контакты из переписок", "Отдельно отмечать, кто подтвердил выход и где находится"],
+      afterTitle: "Работа ведётся вокруг заявки.",
+      after: ["Публиковать заказ и работать с откликами", "Подбирать исполнителей через рабочий интерфейс", "Использовать статусы и историю заказа при координации"]
+    },
+    client: {
+      beforeTitle: "Один запрос приходится повторять.",
+      before: ["Объяснять задачу в звонках и разных чатах", "Собирать предложения и условия вручную", "Самостоятельно уточнять, что происходит с заказом"],
+      afterTitle: "Запрос становится точкой сборки.",
+      after: ["Описать задачу и указать необходимые детали", "Рассмотреть предложения диспетчеров", "Следить за ходом согласованного заказа по статусам"]
+    }
+  };
+  const buttons = [...root.querySelectorAll("[data-compare-role]")];
+  const beforeTitle = root.querySelector("#contrast-before-title");
+  const beforeList = root.querySelector("#contrast-before-list");
+  const afterTitle = root.querySelector("#contrast-after-title");
+  const afterList = root.querySelector("#contrast-after-list");
+  const renderList = (target, items) => {
+    target.replaceChildren(...items.map((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      return li;
+    }));
+  };
+  const select = (role, focus = false) => {
+    const item = content[role];
+    if (!item) return;
+    buttons.forEach((button) => {
+      const active = button.dataset.compareRole === role;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-selected", String(active));
+      button.tabIndex = active ? 0 : -1;
+      if (active && focus) button.focus();
+    });
+    beforeTitle.textContent = item.beforeTitle;
+    afterTitle.textContent = item.afterTitle;
+    renderList(beforeList, item.before);
+    renderList(afterList, item.after);
+  };
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => select(button.dataset.compareRole));
+    button.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      let next = index;
+      if (event.key === "ArrowRight") next = (index + 1) % buttons.length;
+      if (event.key === "ArrowLeft") next = (index - 1 + buttons.length) % buttons.length;
+      if (event.key === "Home") next = 0;
+      if (event.key === "End") next = buttons.length - 1;
+      select(buttons[next].dataset.compareRole, true);
+    });
+  });
+})();
