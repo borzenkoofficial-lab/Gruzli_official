@@ -30,6 +30,7 @@
         <a href="#platform">Платформа</a>
         <a href="#roles">Кому подходит</a>
         <a href="#workflow">Как работает</a>
+        <a href="#signature">Демо-заказ</a>
         <a href="/app/">Приложение</a>
         <a class="nav-cta" href="https://gruzli-b99e57fd.vercel.app/" target="_blank" rel="noreferrer">Открыть Gruzli <span>↗</span></a>
       </nav>
@@ -138,6 +139,62 @@
         <article class="workflow-card reveal"><div class="workflow-top"><b>03</b><span>ГРУЗЧИК</span></div><div class="workflow-icon">↗</div><h3>Выполняет работу</h3><p>Принимает заказ, выходит на смену и подтверждает завершение.</p><div class="workflow-foot"><span>ВЫПОЛНЕНИЕ</span><b>03 / 03</b></div></article>
       </div>
       <div class="workflow-bottom"><span>СВЯЗЬ МЕЖДУ ЭТАПАМИ</span><p>Отклики, сообщения, статусы и документы не живут отдельно от заказа.</p></div>
+    </section>
+
+
+    <section class="signature-section" id="signature" aria-labelledby="signature-title">
+      <div class="signature-shell">
+        <div class="signature-kicker"><span>04 / GRUZLI SIGNATURE EXPERIENCE</span><span>ИНТЕРАКТИВНЫЙ СЦЕНАРИЙ</span></div>
+        <div class="signature-heading">
+          <div><div class="signature-overline"><i></i> ОДИН ЗАКАЗ — ТРИ ВЗГЛЯДА</div><h2 id="signature-title">Посмотрите,<br><em>как работает связь.</em></h2></div>
+          <p>Переключайтесь между ролями и двигайте заказ по этапам. Так выглядит логика взаимодействия участников в одном рабочем процессе.</p>
+        </div>
+        <div class="signature-demo">
+          <div class="signature-demo-head">
+            <div><span class="demo-label">ДЕМОНСТРАЦИОННЫЙ СЦЕНАРИЙ</span><strong>Заказ <b>#DEMO—024</b></strong></div>
+            <span class="demo-state"><i></i> НЕ РЕАЛЬНАЯ ЗАЯВКА</span>
+          </div>
+          <div class="signature-progress" aria-label="Прогресс демонстрационного сценария">
+            <div class="signature-progress-track"><span id="signature-progress-fill"></span></div>
+            <div class="signature-progress-labels"><span class="is-current" data-progress-label="0">Запрос</span><span data-progress-label="1">Координация</span><span data-progress-label="2">Отклик</span><span data-progress-label="3">Результат</span></div>
+          </div>
+          <div class="signature-layout">
+            <div class="signature-console">
+              <div class="signature-console-top"><span>ВЫБЕРИТЕ УЧАСТНИКА</span><span>01—03</span></div>
+              <div class="signature-role-switch" role="tablist" aria-label="Посмотреть заказ глазами участника">
+                <button class="signature-role is-active" type="button" role="tab" aria-selected="true" data-signature-role="client"><span>01</span><b>Клиент</b><i>↗</i></button>
+                <button class="signature-role" type="button" role="tab" aria-selected="false" data-signature-role="dispatcher"><span>02</span><b>Диспетчер</b><i>↗</i></button>
+                <button class="signature-role" type="button" role="tab" aria-selected="false" data-signature-role="worker"><span>03</span><b>Грузчик</b><i>↗</i></button>
+              </div>
+              <div class="signature-perspective" aria-live="polite">
+                <div class="perspective-meta"><span id="signature-role-label">CLIENT VIEW / 01</span><span id="signature-stage-label">ЭТАП 01</span></div>
+                <h3 id="signature-perspective-title">Сформулируйте задачу.</h3>
+                <p id="signature-perspective-copy">Клиент описывает работу, указывает адрес, дату и необходимое количество людей.</p>
+                <div class="perspective-action"><span class="perspective-action-icon" id="signature-action-icon">↗</span><div><small>ЧТО ДЕЛАТЬ СЕЙЧАС</small><b id="signature-action-text">Создать заявку</b></div></div>
+              </div>
+              <div class="signature-controls">
+                <button class="signature-prev" id="signature-prev" type="button" disabled>← Назад</button>
+                <button class="signature-next" id="signature-next" type="button">Следующий этап <span>→</span></button>
+              </div>
+            </div>
+            <div class="signature-stage">
+              <div class="stage-topline"><span>ORDER FLOW / LIVE SIMULATION</span><span id="signature-step-count">01 / 04</span></div>
+              <div class="stage-visual" id="signature-stage-visual">
+                <div class="stage-orbit stage-orbit-a"></div><div class="stage-orbit stage-orbit-b"></div>
+                <div class="stage-core"><span>G</span><small>GRUZLI</small></div>
+                <div class="stage-node node-client is-active"><i>01</i><b>Клиент</b><small>Заявка</small></div>
+                <div class="stage-node node-dispatcher"><i>02</i><b>Диспетчер</b><small>Команда</small></div>
+                <div class="stage-node node-worker"><i>03</i><b>Грузчик</b><small>Отклик</small></div>
+                <svg class="stage-connectors" viewBox="0 0 600 360" preserveAspectRatio="none" aria-hidden="true"><path d="M140 95 Q300 20 460 95"/><path d="M460 95 Q520 260 300 290"/><path d="M300 290 Q80 260 140 95"/></svg>
+                <div class="stage-event" id="signature-stage-event"><span class="event-pulse"></span><div><small>СОБЫТИЕ СЦЕНАРИЯ</small><b>Клиент создал заявку</b><p>Задача передана в рабочий процесс.</p></div><span class="event-index">01</span></div>
+              </div>
+              <div class="stage-caption"><span>ОДНА СИСТЕМА</span><i></i><span>ТРИ РОЛИ</span><i></i><span>ПОСЛЕДОВАТЕЛЬНЫЕ ЭТАПЫ</span></div>
+            </div>
+          </div>
+          <div class="signature-disclaimer"><span>i</span> Это интерактивная демонстрация принципа работы, а не подключение к реальному заказу. Данные и события в ней условные.</div>
+        </div>
+        <div class="signature-bottomline"><span>DESIGNED AROUND THE WORKFLOW</span><a href="/app/">Посмотреть приложение <b>↗</b></a></div>
+      </div>
     </section>
 
     <section class="features-section section-pad">
