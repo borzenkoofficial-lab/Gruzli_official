@@ -43,7 +43,6 @@ const deviceData={
  }
 };
 const tabs=[...document.querySelectorAll(".device-tab")];
-const stepButtons=[...document.querySelectorAll(".guide-step")];
 const dots=[...document.querySelectorAll(".step-dots button")];
 const fields={overlay:document.querySelector("#phone-guide-overlay"),eyebrow:document.querySelector("#panel-eyebrow"),title:document.querySelector("#panel-title"),intro:document.querySelector("#panel-intro"),steps:document.querySelector("#step-list"),actions:document.querySelector("#guide-actions"),disclaimer:document.querySelector("#guide-disclaimer"),image:document.querySelector("#phone-screen-image"),callout:document.querySelector("#instruction-callout"),visualLabel:document.querySelector("#visual-label"),phone:document.querySelector("#phone-mockup"),desktop:document.querySelector("#desktop-mockup"),prev:document.querySelector("#prev-step"),next:document.querySelector("#next-step"),dots:document.querySelector("#step-dots")};
 let currentDevice="ios",currentStep=0;
@@ -58,7 +57,7 @@ function renderStep(){
  fields.visualLabel.textContent="ШАГ "+String(currentStep+1).padStart(2,"0")+" / 04";
  fields.callout.querySelector("b").textContent=step[2];
  fields.callout.querySelector("p").textContent=step[3];
- stepButtons.forEach((button,index)=>{button.classList.toggle("is-active",index===currentStep);button.querySelector(".step-number").textContent=index+1;button.setAttribute("aria-current",index===currentStep?"step":"false")});
+ fields.steps.querySelectorAll(".guide-step").forEach((button,index)=>{button.classList.toggle("is-active",index===currentStep);button.querySelector(".step-number").textContent=index+1;button.setAttribute("aria-current",index===currentStep?"step":"false")});
  dots.forEach((dot,index)=>dot.classList.toggle("is-active",index===currentStep));
  fields.prev.disabled=currentStep===0;fields.next.disabled=currentStep===3;
 }
@@ -92,6 +91,6 @@ tabs.forEach((tab,index)=>{tab.addEventListener("click",()=>selectDevice(tab.dat
 fields.prev.addEventListener("click",()=>{currentStep=Math.max(0,currentStep-1);renderStep()});
 fields.next.addEventListener("click",()=>{currentStep=Math.min(3,currentStep+1);renderStep()});
 dots.forEach((dot,index)=>dot.addEventListener("click",()=>{currentStep=index;renderStep()}));
-stepButtons.forEach(button=>button.addEventListener("click",()=>{currentStep=Number(button.dataset.step);renderStep()}));
+document.querySelectorAll(".guide-step").forEach(button=>button.addEventListener("click",()=>{currentStep=Number(button.dataset.step);renderStep()}));
 document.querySelectorAll(".header-nav a[href^='#']").forEach(link=>link.addEventListener("click",()=>document.querySelector(link.getAttribute("href"))?.scrollIntoView({behavior:"smooth"})));
 document.querySelectorAll(".guide-step").forEach(button=>button.addEventListener("click",()=>{currentStep=Number(button.dataset.step);renderStep()}));
