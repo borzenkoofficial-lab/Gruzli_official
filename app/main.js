@@ -49,6 +49,12 @@ const fields={overlay:document.querySelector("#phone-guide-overlay"),eyebrow:doc
 let currentDevice="ios",currentStep=0;
 function renderStep(){
  const data=deviceData[currentDevice],step=data.steps[currentStep];
+ const overlays={
+  1:'<div class="phone-guide-sheet"><h4>Поделиться</h4><div class="share-apps"><span>AirDrop</span><span>Сообщения</span><span>Почта</span></div><p>Копировать</p><p>Добавить в закладки</p><p class="active">На экран Домой <small>Добавить Gruzli на главный экран</small></p><p>Найти на странице</p></div>',
+  2:'<div class="phone-guide-sheet"><h4>Добавить на экран «Домой»</h4><div class="home-icon">G</div><p><b>Gruzli</b><small>gruzli-b99e57fd.vercel.app</small></p><p class="active">Добавить <small>Иконка появится на экране iPhone</small></p></div>',
+  3:'<div class="phone-guide-sheet"><h4>Готово!</h4><div class="home-icon">G</div><p class="active">Gruzli добавлен на экран Домой<small>Найдите иконку на главном экране телефона</small></p></div>'
+ };
+ if(currentDevice==="ios"&&currentStep>0){fields.overlay.innerHTML=overlays[currentStep];fields.overlay.hidden=false;document.querySelector(".share-control")?.classList.toggle("is-highlighted",currentStep===1)}else{fields.overlay.hidden=true;fields.overlay.innerHTML="";document.querySelector(".share-control")?.classList.remove("is-highlighted")}
  fields.visualLabel.textContent="ШАГ "+String(currentStep+1).padStart(2,"0")+" / 04";
  fields.callout.querySelector("b").textContent=step[2];
  fields.callout.querySelector("p").textContent=step[3];
