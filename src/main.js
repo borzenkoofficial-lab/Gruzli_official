@@ -400,3 +400,130 @@ lightbox.addEventListener("close", () => document.body.classList.remove("lightbo
     });
   });
 })();
+
+
+/* GRUZLI SMART NAVIGATION — reading progress, section compass and command palette */
+(() => {
+  const sectionMeta = [
+    ["platform","Платформа","Как устроен GRUZLI"],["about","История","Почему появилась платформа"],
+    ["contrast","Сравнение","Чаты и единый процесс"],["roles","Три роли","Клиент · Диспетчер · Грузчик"],
+    ["workflow","Рабочий процесс","Как движется заказ"],["signature","Интерактивный сценарий","Пройдите путь заказа"],
+    ["screens","Интерфейс","Экраны приложения"],["download","Приложение","iPhone · Android · ПК"],
+    ["faq","Вопросы","Ответы о GRUZLI"]
+  ];
+  const sections=sectionMeta.map(([id,title,description])=>{const element=document.getElementById(id);return element?{id,element,title,description}:null;}).filter(Boolean);
+  if(!sections.length)return;
+
+  const progress=document.createElement("div");
+  progress.className="gruzli-reading-progress";
+  progress.setAttribute("aria-hidden","true");
+  progress.innerHTML="<span></span>";
+  document.body.append(progress);
+
+  const compass=document.createElement("aside");
+  compass.className="gruzli-compass";
+  compass.setAttribute("aria-label","Навигация по странице");
+  compass.innerHTML='<span class="gruzli-compass-index">01 <i>/ '+String(sections.length).padStart(2,"0")+'</i></span><span class="gruzli-compass-copy"><b>Платформа</b><small>Как устроен GRUZLI</small></span><button type="button" class="gruzli-compass-map" aria-label="Открыть карту разделов" title="Карта разделов · Ctrl K">⌘K</button><button type="button" class="gruzli-compass-up" aria-label="Предыдущий раздел" title="Предыдущий раздел">↑</button><button type="button" class="gruzli-compass-down" aria-label="Следующий раздел" title="Следующий раздел">↓</button>';
+  document.body.append(compass);
+
+  const overlay=document.createElement("div");
+  overlay.className="gruzli-command-overlay";
+  overlay.hidden=true;
+  overlay.innerHTML='<section class="gruzli-command" role="dialog" aria-modal="true" aria-labelledby="gruzli-command-title"><div class="gruzli-command-head"><div><span>GRUZLI / НАВИГАЦИЯ</span><h2 id="gruzli-command-title">Куда перейдём?</h2></div><kbd>ESC</kbd></div><label class="gruzli-command-search"><span>⌕</span><input type="search" autocomplete="off" placeholder="Найти раздел или тему…" aria-label="Поиск по разделам"><kbd>↵</kbd></label><div class="gruzli-command-results" role="listbox" aria-label="Разделы сайта"></div><div class="gruzli-command-foot"><span><kbd>↑</kbd><kbd>↓</kbd> выбрать</span><span><kbd>ENTER</kbd> открыть</span><span>9 РАЗДЕЛОВ</span></div></section>';
+  document.body.append(overlay);
+
+  const progressFill=progress.firstElementChild;
+  const indexLabel=compass.querySelector(".gruzli-compass-index");
+  const titleLabel=compass.querySelector(".gruzli-compass-copy b");
+  const descriptionLabel=compass.querySelector(".gruzli-compass-copy small");
+  const upButton=compass.querySelector(".gruzli-compass-up");
+  const downButton=compass.querySelector(".gruzli-compass-down");
+  const mapButton=compass.querySelector(".gruzli-compass-map");
+  const searchInput=overlay.querySelector("input");
+  const results=overlay.querySelector(".gruzli-command-results");
+  let activeIndex=0,selectedIndex=0,filtered=sections.slice(),scrollTick=false;
+
+  const goTo=index=>{
+    const safeIndex=Math.max(0,Math.min(sections.length-1,index));
+    sections[safeIndex].element.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+    closePalette();
+  };
+  const setActive=index=>{
+    activeIndex=Math.max(0,Math.min(sections.length-1,index));
+    const section=sections[activeIndex];
+    indexLabel.innerHTML=String(activeIndex+1).padStart(2,"0")+' <i>/ '+String(sections.length).padStart(2,"0")+'</i>';
+    titleLabel.textContent=section.title;
+    descriptionLabel.textContent=section.description;
+    upButton.disabled=activeIndex===0;
+    downButton.disabled=activeIndex===sections.length-1;
+  };
+  const updateScroll=()=>{
+    const max=document.documentElement.scrollHeight-window.innerHeight;
+    const ratio=max>0?Math.min(1,Math.max(0,window.scrollY/max)):0;
+    progressFill.style.transform="scaleX("+ratio+")";
+    scrollTick=false;
+  };
+  window.addEventListener("scroll",()=>{if(!scrollTick){window.requestAnimationFrame(updateScroll);scrollTick=true;}},{passive:true});
+  updateScroll();
+
+  if("IntersectionObserver" in window){
+    const observer=new IntersectionObserver(entries=>{
+      const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio);
+      if(!visible.length)return;
+      const index=sections.findIndex(section=>section.element===visible[0].target);
+      if(index>=0)setActive(index);
+    },{rootMargin:"-18% 0px -58% 0px",threshold:[0,.15,.35,.6]});
+    sections.forEach(section=>observer.observe(section.element));
+  }else{
+    window.addEventListener("scroll",()=>{
+      const index=sections.reduce((best,section,i)=>section.element.getBoundingClientRect().top<window.innerHeight*.45?i:best,0);
+      setActive(index);
+    },{passive:true});
+  }
+  setActive(0);
+
+  const renderResults=()=>{
+    const query=searchInput.value.trim().toLocaleLowerCase("ru");
+    filtered=sections.filter(section=>(section.title+" "+section.description).toLocaleLowerCase("ru").includes(query));
+    if(!filtered.length){results.innerHTML='<p class="gruzli-command-empty">Ничего не найдено. Попробуйте другое слово.</p>';selectedIndex=0;return;}
+    selectedIndex=Math.min(selectedIndex,filtered.length-1);
+    results.replaceChildren(...filtered.map((section,index)=>{
+      const originalIndex=sections.indexOf(section),button=document.createElement("button");
+      button.type="button";button.className="gruzli-command-item";button.setAttribute("role","option");button.setAttribute("aria-selected",String(index===selectedIndex));
+      button.innerHTML='<span class="gruzli-command-number">'+String(originalIndex+1).padStart(2,"0")+'</span><span><b></b><small></small></span><i>↗</i>';
+      button.querySelector("b").textContent=section.title;
+      button.querySelector("small").textContent=section.description;
+      button.addEventListener("click",()=>goTo(originalIndex));
+      return button;
+    }));
+  };
+  const paintSelection=()=>{
+    [...results.querySelectorAll(".gruzli-command-item")].forEach((item,index)=>item.setAttribute("aria-selected",String(index===selectedIndex)));
+    results.querySelector('[aria-selected="true"]')?.scrollIntoView({block:"nearest"});
+  };
+  const openPalette=()=>{
+    overlay.hidden=false;document.body.classList.add("gruzli-command-open");
+    searchInput.value="";selectedIndex=0;renderResults();window.requestAnimationFrame(()=>searchInput.focus());
+  };
+  function closePalette(){
+    if(overlay.hidden)return;
+    overlay.hidden=true;document.body.classList.remove("gruzli-command-open");mapButton.focus();
+  }
+  mapButton.addEventListener("click",openPalette);
+  upButton.addEventListener("click",()=>goTo(activeIndex-1));
+  downButton.addEventListener("click",()=>goTo(activeIndex+1));
+  searchInput.addEventListener("input",()=>{selectedIndex=0;renderResults();});
+  searchInput.addEventListener("keydown",event=>{
+    if(event.key==="ArrowDown"){event.preventDefault();selectedIndex=Math.min(filtered.length-1,selectedIndex+1);paintSelection();}
+    if(event.key==="ArrowUp"){event.preventDefault();selectedIndex=Math.max(0,selectedIndex-1);paintSelection();}
+    if(event.key==="Enter"&&filtered[selectedIndex])goTo(sections.indexOf(filtered[selectedIndex]));
+  });
+  overlay.addEventListener("click",event=>{if(event.target===overlay)closePalette();});
+  document.addEventListener("keydown",event=>{
+    const target=event.target,typing=target instanceof HTMLElement&&(target.isContentEditable||["INPUT","TEXTAREA","SELECT"].includes(target.tagName));
+    if((event.metaKey||event.ctrlKey)&&event.key.toLowerCase()==="k"){event.preventDefault();if(overlay.hidden)openPalette();else closePalette();}
+    else if(event.key==="Escape"&&!overlay.hidden)closePalette();
+    else if(!typing&&overlay.hidden&&event.altKey&&event.key==="ArrowDown"){event.preventDefault();goTo(activeIndex+1);}
+    else if(!typing&&overlay.hidden&&event.altKey&&event.key==="ArrowUp"){event.preventDefault();goTo(activeIndex-1);}
+  });
+})();

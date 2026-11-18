@@ -94,3 +94,61 @@ button:disabled{cursor:not-allowed}
   html{scroll-behavior:auto}
   *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* Smart navigation: reading progress, section compass and command palette */
+.gruzli-reading-progress{position:fixed;z-index:120;inset:0 0 auto;height:3px;pointer-events:none;background:rgba(23,24,27,.08)}
+.gruzli-reading-progress span{display:block;width:100%;height:100%;background:linear-gradient(90deg,#f0bd18,#ffe17b);transform:scaleX(0);transform-origin:left center;will-change:transform}
+.gruzli-compass{position:fixed;z-index:110;right:26px;bottom:24px;display:flex;align-items:center;gap:9px;min-height:66px;padding:9px 10px 9px 15px;border:1px solid rgba(255,255,255,.72);border-radius:19px;background:rgba(248,248,245,.9);box-shadow:0 14px 42px rgba(20,21,23,.15),inset 0 1px 0 #fff;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#17181b;transition:transform .25s ease,opacity .25s ease}
+.gruzli-compass-index{min-width:38px;font-size:13px;font-weight:850;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.gruzli-compass-index i{color:#92938f;font-style:normal;font-size:10px;font-weight:650}
+.gruzli-compass-copy{display:flex;flex-direction:column;gap:3px;min-width:112px;padding-right:5px}
+.gruzli-compass-copy b{font-size:11px;line-height:1.15;font-weight:800}
+.gruzli-compass-copy small{font-size:9px;line-height:1.2;color:#777970;white-space:nowrap}
+.gruzli-compass button{width:34px;height:34px;display:grid;place-items:center;border:1px solid #e3e2dc;border-radius:11px;background:#fff;color:#252629;font:750 15px/1 Inter,sans-serif;transition:background .2s,border-color .2s,transform .2s}
+.gruzli-compass button:hover:not(:disabled){background:#fff4c9;border-color:#e4c34f;transform:translateY(-2px)}
+.gruzli-compass button:disabled{opacity:.28;cursor:default}
+.gruzli-compass .gruzli-compass-map{width:42px;background:#17181b;color:#f5cf45;border-color:#17181b;font-size:10px;letter-spacing:-.04em}
+.gruzli-compass .gruzli-compass-map:hover{background:#333438;color:#ffe27a;border-color:#333438}
+.gruzli-command-open{overflow:hidden}
+.gruzli-command-overlay{position:fixed;z-index:300;inset:0;display:grid;place-items:start center;padding:min(18vh,150px) 20px 24px;background:rgba(15,16,18,.58);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);opacity:1;animation:gruzli-overlay-in .18s ease both}
+.gruzli-command-overlay[hidden]{display:none}
+.gruzli-command{width:min(560px,100%);overflow:hidden;border:1px solid rgba(255,255,255,.6);border-radius:24px;background:#f8f8f5;box-shadow:0 34px 100px rgba(0,0,0,.35);animation:gruzli-command-in .24s cubic-bezier(.2,.8,.2,1) both}
+.gruzli-command-head{display:flex;align-items:flex-start;justify-content:space-between;padding:25px 26px 17px}
+.gruzli-command-head>div>span{font-size:9px;font-weight:850;letter-spacing:.16em;color:#8c8d87}
+.gruzli-command-head h2{margin:9px 0 0;font-size:26px;line-height:1.05;letter-spacing:-.055em}
+.gruzli-command kbd{display:inline-grid;place-items:center;min-width:25px;height:23px;padding:0 6px;border:1px solid #e3e1da;border-radius:7px;background:#fff;color:#767770;font:650 9px/1 Inter,sans-serif}
+.gruzli-command-search{height:52px;margin:0 22px 15px;padding:0 14px;display:flex;align-items:center;gap:10px;border:1px solid #e0ded6;border-radius:13px;background:#fff;color:#85867f}
+.gruzli-command-search>span{font-size:22px}
+.gruzli-command-search input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:#17181b;font:550 13px Inter,sans-serif}
+.gruzli-command-search input::placeholder{color:#a0a098}
+.gruzli-command-results{max-height:min(390px,52vh);overflow:auto;padding:0 12px 12px}
+.gruzli-command-item{width:100%;min-height:60px;padding:9px 12px;display:grid;grid-template-columns:32px 1fr 24px;align-items:center;gap:12px;border:1px solid transparent;border-radius:12px;background:transparent;text-align:left;color:#17181b;cursor:pointer}
+.gruzli-command-item[aria-selected="true"],.gruzli-command-item:hover{border-color:#eadb9d;background:#fff9e7}
+.gruzli-command-number{font-size:10px;font-weight:850;color:#a3a399;font-variant-numeric:tabular-nums}
+.gruzli-command-item>span:nth-child(2){display:grid;gap:4px}
+.gruzli-command-item b{font-size:12px;font-weight:800}
+.gruzli-command-item small{font-size:10px;color:#81827c}
+.gruzli-command-item>i{font-style:normal;color:#9a7a0b}
+.gruzli-command-empty{margin:8px;padding:22px 12px;text-align:center;color:#777970;font-size:12px}
+.gruzli-command-foot{min-height:43px;padding:0 24px;display:flex;align-items:center;gap:15px;border-top:1px solid #e8e6df;color:#85867f;font-size:9px}
+.gruzli-command-foot>span{display:flex;align-items:center;gap:4px}
+.gruzli-command-foot>span:last-child{margin-left:auto;letter-spacing:.1em;font-weight:800}
+@keyframes gruzli-overlay-in{from{opacity:0}to{opacity:1}}
+@keyframes gruzli-command-in{from{opacity:0;transform:translateY(-8px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:640px){
+ .gruzli-compass{right:12px;bottom:12px;min-height:58px;gap:6px;padding:7px 8px 7px 11px;border-radius:16px}
+ .gruzli-compass-copy{min-width:92px}
+ .gruzli-compass-copy b{font-size:10px}
+ .gruzli-compass-copy small{font-size:8px}
+ .gruzli-compass button{width:31px;height:31px;border-radius:9px}
+ .gruzli-compass .gruzli-compass-map{width:37px}
+ .gruzli-command-overlay{padding:9vh 12px 16px}
+ .gruzli-command{border-radius:19px}
+ .gruzli-command-head{padding:21px 20px 15px}
+ .gruzli-command-head h2{font-size:23px}
+ .gruzli-command-search{margin-inline:15px}
+ .gruzli-command-foot{padding-inline:17px;gap:9px}
+ .gruzli-command-foot>span:last-child{display:none}
+}
+@media(prefers-reduced-motion:reduce){.gruzli-command-overlay,.gruzli-command{animation:none}}
