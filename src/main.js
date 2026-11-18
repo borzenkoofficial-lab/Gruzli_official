@@ -46,10 +46,11 @@ const roleFields = {
 
 const visualMarkup = {
   worker: '<div class="worker-showcase"><div class="showcase-phone"><span class="showcase-island"></span><img src="/images/gruzli-new-feed.webp" alt="Лента заказов для грузчика" loading="lazy"></div><div class="showcase-toast"><span>↗</span><div><b>Новая заявка</b><small>Условия до отклика</small></div><i></i></div><div class="showcase-rate"><b>900 ₽ / час</b><small>Пример ставки в карточке</small></div><div class="visual-caption">РАБОЧАЯ ЛЕНТА / 01</div></div>',
-  dispatcher: '<div class="role-abstract"><span class="role-abstract-index">02 / COORDINATION</span><div class="role-abstract-mark">G<span>·</span></div><b>Заявка → Команда → Выполнение</b><small>Единый процесс координации заказов</small></div>',
-  client: '<div class="role-abstract"><span class="role-abstract-index">03 / REQUEST</span><div class="role-abstract-mark">G<span>·</span></div><b>Опишите задачу</b><small>Gruzli помогает связать запрос с исполнителями</small></div>'
+  dispatcher: '<div class="role-scenario dispatcher-scenario"><div class="scenario-top"><span>02 / DISPATCH DESK</span><b><i></i> РАБОЧЕЕ ПРОСТРАНСТВО</b></div><div class="scenario-title"><small>УПРАВЛЕНИЕ ЗАКАЗАМИ</small><strong>Заявки <em>и команда</em></strong><span>Единый обзор текущей работы</span></div><div class="dispatch-board"><div class="dispatch-board-head"><b>АКТИВНЫЕ ЭТАПЫ</b><span>01—03</span></div><div class="dispatch-row"><i class="dispatch-mark">01</i><span><b>Новая заявка</b><small>Проверить условия и детали</small></span><em>НОВАЯ</em></div><div class="dispatch-row"><i class="dispatch-mark">02</i><span><b>Подбор исполнителей</b><small>Отклики и состав команды</small></span><em class="is-warm">В РАБОТЕ</em></div><div class="dispatch-row"><i class="dispatch-mark">03</i><span><b>Выполнение заказа</b><small>Статус и коммуникация</small></span><em>КОНТРОЛЬ</em></div></div><div class="scenario-foot"><span>ЗАЯВКИ</span><i></i><span>ИСПОЛНИТЕЛИ</span><i></i><span>СТАТУСЫ</span></div><div class="scenario-orbit"></div></div>',
+  client: '<div class="role-scenario client-scenario"><div class="scenario-top"><span>03 / CLIENT REQUEST</span><b><i></i> СОЗДАНИЕ ЗАЯВКИ</b></div><div class="client-request-card"><div class="client-request-head"><span>НОВЫЙ ЗАПРОС</span><b>G<span>·</span></b></div><strong>Какая помощь<br>вам нужна?</strong><p>Опишите задачу — диспетчеры смогут предложить условия и команду.</p><div class="request-field"><small>ТИП РАБОТЫ</small><b>Погрузка / разгрузка</b><span>⌄</span></div><div class="request-fields"><div class="request-field"><small>АДРЕС</small><b>Укажите локацию</b></div><div class="request-field"><small>ЛЮДИ</small><b>Количество</b></div></div><div class="request-submit">Продолжить <span>↗</span></div><div class="request-note">СХЕМА СЦЕНАРИЯ · НЕ СКРИНШОТ ПРИЛОЖЕНИЯ</div></div><div class="scenario-orbit"></div></div>'
 };
 
+let roleSwitchTimer = 0;
 function selectRole(role) {
   const item = roleContent[role];
   if (!item) return;
@@ -59,8 +60,9 @@ function selectRole(role) {
     tab.setAttribute("aria-selected", String(active));
     tab.setAttribute("tabindex", active ? "0" : "-1");
   });
+  window.clearTimeout(roleSwitchTimer);
   rolePanel.classList.add("is-switching");
-  window.setTimeout(() => {
+  roleSwitchTimer = window.setTimeout(() => {
     roleFields.eyebrow.textContent = item.eyebrow;
     roleFields.title.textContent = item.title;
     roleFields.accent.textContent = item.accent;
@@ -144,3 +146,36 @@ if (!reducedMotion && "IntersectionObserver" in window) {
 } else {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
+
+const header = document.querySelector(".site-header");
+let scrollFrame = 0;
+const updateHeader = () => {
+  header.classList.toggle("is-scrolled", window.scrollY > 24);
+  scrollFrame = 0;
+};
+window.addEventListener("scroll", () => {
+  if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateHeader);
+}, { passive: true });
+updateHeader();
+
+const heroVisual = document.querySelector(".hero-visual");
+if (!reducedMotion && window.matchMedia("(pointer:fine)").matches) {
+  heroVisual.addEventListener("pointermove", (event) => {
+    const rect = heroVisual.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - .5) * 2;
+    const y = ((event.clientY - rect.top) / rect.height - .5) * 2;
+    heroVisual.style.setProperty("--pointer-x", x.toFixed(3));
+    heroVisual.style.setProperty("--pointer-y", y.toFixed(3));
+  }, { passive: true });
+  heroVisual.addEventListener("pointerleave", () => {
+    heroVisual.style.setProperty("--pointer-x", "0");
+    heroVisual.style.setProperty("--pointer-y", "0");
+  }, { passive: true });
+}
+
+document.querySelectorAll(".screen-card").forEach((card) => {
+  const image = card.querySelector("img");
+  if (!image) return;
+  image.addEventListener("load", () => card.classList.add("is-loaded"), { once: true });
+  if (image.complete) card.classList.add("is-loaded");
+});
