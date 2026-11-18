@@ -44,12 +44,34 @@
       <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
       <div class="hero-inner">
         <div class="hero-copy">
-          <div class="eyebrow hero-eyebrow"><span class="live-dot"></span> ЕДИНАЯ ПЛАТФОРМА ДЛЯ ГРУЗОВЫХ РАБОТ</div>
+          <div class="eyebrow hero-eyebrow"><span class="live-dot"></span> В РАЗРАБОТКЕ</div>
+          <div class="hero-project-type">ЕДИНАЯ ПЛАТФОРМА ДЛЯ ГРУЗОВЫХ РАБОТ</div>
           <h1>Три стороны.<br><em>Один процесс.</em></h1>
           <p class="hero-lead">Gruzli соединяет тех, кому нужны люди, тех, кто собирает команды, и тех, кто готов работать.</p>
-          <div class="hero-actions">
-            <a class="button button-yellow" href="#roles">Выбрать свою роль <span class="arrow">↘</span></a>
-            <a class="button button-outline" href="/app/">Как установить <span>↗</span></a>
+          <div class="hero-entry-choice" aria-label="Выберите способ работы с Gruzli">
+            <a class="hero-entry-card hero-entry-service" href="#roles">
+              <span class="hero-entry-icon" aria-hidden="true">↗</span>
+              <span class="hero-entry-content">
+                <span class="hero-entry-kicker">БЕЗ УСТАНОВКИ</span>
+                <strong>Найти исполнителей</strong>
+                <small>Оставить заявку на сайте — мы поможем с поиском</small>
+              </span>
+              <span class="hero-entry-arrow" aria-hidden="true">↘</span>
+            </a>
+            <a class="hero-entry-card hero-entry-app" href="/app/">
+              <span class="hero-entry-icon" aria-hidden="true">▣</span>
+              <span class="hero-entry-content">
+                <span class="hero-entry-kicker">ЦИФРОВАЯ ПЛАТФОРМА</span>
+                <strong>Открыть приложение</strong>
+                <small>Самостоятельная работа с заказами в GRUZLI</small>
+              </span>
+              <span class="hero-entry-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="hero-release" aria-label="Планируемая дата запуска GRUZLI — 15 января 2027 года">
+            <span class="hero-release-label">ПЛАНИРУЕМЫЙ ЗАПУСК</span>
+            <strong>15.01.<em>2027</em></strong>
+            <span class="hero-release-note">GRUZLI <i></i> 15 ЯНВАРЯ 2027</span>
           </div>
           <div class="hero-meta">
             <span><b>01</b> Клиент</span><span><b>02</b> Диспетчер</span><span><b>03</b> Грузчик</span>
@@ -164,6 +186,43 @@
         <p>Мы строим платформу, в которой заказ, люди, договорённости и результат связаны между собой. Чтобы клиенту было проще получить помощь, диспетчеру — организовать процесс, а исполнителю — находить работу и видеть свой вклад.</p>
         <a class="button button-yellow" href="#roles">Выбрать свою роль <span class="arrow">↘</span></a>
       </div>
+    </section>
+
+    <section class="contrast-section section-pad" id="contrast" aria-labelledby="contrast-title">
+      <div class="contrast-topline"><span>ПРИНЦИП В РАБОТЕ</span><span>ОТ РАЗРОЗНЕННЫХ ДЕЙСТВИЙ К ЕДИНОМУ ПРОЦЕССУ</span></div>
+      <div class="contrast-heading">
+        <div><p class="contrast-overline"><i></i> ЧТО МЕНЯЕТСЯ С GRUZLI</p><h2 id="contrast-title">Не обещания.<br><em>Другой порядок действий.</em></h2></div>
+        <p>Выберите свою роль и сравните два подхода: когда работа держится на отдельных чатах и звонках — и когда ключевые действия собраны вокруг заказа в одной платформе.</p>
+      </div>
+      <div class="contrast-switch" role="tablist" aria-label="Выбрать роль для сравнения">
+        <button class="contrast-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="contrast-panel" data-compare-role="worker"><span>01</span> Грузчик</button>
+        <button class="contrast-tab" type="button" role="tab" aria-selected="false" aria-controls="contrast-panel" data-compare-role="dispatcher"><span>02</span> Диспетчер</button>
+        <button class="contrast-tab" type="button" role="tab" aria-selected="false" aria-controls="contrast-panel" data-compare-role="client"><span>03</span> Клиент</button>
+      </div>
+      <div class="contrast-panel" id="contrast-panel" role="tabpanel" tabindex="0" aria-live="polite">
+        <article class="contrast-card contrast-card-before">
+          <div class="contrast-card-head"><span>КАК ЧАСТО БЫВАЕТ</span><b>РАЗРОЗНЕННЫЙ ПРОЦЕСС</b></div>
+          <h3 id="contrast-before-title">Поиск смены в потоке сообщений.</h3>
+          <ul id="contrast-before-list">
+            <li>Просматривать несколько чатов и каналов</li>
+            <li>Отдельно уточнять ставку, адрес и длительность</li>
+            <li>Самостоятельно хранить историю договорённостей</li>
+          </ul>
+          <div class="contrast-card-foot"><span>ИНФОРМАЦИЯ РАСПРЕДЕЛЕНА</span><i>↗</i></div>
+        </article>
+        <div class="contrast-transition" aria-hidden="true"><span>→</span><small>СМЕНА ПОДХОДА</small></div>
+        <article class="contrast-card contrast-card-after">
+          <div class="contrast-card-head"><span>СЦЕНАРИЙ GRUZLI</span><b><i></i> В ОДНОЙ ПЛАТФОРМЕ</b></div>
+          <h3 id="contrast-after-title">Заявки собраны в рабочей ленте.</h3>
+          <ul id="contrast-after-list">
+            <li>Смотреть карточки заявок и основные условия</li>
+            <li>Откликаться на подходящую смену</li>
+            <li>Возвращаться к своим заказам и их статусам</li>
+          </ul>
+          <div class="contrast-card-foot"><span>ЗАКАЗ И ЕГО ИСТОРИЯ РЯДОМ</span><i>✓</i></div>
+        </article>
+      </div>
+      <div class="contrast-bottom"><p><b>Важно:</b> GRUZLI не гарантирует наличие заказа или мгновенный подбор команды. Платформа помогает участникам организовать заявку, отклики, коммуникацию и статусы в одном месте.</p><a class="contrast-link" href="/app/">Посмотреть приложение <span>↗</span></a></div>
     </section>
 
     <section class="roles-section section-pad" id="roles">

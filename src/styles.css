@@ -369,3 +369,98 @@ body.lightbox-open{overflow:hidden}
  .story-manifesto:after{font-size:220px;top:-35px}
 }
 @media(prefers-reduced-motion:reduce){.story-section *{scroll-behavior:auto}}
+
+
+/* GRUZLI / Role-based workflow contrast */
+.contrast-section{padding-top:116px;padding-bottom:112px;background:#ecece9;border-top:1px solid #e2e2de;border-bottom:1px solid #e2e2de}
+.contrast-topline{display:flex;justify-content:space-between;gap:20px;color:#96979a;font-size:8px;font-weight:850;letter-spacing:.15em}
+.contrast-heading{display:grid;grid-template-columns:1.1fr .9fr;align-items:end;gap:70px;margin-top:50px}
+.contrast-overline{display:flex;align-items:center;gap:9px;margin:0 0 20px;color:#929398;font-size:8px;font-weight:850;letter-spacing:.14em}
+.contrast-overline i{width:18px;height:2px;background:var(--yellow)}
+.contrast-heading h2{margin:0;font-size:clamp(45px,6vw,76px);line-height:.98;letter-spacing:-.075em;font-weight:850}
+.contrast-heading h2 em{color:#999a9c;font-style:normal}
+.contrast-heading>p{max-width:430px;margin:0 0 5px;color:#77797d;font-size:13px;line-height:1.85}
+.contrast-switch{display:flex;gap:7px;margin-top:45px;padding:6px;border:1px solid #deded9;border-radius:15px;background:rgba(255,255,255,.52);width:max-content;max-width:100%}
+.contrast-tab{min-height:46px;padding:0 17px;display:flex;align-items:center;gap:10px;border:1px solid transparent;border-radius:10px;background:transparent;color:#77797d;font:inherit;font-size:11px;font-weight:750;cursor:pointer;transition:background .22s,color .22s,border-color .22s,box-shadow .22s}
+.contrast-tab>span{color:#a1a2a5;font-size:8px;font-weight:850}
+.contrast-tab:hover{color:var(--ink)}
+.contrast-tab.is-active{background:#fff;border-color:#fff;color:var(--ink);box-shadow:0 5px 16px rgba(23,24,27,.06)}
+.contrast-tab.is-active>span{color:#a77e00}
+.contrast-panel{display:grid;grid-template-columns:minmax(0,1fr) 76px minmax(0,1fr);align-items:stretch;gap:14px;margin-top:17px;outline:none}
+.contrast-card{position:relative;min-width:0;min-height:315px;padding:28px 29px 23px;border:1px solid #deded9;border-radius:19px;background:#f8f8f6;display:flex;flex-direction:column;overflow:hidden}
+.contrast-card-before{background:linear-gradient(145deg,#f8f8f6,#f0f0ed)}
+.contrast-card-after{border-color:#e5d8a7;background:radial-gradient(circle at 92% 0%,rgba(240,189,24,.15),transparent 34%),linear-gradient(145deg,#fff,#f8f7f1);box-shadow:0 18px 45px rgba(23,24,27,.045)}
+.contrast-card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#9a9b9e;font-size:7px;font-weight:850;letter-spacing:.13em}
+.contrast-card-head>b{display:flex;align-items:center;gap:6px;color:#8d8e91;font-size:7px}
+.contrast-card-head>b i{width:6px;height:6px;border-radius:50%;background:#a8b69c}
+.contrast-card h3{max-width:390px;margin:36px 0 22px;font-size:clamp(22px,2.5vw,31px);line-height:1.08;letter-spacing:-.06em}
+.contrast-card ul{display:grid;gap:14px;padding:0;margin:0 0 30px;list-style:none}
+.contrast-card li{position:relative;padding-left:20px;color:#686a6e;font-size:11px;line-height:1.6}
+.contrast-card li:before{position:absolute;left:0;top:0;color:#a1a2a5;content:"—";font-weight:700}
+.contrast-card-after li:before{color:#a77e00;content:"✓"}
+.contrast-card-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:16px;border-top:1px solid rgba(23,24,27,.09);color:#a0a1a3;font-size:7px;font-weight:850;letter-spacing:.12em}
+.contrast-card-after .contrast-card-foot i{color:#a77e00}
+.contrast-card-foot i{font-size:14px;font-style:normal}
+.contrast-transition{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#a3a4a6}
+.contrast-transition span{width:38px;height:38px;display:grid;place-items:center;border:1px solid #d7d7d2;border-radius:50%;background:rgba(255,255,255,.58);color:#a77e00;font-size:17px}
+.contrast-transition small{writing-mode:vertical-rl;color:#a3a4a6;font-size:6px;font-weight:850;letter-spacing:.14em}
+.contrast-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:22px}
+.contrast-bottom p{max-width:760px;margin:0;color:#929397;font-size:9px;line-height:1.75}
+.contrast-bottom p b{color:#686a6e}
+.contrast-link{flex:0 0 auto;display:inline-flex;align-items:center;gap:15px;color:#34363a;font-size:10px;font-weight:750;transition:color .2s}
+.contrast-link:hover{color:#a77e00}
+.contrast-link span{color:#a77e00;font-size:16px}
+@media(max-width:780px){
+  .contrast-section{padding-top:76px;padding-bottom:78px}
+  .contrast-topline{font-size:7px;letter-spacing:.1em}
+  .contrast-heading{grid-template-columns:1fr;gap:18px;margin-top:34px}
+  .contrast-heading h2{font-size:clamp(43px,10vw,65px)}
+  .contrast-heading>p{font-size:12px}
+  .contrast-switch{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:30px;gap:4px;padding:4px}
+  .contrast-tab{justify-content:center;gap:6px;padding:0 5px;font-size:10px}
+  .contrast-tab>span{display:none}
+  .contrast-panel{grid-template-columns:1fr;gap:9px;margin-top:12px}
+  .contrast-card{min-height:0;padding:22px 20px 18px}
+  .contrast-card h3{margin:24px 0 16px;font-size:25px}
+  .contrast-card ul{gap:11px;margin-bottom:23px}
+  .contrast-transition{flex-direction:row;gap:9px;padding:1px 0}
+  .contrast-transition span{width:29px;height:29px;font-size:14px;transform:rotate(90deg)}
+  .contrast-transition small{writing-mode:initial;font-size:6px}
+  .contrast-bottom{align-items:flex-start;flex-direction:column;gap:15px;margin-top:18px}
+}
+@media(prefers-reduced-motion:reduce){.contrast-tab{transition:none}}
+
+/* HERO / GRUZLI launch lockup */
+.hero-eyebrow{display:inline-flex;min-height:30px;padding:0 12px;border:1px solid rgba(167,126,0,.2);border-radius:999px;background:rgba(255,255,255,.62);color:#7c5e00;font-size:9px;letter-spacing:.17em}
+.hero-eyebrow .live-dot{width:6px;height:6px;flex-basis:6px;box-shadow:0 0 0 4px rgba(240,189,24,.13),0 0 14px rgba(240,189,24,.45);animation:hero-status-pulse 2.4s ease-in-out infinite}
+.hero-project-type{margin-top:12px;color:#929398;font-size:8px;font-weight:800;letter-spacing:.15em;line-height:1.5}
+.hero-release{position:relative;display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:18px;row-gap:4px;width:max-content;max-width:100%;margin-top:28px;padding:12px 19px 12px 17px;border:1px solid rgba(23,24,27,.09);border-left:3px solid var(--yellow);border-radius:0 13px 13px 0;background:linear-gradient(110deg,rgba(255,255,255,.92),rgba(255,255,255,.48));box-shadow:0 10px 30px rgba(23,24,27,.035)}
+.hero-release-label{grid-column:1;color:#999a9c;font-size:7px;font-weight:850;letter-spacing:.16em;white-space:nowrap}
+.hero-release strong{grid-column:1;grid-row:2;font-size:clamp(25px,3vw,34px);font-weight:850;line-height:1;letter-spacing:-.075em;font-variant-numeric:tabular-nums}
+.hero-release strong em{color:#a77e00;font-style:normal}
+.hero-release-note{grid-column:2;grid-row:1/3;display:flex;align-items:center;gap:8px;padding-left:16px;border-left:1px solid #e5e5e0;color:#898a8e;font-size:7px;font-weight:850;letter-spacing:.12em;white-space:nowrap}
+.hero-release-note i{width:4px;height:4px;border-radius:50%;background:var(--yellow)}
+.hero-meta{margin-top:22px}
+@keyframes hero-status-pulse{0%,100%{box-shadow:0 0 0 4px rgba(240,189,24,.12),0 0 12px rgba(240,189,24,.35)}50%{box-shadow:0 0 0 7px rgba(240,189,24,.04),0 0 18px rgba(240,189,24,.58)}}
+@media(max-width:780px){.hero-release{margin-top:23px}.hero-meta{margin-top:19px}}
+@media(max-width:430px){.hero-eyebrow{min-height:27px;padding:0 10px;font-size:8px}.hero-project-type{font-size:7px}.hero-release{column-gap:13px;margin-top:21px;padding:11px 13px}.hero-release strong{font-size:28px}.hero-release-note{padding-left:11px;font-size:6px;letter-spacing:.08em}}
+@media(prefers-reduced-motion:reduce){.hero-eyebrow .live-dot{animation:none}}
+
+
+/* HERO / Two ways to use GRUZLI */
+.hero-entry-choice{display:grid;grid-template-columns:1fr 1fr;gap:9px;width:min(100%,610px);margin-top:30px}
+.hero-entry-card{position:relative;min-width:0;min-height:112px;display:flex;align-items:flex-start;gap:12px;padding:15px 35px 14px 14px;border:1px solid rgba(255,255,255,.14);border-radius:15px;background:linear-gradient(145deg,rgba(255,255,255,.095),rgba(255,255,255,.035));color:#fff;text-decoration:none;overflow:hidden;transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease}
+.hero-entry-card:before{position:absolute;inset:0;content:"";background:radial-gradient(circle at 0 0,rgba(240,189,24,.13),transparent 65%);opacity:0;transition:opacity .22s ease;pointer-events:none}
+.hero-entry-card:hover{transform:translateY(-3px);border-color:rgba(240,189,24,.48);background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.055));box-shadow:0 14px 32px rgba(0,0,0,.16)}
+.hero-entry-card:hover:before{opacity:1}
+.hero-entry-service{border-color:rgba(240,189,24,.38);background:linear-gradient(145deg,rgba(240,189,24,.13),rgba(255,255,255,.045))}
+.hero-entry-icon{position:relative;z-index:1;flex:0 0 31px;width:31px;height:31px;display:grid;place-items:center;border:1px solid rgba(240,189,24,.32);border-radius:9px;background:rgba(240,189,24,.12);color:var(--yellow);font-size:16px}
+.hero-entry-content{position:relative;z-index:1;display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:5px}
+.hero-entry-kicker{color:rgba(255,255,255,.46);font-size:7px;font-weight:850;letter-spacing:.14em;line-height:1.4}
+.hero-entry-content strong{font-size:clamp(11px,1.05vw,13px);font-weight:800;letter-spacing:-.025em;line-height:1.25}
+.hero-entry-content small{max-width:220px;color:rgba(255,255,255,.57);font-size:9px;line-height:1.5}
+.hero-entry-arrow{position:absolute;right:13px;top:13px;color:var(--yellow);font-size:15px;transition:transform .22s ease}
+.hero-entry-card:hover .hero-entry-arrow{transform:translate(2px,-2px)}
+@media(max-width:1050px){.hero-entry-choice{max-width:560px}}
+@media(max-width:600px){.hero-entry-choice{grid-template-columns:1fr;gap:8px;margin-top:25px}.hero-entry-card{min-height:88px;padding:13px 36px 12px 13px}.hero-entry-content strong{font-size:12px}.hero-entry-content small{font-size:9px;max-width:270px}}
+@media(prefers-reduced-motion:reduce){.hero-entry-card,.hero-entry-card:before,.hero-entry-arrow{transition:none}}
