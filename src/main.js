@@ -179,3 +179,102 @@ document.querySelectorAll(".screen-card").forEach((card) => {
   image.addEventListener("load", () => card.classList.add("is-loaded"), { once: true });
   if (image.complete) card.classList.add("is-loaded");
 });
+
+/* Scroll position, section context and image inspection. */
+const progressRoot = document.createElement("div");
+progressRoot.className = "scroll-progress";
+progressRoot.setAttribute("aria-hidden", "true");
+const progressFill = document.createElement("span");
+progressRoot.append(progressFill);
+document.body.prepend(progressRoot);
+
+let progressFrame = 0;
+const paintScrollProgress = () => {
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const ratio = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+  progressFill.style.width = (ratio * 100).toFixed(2) + "%";
+  progressFrame = 0;
+};
+window.addEventListener("scroll", () => {
+  if (!progressFrame) progressFrame = window.requestAnimationFrame(paintScrollProgress);
+}, { passive: true });
+window.addEventListener("resize", paintScrollProgress, { passive: true });
+paintScrollProgress();
+
+const sectionLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'))
+  .filter((link) => document.querySelector(link.getAttribute("href")));
+if ("IntersectionObserver" in window) {
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      sectionLinks.forEach((link) => {
+        if (link.getAttribute("href") === "#" + entry.target.id) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    });
+  }, { rootMargin: "-28% 0px -58% 0px", threshold: 0 });
+  sectionLinks.forEach((link) => sectionObserver.observe(document.querySelector(link.getAttribute("href"))));
+}
+
+const workflowCards = Array.from(document.querySelectorAll(".workflow-card"));
+if (!reducedMotion && "IntersectionObserver" in window) {
+  const workflowObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("is-in-view");
+      else entry.target.classList.remove("is-in-view");
+    });
+  }, { threshold: .58 });
+  workflowCards.forEach((card) => workflowObserver.observe(card));
+} else {
+  workflowCards.forEach((card) => card.classList.add("is-in-view"));
+}
+
+if (!reducedMotion && window.matchMedia("(pointer:fine)").matches) {
+  document.querySelectorAll(".workflow-card,.feature-card").forEach((card) => {
+    card.addEventListener("pointermove", (event) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--card-x", (event.clientX - rect.left) + "px");
+      card.style.setProperty("--card-y", (event.clientY - rect.top) + "px");
+    }, { passive: true });
+    card.addEventListener("pointerleave", () => {
+      card.style.setProperty("--card-x", "50%");
+      card.style.setProperty("--card-y", "50%");
+    }, { passive: true });
+  });
+}
+
+const lightbox = document.querySelector(".screen-lightbox");
+const lightboxImage = lightbox.querySelector(".lightbox-image");
+const lightboxCaption = lightbox.querySelector(".lightbox-caption");
+const closeLightbox = () => {
+  if (lightbox.open) lightbox.close();
+  document.body.classList.remove("lightbox-open");
+  lightboxImage.removeAttribute("src");
+};
+document.querySelectorAll(".screen-photo img").forEach((image) => {
+  image.setAttribute("tabindex", "0");
+  image.setAttribute("role", "button");
+  image.setAttribute("aria-label", "Увеличить: " + image.alt);
+  const openImage = () => {
+    lightboxImage.src = image.currentSrc || image.src;
+    lightboxImage.alt = image.alt;
+    lightboxCaption.textContent = image.alt;
+    if (!lightbox.open) lightbox.showModal();
+    document.body.classList.add("lightbox-open");
+  };
+  image.addEventListener("click", openImage);
+  image.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openImage();
+    }
+  });
+});
+lightbox.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+lightbox.addEventListener("close", () => document.body.classList.remove("lightbox-open"));
