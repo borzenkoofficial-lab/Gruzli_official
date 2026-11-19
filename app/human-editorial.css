@@ -1,0 +1,46 @@
+/* GRUZLI APP GUIDE / practical editorial layout */
+body{background:#f6f5f1}
+.hero-glow,.art-orbit,.orbit-one,.orbit-two{display:none!important}
+.app-hero{background:#17191b}
+.hero-art{filter:none}
+.art-phone{box-shadow:0 20px 50px rgba(0,0,0,.2)}
+.art-phone-front{transform:rotate(-3deg)}
+.art-phone-back{transform:rotate(3deg)}
+.art-note{border:0;border-left:2px solid #e0b51c;border-radius:0;background:#242629;color:#fff;box-shadow:none}
+.art-note:before{display:none}
+.art-index{border:0;border-radius:0;background:transparent;box-shadow:none}
+.device-tabs{border:0;border-bottom:1px solid #c9c8c1;border-radius:0;background:transparent;padding:0;gap:0}
+.device-tab{min-height:74px;border:0;border-radius:0;background:transparent;box-shadow:none!important}
+.device-tab.is-active{border-bottom:3px solid #d8a900;background:transparent;color:#17181b}
+.device-icon{border:0;border-radius:0;background:transparent;box-shadow:none}
+.device-panel{border:0;border-top:1px solid #c9c8c1;border-bottom:1px solid #c9c8c1;border-radius:0;background:transparent;box-shadow:none;overflow:hidden}
+.guide-copy{padding:clamp(22px,4vw,48px)}
+.guide-step{border:0;border-bottom:1px solid #d4d2ca;border-radius:0;background:transparent}
+.guide-step.is-active{background:#eeede7}
+.step-number{border-radius:0;background:transparent;border:1px solid #c9c8c1}
+.guide-visual{border-left:1px solid #d4d2ca;background:#eeede7}
+.visual-topline{border:0}
+.phone-mockup,.desktop-window,.showcase-window{border-radius:2px;box-shadow:none}
+.phone-hardware{border-radius:28px}
+.instruction-callout{border:1px solid #c9c8c1;border-radius:2px;background:#f8f7f3;box-shadow:none}
+.instruction-callout:before{display:none}
+.visual-controls>button{border-radius:2px;box-shadow:none}
+.step-dots button{border-radius:0}
+.desktop-showcase{border:1px solid #c9c8c1;border-radius:0;background:#eeede7;box-shadow:none;padding:10px}
+.showcase-window{border:1px solid #c9c8c1}
+.showcase-window-top{border-radius:0}
+.showcase-caption{border-radius:0;background:transparent}
+.desktop-benefits{gap:0;border-top:1px solid #c9c8c1}
+.desktop-benefits article{border:0;border-bottom:1px solid #c9c8c1;border-radius:0;background:transparent;box-shadow:none;padding:20px 14px}
+.desktop-benefits article+article{border-left:1px solid #c9c8c1}
+.access-section{background:#202225}
+.access-actions>a:first-child{border-radius:2px;box-shadow:none}
+@media(max-width:640px){
+ .device-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .device-tab{align-items:flex-start;border-bottom:0}
+ .device-tab.is-active{border-bottom:3px solid #d8a900}
+ .device-panel{grid-template-columns:1fr}
+ .guide-visual{border-left:0;border-top:1px solid #d4d2ca}
+ .desktop-benefits{grid-template-columns:1fr}
+ .desktop-benefits article+article{border-left:0}
+}
