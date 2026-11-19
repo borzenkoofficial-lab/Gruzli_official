@@ -39,7 +39,7 @@ button:disabled{cursor:not-allowed}
 .hero-release strong em{color:#f0bd18;font-style:normal}
 .hero-release-note{grid-column:2;grid-row:1 / span 2;max-width:110px;color:#d0cfc8;font-size:8px;line-height:1.5;letter-spacing:.11em}
 .hero-entry-choice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:26px;border:0}
-.vessel-card{position:relative;isolation:isolate;min-width:0;overflow:hidden;border:1px solid var(--card-vessel-line);border-radius:var(--card-vessel-radius);background:var(--card-vessel-paper);color:var(--card-vessel-ink);box-shadow:var(--card-vessel-shadow);transition:transform var(--gruzli-motion-card),border-color var(--gruzli-motion-fast),background var(--gruzli-motion-fast),box-shadow var(--gruzli-motion-card)}
+.vessel-card{position:relative;isolation:isolate;min-width:0;overflow:hidden;border:1px solid var(--card-vessel-line);border-radius:var(--card-vessel-radius);background:var(--card-vessel-paper);color:var(--card-vessel-ink);box-shadow:var(--card-vessel-shadow);transition:border-color var(--gruzli-motion-fast),background var(--gruzli-motion-fast),box-shadow var(--gruzli-motion-card)}
 .vessel-card--hero{min-height:136px;padding:22px 40px 20px 19px;border-radius:var(--card-vessel-radius-wide);display:grid;grid-template-columns:34px minmax(0,1fr) 18px;align-items:center;gap:14px;box-shadow:none}
 .hero-entry-card{min-width:0;min-height:136px;border:1px solid transparent!important;color:#17191b!important;transform:none}
 .hero-entry-service{background:#f0bd18!important;border-color:#f0bd18!important}
