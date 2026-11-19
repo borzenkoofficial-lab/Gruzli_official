@@ -22,8 +22,8 @@ assert.ok(hero.includes("gsap.quickTo") && hero.includes("pointerleave"), "Point
 assert.ok(hero.includes("context.conditions.desktop"), "Heavy scroll depth must be desktop-only");
 assert.ok(scroll.includes("ScrollTrigger.batch") && scroll.includes("once: true"), "Scroll reveals must be batched and one-shot");
 assert.ok(interactions.includes("pointerdown") && interactions.includes("pointerleave"), "Card hover and press feedback must be present");
-const vesselRule = cardCss.match(/\\.vessel-card\\{([^}]*)\\}/s)?.[1] ?? "";
-const workflowRule = cardCss.match(/\\.workflow-card\\{([^}]*)\\}/s)?.[1] ?? "";
+const vesselRule = cardCss.match(/\.vessel-card\{([^}]*)\}/s)?.[1] ?? "";
+const workflowRule = cardCss.match(/\.workflow-card\{([^}]*)\}/s)?.[1] ?? "";
 assert.ok(!/transition:[^}]*transform/.test(vesselRule + workflowRule), "GSAP-owned card transforms must not compete with CSS transform transitions");
 assert.ok(main.includes("gsap.timeline()") && !main.includes("roleSwitchTimer"), "Role and order-demo changes must use GSAP timelines");
 assert.ok(scroll.includes("force3D: true"), "Reveal transforms must use compositor-friendly properties");
