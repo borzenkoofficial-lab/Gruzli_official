@@ -1,0 +1,26 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+
+const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
+const html = read("../index.html");
+const pkg = JSON.parse(read("../package.json"));
+const main = read("../src/main.js");
+const core = read("../src/motion/core.js");
+const hero = read("../src/motion/hero.js");
+const scroll = read("../src/motion/scroll.js");
+const css = read("../src/motion/motion.css");
+
+assert.ok(pkg.dependencies?.gsap, "GSAP must be a production dependency");
+assert.ok(html.includes('href="/src/motion/motion.css"'), "Motion CSS must be loaded");
+assert.ok(html.includes('src="/src/motion/index.js"'), "Motion runtime must be loaded");
+assert.ok(!html.includes("motion-direction.js"), "Legacy motion runtime must be removed");
+assert.ok(core.includes("gsap.registerPlugin(ScrollTrigger, SplitText)"), "Required GSAP plugins must be registered centrally");
+assert.ok(hero.includes("autoSplit: true") && hero.includes("onSplit(self)"), "SplitText must support responsive re-splitting");
+assert.ok(hero.includes("gsap.quickTo") && hero.includes("pointerleave"), "Pointer parallax must ease back to rest");
+assert.ok(hero.includes("context.conditions.desktop"), "Heavy scroll depth must be desktop-only");
+assert.ok(scroll.includes("ScrollTrigger.batch") && scroll.includes("once: true"), "Scroll reveals must be batched and one-shot");
+assert.ok(scroll.includes("force3D: true"), "Reveal transforms must use compositor-friendly properties");
+assert.ok(css.includes(".motion-ready .reveal") && css.includes("prefers-reduced-motion: reduce"), "Motion states must preserve reduced-motion and no-JS visibility");
+assert.ok(!main.includes("const revealItems") && !main.includes("workflowObserver"), "Legacy reveal observers must not compete with GSAP");
+assert.ok(!main.includes('const heroVisual = document.querySelector(".hero-visual")'), "Legacy hero pointer motion must be removed");
+console.log("GSAP motion foundation contract: PASS");

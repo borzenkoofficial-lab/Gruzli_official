@@ -16,7 +16,8 @@ assert.ok(html.includes('href="/src/card-system.css"'), "Homepage must load the 
 assert.ok(!html.includes('href="/src/human-editorial.css"'), "Legacy editorial card layer must not be loaded");
 assert.ok(!html.includes('href="/src/motion-direction.css"'), "Legacy motion/card layer must not be loaded");
 assert.ok(!html.includes('href="/src/site-polish.css"'), "Legacy finishing layer must not be loaded");
-assert.ok(html.includes('src="/src/motion-direction.js"'), "The authored motion controller must remain enabled");
+assert.ok(html.includes('src="/src/motion/index.js"'), "The GSAP motion entrypoint must be loaded");
+assert.ok(!html.includes('src="/src/motion-direction.js"'), "The legacy motion controller must not be loaded");
 for (const legacySelector of [".hero-entry-card", ".story-triad", ".story-statuses", ".contrast-card", ".workflow-card", ".feature-card", ".role-tab", ".role-panel", ".screen-card", ".faq-item"]) {
   assert.ok(!mobileCss.includes(legacySelector), `Mobile layout file must not redefine card component: ${legacySelector}`);
 }

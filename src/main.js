@@ -119,22 +119,6 @@ nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () =>
 
 document.querySelector("#year").textContent = String(new Date().getFullYear());
 
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const revealItems = document.querySelectorAll(".reveal");
-if (!reducedMotion && "IntersectionObserver" in window) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  revealItems.forEach((item) => observer.observe(item));
-} else {
-  revealItems.forEach((item) => item.classList.add("is-visible"));
-}
-
 const header = document.querySelector(".site-header");
 let scrollFrame = 0;
 const updateHeader = () => {
@@ -145,21 +129,6 @@ window.addEventListener("scroll", () => {
   if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateHeader);
 }, { passive: true });
 updateHeader();
-
-const heroVisual = document.querySelector(".hero-visual");
-if (!reducedMotion && window.matchMedia("(pointer:fine)").matches) {
-  heroVisual.addEventListener("pointermove", (event) => {
-    const rect = heroVisual.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - .5) * 2;
-    const y = ((event.clientY - rect.top) / rect.height - .5) * 2;
-    heroVisual.style.setProperty("--pointer-x", x.toFixed(3));
-    heroVisual.style.setProperty("--pointer-y", y.toFixed(3));
-  }, { passive: true });
-  heroVisual.addEventListener("pointerleave", () => {
-    heroVisual.style.setProperty("--pointer-x", "0");
-    heroVisual.style.setProperty("--pointer-y", "0");
-  }, { passive: true });
-}
 
 document.querySelectorAll(".screen-card").forEach((card) => {
   const image = card.querySelector("img");
@@ -205,19 +174,6 @@ if ("IntersectionObserver" in window) {
     });
   }, { rootMargin: "-28% 0px -58% 0px", threshold: 0 });
   sectionLinks.forEach((link) => sectionObserver.observe(document.querySelector(link.getAttribute("href"))));
-}
-
-const workflowCards = Array.from(document.querySelectorAll(".workflow-card"));
-if (!reducedMotion && "IntersectionObserver" in window) {
-  const workflowObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("is-in-view");
-      else entry.target.classList.remove("is-in-view");
-    });
-  }, { threshold: .58 });
-  workflowCards.forEach((card) => workflowObserver.observe(card));
-} else {
-  workflowCards.forEach((card) => card.classList.add("is-in-view"));
 }
 
 const lightbox = document.querySelector(".screen-lightbox");

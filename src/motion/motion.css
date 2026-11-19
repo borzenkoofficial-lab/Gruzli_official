@@ -1,0 +1,35 @@
+/* GSAP owns motion-ready states. Without JS, all content stays visible. */
+.motion-ready .reveal {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, 22px, 0);
+}
+
+.hero h1 .hero-line-mask {
+  overflow: clip;
+}
+
+.hero h1 .hero-word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+@media (max-width: 760px) {
+  .motion-ready .hero-visual {
+    will-change: transform;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .reveal {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .hero h1 .hero-word {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto;
+  }
+}
