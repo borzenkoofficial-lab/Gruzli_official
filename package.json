@@ -8,7 +8,7 @@
     "build": "npm run check:homepage && npm run check:motion && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "check:homepage": "node scripts/verify-homepage-cards.mjs",
-    "check:motion": "node --check src/motion/core.js && node --check src/motion/hero.js && node --check src/motion/scroll.js && node --check src/motion/interactions.js && node --check src/motion/index.js && node scripts/verify-motion-foundation.mjs && node --check app/motion.js"
+    "check:motion": "node --check src/motion/core.js && node --check src/motion/hero.js && node --check src/motion/scroll.js && node --check src/motion/interactions.js && node --check src/motion/index.js && node scripts/verify-motion-foundation.mjs && node --check app/motion.js && node --check src/main.js"
   },
   "devDependencies": {
     "vite": "^5.4.19"

@@ -127,15 +127,34 @@ document.querySelectorAll(".faq-item > button").forEach((button) => {
   button.addEventListener("click", () => {
     const item = button.closest(".faq-item");
     const shouldOpen = !item.classList.contains("is-open");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     document.querySelectorAll(".faq-item").forEach((entry) => {
+      const answer = entry.querySelector(".faq-answer p");
+      const wasOpen = entry.classList.contains("is-open");
       entry.classList.remove("is-open");
       entry.querySelector("button").setAttribute("aria-expanded", "false");
       entry.querySelector("button i").textContent = "+";
+      if (wasOpen && !reduce) {
+        gsap.to(answer, { autoAlpha: 0, y: -4, duration: 0.12, ease: "power1.out", overwrite: true });
+      } else if (reduce) {
+        gsap.set(answer, { autoAlpha: 1, y: 0, clearProps: "transform" });
+      }
     });
+
     if (shouldOpen) {
       item.classList.add("is-open");
       button.setAttribute("aria-expanded", "true");
       button.querySelector("i").textContent = "−";
+      const answer = item.querySelector(".faq-answer p");
+      if (reduce) {
+        gsap.set(answer, { autoAlpha: 1, y: 0, clearProps: "transform" });
+      } else {
+        gsap.fromTo(answer,
+          { autoAlpha: 0, y: 7 },
+          { autoAlpha: 1, y: 0, duration: 0.32, delay: 0.1, ease: "power3.out", clearProps: "transform,opacity,visibility" },
+        );
+      }
     }
   });
 });
@@ -216,21 +235,45 @@ if ("IntersectionObserver" in window) {
 const lightbox = document.querySelector(".screen-lightbox");
 const lightboxImage = lightbox.querySelector(".lightbox-image");
 const lightboxCaption = lightbox.querySelector(".lightbox-caption");
-const closeLightbox = () => {
+let lightboxTimeline;
+const finishLightboxClose = () => {
   if (lightbox.open) lightbox.close();
   document.body.classList.remove("lightbox-open");
   lightboxImage.removeAttribute("src");
+  gsap.set([lightbox, lightboxImage], { clearProps: "all" });
+};
+const closeLightbox = () => {
+  if (!lightbox.open) return;
+  lightboxTimeline?.kill();
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    finishLightboxClose();
+    return;
+  }
+  lightboxTimeline = gsap.timeline({ onComplete: finishLightboxClose });
+  lightboxTimeline
+    .to(lightboxImage, { autoAlpha: 0, scale: 0.97, duration: 0.16, ease: "power2.in" })
+    .to(lightbox, { autoAlpha: 0, duration: 0.16, ease: "power1.in" }, 0);
 };
 document.querySelectorAll(".screen-photo img").forEach((image) => {
   image.setAttribute("tabindex", "0");
   image.setAttribute("role", "button");
   image.setAttribute("aria-label", "Увеличить: " + image.alt);
   const openImage = () => {
+    lightboxTimeline?.kill();
     lightboxImage.src = image.currentSrc || image.src;
     lightboxImage.alt = image.alt;
     lightboxCaption.textContent = image.alt;
     if (!lightbox.open) lightbox.showModal();
     document.body.classList.add("lightbox-open");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set([lightbox, lightboxImage], { autoAlpha: 1, scale: 1, y: 0, clearProps: "transform" });
+      return;
+    }
+    gsap.fromTo(lightbox, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, ease: "power2.out", overwrite: true });
+    gsap.fromTo(lightboxImage,
+      { autoAlpha: 0, scale: 0.96, y: 8 },
+      { autoAlpha: 1, scale: 1, y: 0, duration: 0.42, ease: "power3.out", force3D: true, clearProps: "transform,opacity,visibility" },
+    );
   };
   image.addEventListener("click", openImage);
   image.addEventListener("keydown", (event) => {
@@ -243,6 +286,10 @@ document.querySelectorAll(".screen-photo img").forEach((image) => {
 lightbox.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
 lightbox.addEventListener("click", (event) => {
   if (event.target === lightbox) closeLightbox();
+});
+lightbox.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeLightbox();
 });
 lightbox.addEventListener("close", () => document.body.classList.remove("lightbox-open"));
 

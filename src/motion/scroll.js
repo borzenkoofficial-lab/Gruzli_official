@@ -41,5 +41,30 @@ export function initScrollMotion() {
     return () => scope.revert();
   });
 
+  // The four order statuses form a single semantic sequence; reveal them as a group.
+  const statusCards = gsap.utils.toArray(".story-statuses .vessel-card");
+  if (statusCards.length) {
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      const statusScope = gsap.context(() => {
+        gsap.set(statusCards, { autoAlpha: 0, y: 12, force3D: true });
+        ScrollTrigger.create({
+          trigger: statusCards[0].parentElement,
+          start: "top 86%",
+          once: true,
+          onEnter: () => gsap.to(statusCards, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.52,
+            stagger: 0.09,
+            ease: "power3.out",
+            overwrite: "auto",
+            clearProps: "transform,willChange",
+          }),
+        });
+      });
+      return () => statusScope.revert();
+    });
+  }
+
   return () => media.revert();
 }
