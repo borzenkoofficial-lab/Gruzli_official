@@ -24,3 +24,14 @@
 .capabilities-footnote b{color:#222426}
 @media(max-width:850px){.capabilities-shell{width:calc(100% - 40px)}.capabilities-heading{grid-template-columns:1fr;gap:18px;margin:34px 0}.capability-groups{grid-template-columns:1fr}.capability-vessel{border-radius:42px 42px 28px 28px}}
 @media(max-width:480px){.capabilities-shell{width:calc(100% - 32px)}.capabilities-heading h2{font-size:42px}.capability-vessel{padding:24px 20px}.capability-vessel h3{font-size:34px}.capability-list b{font-size:13px}.capability-list p{font-size:12px}}
+
+.capability-common{display:grid;grid-template-columns:.72fr 1.28fr;gap:44px;margin-top:54px;padding:34px 0;border-top:1px solid #d5d2c9;border-bottom:1px solid #d5d2c9}
+.common-heading>span{font-size:9px;letter-spacing:.15em;font-weight:800;color:#85817a}
+.common-heading h3{font-size:clamp(28px,3vw,42px);line-height:1.03;letter-spacing:-.05em;margin:22px 0 0;font-weight:850}
+.common-heading h3 em{font-style:normal;color:#a27a0a}
+.common-items{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+.common-items article{padding:16px 0;border-top:1px solid #d8d6cf}
+.common-items b{font-size:13px;color:#202224}
+.common-items p{font-size:12px;line-height:1.7;color:#66686a;margin:7px 0 0}
+@media(max-width:850px){.capability-common{grid-template-columns:1fr;gap:20px}.common-items{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.common-items{grid-template-columns:1fr}.capability-common{padding:28px 0}}
