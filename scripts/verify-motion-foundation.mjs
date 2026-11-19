@@ -11,6 +11,7 @@ const scroll = read("../src/motion/scroll.js");
 const interactions = read("../src/motion/interactions.js");
 const css = read("../src/motion/motion.css");
 const cardCss = read("../src/card-system.css");
+const baseCss = read("../src/styles.css");
 
 assert.ok(pkg.dependencies?.gsap, "GSAP must be a production dependency");
 assert.ok(html.includes('href="/src/motion/motion.css"'), "Motion CSS must be loaded");
@@ -25,6 +26,7 @@ assert.ok(interactions.includes("pointerdown") && interactions.includes("pointer
 const vesselRule = cardCss.match(/\.vessel-card\{([^}]*)\}/s)?.[1] ?? "";
 const workflowRule = cardCss.match(/\.workflow-card\{([^}]*)\}/s)?.[1] ?? "";
 assert.ok(!/transition:[^}]*transform/.test(vesselRule + workflowRule), "GSAP-owned card transforms must not compete with CSS transform transitions");
+assert.ok(!/\\.workflow-card:hover\\{[^}]*transform:/.test(baseCss) && !/\\.feature-card:hover\\{[^}]*transform:/.test(baseCss), "Legacy hover transforms must not override GSAP card feedback");
 assert.ok(main.includes("gsap.timeline()") && !main.includes("roleSwitchTimer"), "Role and order-demo changes must use GSAP timelines");
 assert.ok(scroll.includes("force3D: true"), "Reveal transforms must use compositor-friendly properties");
 assert.ok(css.includes(".motion-ready .reveal") && css.includes("prefers-reduced-motion: reduce"), "Motion states must preserve reduced-motion and no-JS visibility");
