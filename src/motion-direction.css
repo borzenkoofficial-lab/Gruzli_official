@@ -60,3 +60,26 @@ body{overflow-x:clip}
  .hero:after,.section-pad.motion-scene-active:before{animation:none!important}
  .hero-inner,.hero-visual,.hero-phone,.reveal,.workflow-card,.feature-card,.contrast-card{transform:none!important;filter:none!important;transition:none!important}
 }
+
+/* Two-role order flow and cinematic slide choreography */
+.workflow-track{grid-template-columns:repeat(2,minmax(0,1fr))!important;max-width:940px;margin-left:auto;margin-right:auto}
+.workflow-line{display:none!important}
+.workflow-card{min-height:270px}
+.stage-node.node-dispatcher{left:8%;right:auto;top:22%}
+.stage-node.node-worker{left:auto;right:8%;bottom:auto;top:22%;transform:none}
+.stage-node.node-worker.is-active{transform:translateY(-4px)}
+.stage-connectors path{stroke:rgba(240,189,24,.5);stroke-dasharray:7 9;animation:connector-flow 5s linear infinite}
+@keyframes connector-flow{to{stroke-dashoffset:-64}}
+.reveal{opacity:1}
+.reveal:not(.is-visible){opacity:0;transform:translate3d(0,34px,0);filter:blur(7px)}
+.reveal.is-visible{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}
+.hero-entry-card:focus-visible,.role-tab:focus-visible,.contrast-tab:focus-visible{outline:3px solid #efbd1b!important;outline-offset:5px}
+@media(max-width:780px){
+ .workflow-track{grid-template-columns:1fr!important}
+ .stage-node.node-dispatcher{left:2%;top:16%}
+ .stage-node.node-worker{right:2%;top:16%}
+}
+@media(prefers-reduced-motion:reduce){
+ .stage-connectors path{animation:none!important}
+ .reveal:not(.is-visible){opacity:1;transform:none;filter:none}
+}
