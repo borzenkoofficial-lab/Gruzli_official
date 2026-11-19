@@ -16,10 +16,8 @@
   <link rel="icon" href="https://raw.githubusercontent.com/borzenkoofficial-lab/gruzli-b99e57fd/main/public/favicon.jpeg" type="image/jpeg" />
   <link rel="stylesheet" href="/src/styles.css" />
   <title>Gruzli — платформа для диспетчеров и грузчиков</title>
-  <link rel="stylesheet" href="/src/site-polish.css" />
   <link rel="stylesheet" href="/src/mobile-polish.css" />
-  <link rel="stylesheet" href="/src/human-editorial.css" />
-  <link rel="stylesheet" href="/src/motion-direction.css" />
+  <link rel="stylesheet" href="/src/card-system.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержанию</a>
@@ -59,7 +57,7 @@
             <span class="hero-release-note">GRUZLI <i></i> 15 ЯНВАРЯ 2027</span>
           </div>
           <div class="hero-entry-choice" aria-label="Выберите способ работы с Gruzli">
-            <a class="hero-entry-card hero-entry-service" href="#roles">
+            <a class="hero-entry-card vessel-card vessel-card--hero hero-entry-service" href="#roles">
               <span class="hero-entry-icon" aria-hidden="true">↗</span>
               <span class="hero-entry-content">
                 <span class="hero-entry-kicker">ДЛЯ ДИСПЕТЧЕРА</span>
@@ -68,7 +66,7 @@
               </span>
               <span class="hero-entry-arrow" aria-hidden="true">↘</span>
             </a>
-            <a class="hero-entry-card hero-entry-app" href="/app/">
+            <a class="hero-entry-card vessel-card vessel-card--hero hero-entry-app" href="/app/">
               <span class="hero-entry-icon" aria-hidden="true">▣</span>
               <span class="hero-entry-content">
                 <span class="hero-entry-kicker">ДЛЯ ГРУЗЧИКА</span>
@@ -139,8 +137,8 @@
             <p>GRUZLI объединяет два рабочих сценария. Диспетчер публикует и ведёт заявки, обрабатывает отклики и собирает команду. Грузчик находит смены, изучает условия, откликается и отмечает ход выполнения. Участники работают вокруг заказа, а не пытаются собрать его историю из десятков сообщений.</p>
             <p>Это не попытка запретить людям общаться привычным способом. Это способ перестать использовать переписку как единственное место, где хранится вся работа.</p>
             <div class="story-triad">
-              <div><span>01</span><b>Диспетчер</b><small>Ведёт заявки и команду</small></div>
-              <div><span>02</span><b>Грузчик</b><small>Находит смены и работает</small></div>
+              <div class="vessel-card vessel-card--role"><span>01</span><b>Диспетчер</b><small>Ведёт заявки и команду</small></div>
+              <div class="vessel-card vessel-card--role"><span>02</span><b>Грузчик</b><small>Находит смены и работает</small></div>
             </div>
           </div>
         </article>
@@ -150,13 +148,13 @@
             <h3>Статус говорит<br><em>вместо десятка звонков.</em></h3>
             <p>В GRUZLI движение заказа можно отмечать понятными действиями: «Готов», «Приехал», «Выполняю», «Выполнил». Это простые слова, но за ними — важная привычка: фиксировать этап работы там, где заказ и был создан. Диспетчеру легче понимать, что происходит на объекте, а грузчику не нужно каждый раз объяснять одно и то же в личных сообщениях.</p>
             <div class="story-statuses" aria-label="Этапы выполнения заказа">
-              <div><i>01</i><b>Готов</b><small>Подтверждаю готовность</small></div>
+              <div class="vessel-card vessel-card--status"><i>01</i><b>Готов</b><small>Подтверждаю готовность</small></div>
               <span>→</span>
-              <div><i>02</i><b>Приехал</b><small>На месте</small></div>
+              <div class="vessel-card vessel-card--status"><i>02</i><b>Приехал</b><small>На месте</small></div>
               <span>→</span>
-              <div><i>03</i><b>Выполняю</b><small>Работа началась</small></div>
+              <div class="vessel-card vessel-card--status"><i>03</i><b>Выполняю</b><small>Работа началась</small></div>
               <span>→</span>
-              <div><i>04</i><b>Выполнил</b><small>Работа завершена</small></div>
+              <div class="vessel-card vessel-card--status"><i>04</i><b>Выполнил</b><small>Работа завершена</small></div>
             </div>
           </div>
         </article>
@@ -204,7 +202,7 @@
         
       </div>
       <div class="contrast-panel" id="contrast-panel" role="tabpanel" tabindex="0" aria-live="polite">
-        <article class="contrast-card contrast-card-before">
+        <article class="contrast-card vessel-card vessel-card--contrast contrast-card-before">
           <div class="contrast-card-head"><span>КАК ЧАСТО БЫВАЕТ</span><b>РАЗРОЗНЕННЫЙ ПРОЦЕСС</b></div>
           <h3 id="contrast-before-title">Поиск смены в потоке сообщений.</h3>
           <ul id="contrast-before-list">
@@ -215,7 +213,7 @@
           <div class="contrast-card-foot"><span>ИНФОРМАЦИЯ РАСПРЕДЕЛЕНА</span><i>↗</i></div>
         </article>
         <div class="contrast-transition" aria-hidden="true"><span>→</span><small>СМЕНА ПОДХОДА</small></div>
-        <article class="contrast-card contrast-card-after">
+        <article class="contrast-card vessel-card vessel-card--contrast contrast-card-after">
           <div class="contrast-card-head"><span>СЦЕНАРИЙ GRUZLI</span><b><i></i> В ОДНОЙ ПЛАТФОРМЕ</b></div>
           <h3 id="contrast-after-title">Заявки собраны в рабочей ленте.</h3>
           <ul id="contrast-after-list">
@@ -278,7 +276,7 @@
       </div>
       <div class="workflow-track">
         <div class="workflow-line"><span></span></div>
-        <article class="workflow-card reveal"><div class="workflow-top"><b>01</b><span>ДИСПЕТЧЕР</span></div><div class="workflow-icon">⌘</div><h3>Организует заказ</h3><p>Публикует заявку, рассматривает отклики, подбирает людей и управляет ходом выполнения.</p><div class="workflow-foot"><span>КООРДИНАЦИЯ</span><b>01 / 02</b></div></article>
+        <article class="workflow-card vessel-card vessel-card--process reveal"><div class="workflow-top"><b>01</b><span>ДИСПЕТЧЕР</span></div><div class="workflow-icon">⌘</div><h3>Организует заказ</h3><p>Публикует заявку, рассматривает отклики, подбирает людей и управляет ходом выполнения.</p><div class="workflow-foot"><span>КООРДИНАЦИЯ</span><b>01 / 02</b></div></article>
         <article class="workflow-card reveal"><div class="workflow-top"><b>02</b><span>ГРУЗЧИК</span></div><div class="workflow-icon">↗</div><h3>Выходит на смену</h3><p>Изучает условия, откликается, общается с диспетчером и отмечает статусы работы.</p><div class="workflow-foot"><span>ВЫПОЛНЕНИЕ</span><b>02 / 02</b></div></article>
       </div>
       <div class="workflow-bottom"><span>СВЯЗЬ МЕЖДУ ЭТАПАМИ</span><p>Отклики, сообщения, статусы и документы не живут отдельно от заказа.</p></div>
@@ -342,7 +340,7 @@
       <div class="section-kicker"><span>04 / ВОЗМОЖНОСТИ</span><span>ИНСТРУМЕНТЫ НА КАЖДОМ ЭТАПЕ</span></div>
       <div class="section-heading"><h2 class="reveal">Всё важное —<br><em>под рукой.</em></h2><p class="reveal">Лента, отклики, команда, картотека, чаты, документы и статусы собраны вокруг реальной работы.</p></div>
       <div class="features-grid">
-        <article class="feature-card reveal"><div class="feature-card-top"><span>⌕</span><b>01</b></div><h3>Лента и заявки</h3><p>Публикация заказов, поиск подходящих смен и понятные карточки с условиями.</p><i>↗</i></article>
+        <article class="feature-card vessel-card vessel-card--feature reveal"><div class="feature-card-top"><span>⌕</span><b>01</b></div><h3>Лента и заявки</h3><p>Публикация заказов, поиск подходящих смен и понятные карточки с условиями.</p><i>↗</i></article>
         <article class="feature-card reveal"><div class="feature-card-top"><span>◌</span><b>02</b></div><h3>Общение по делу</h3><p>Чаты между участниками помогают уточнять детали и держать связь по заказу.</p><i>↗</i></article>
         <article class="feature-card reveal"><div class="feature-card-top"><span>▤</span><b>03</b></div><h3>Договоры и документы</h3><p>Для нужных заказов предусмотрены договоры, онлайн-подписание и PDF.</p><i>↗</i></article>
         <article class="feature-card reveal"><div class="feature-card-top"><span>◈</span><b>04</b></div><h3>Профили и репутация</h3><p>Профили, рейтинги и история заказов помогают принимать более взвешенные решения.</p><i>↗</i></article>
@@ -357,7 +355,7 @@
         <div class="section-heading"><h2 class="reveal">Знакомый интерфейс.<br><em>Понятный рабочий день.</em></h2><p class="reveal">Два реальных экрана нового интерфейса. Остальные сценарии показываем отдельно, не выдавая концепты за скриншоты.</p></div>
       </div>
       <div class="screens-rail screens-rail-new">
-        <article class="screen-card screen-card-main"><div class="screen-photo"><div class="screen-photo-index">01 / WORK FEED</div><img src="/images/gruzli-new-feed.webp" alt="Новый дизайн ленты заявок Gruzli" loading="lazy" /></div><div class="screen-caption"><b>Лента заявок</b><span>Новая карточка заказа, ставка и условия смены</span><i>01</i></div></article>
+        <article class="screen-card vessel-card vessel-card--screen screen-card-main"><div class="screen-photo"><div class="screen-photo-index">01 / WORK FEED</div><img src="/images/gruzli-new-feed.webp" alt="Новый дизайн ленты заявок Gruzli" loading="lazy" /></div><div class="screen-caption"><b>Лента заявок</b><span>Новая карточка заказа, ставка и условия смены</span><i>01</i></div></article>
         <article class="screen-card screen-card-main"><div class="screen-photo"><div class="screen-photo-index">02 / WORKER PROFILE</div><img src="/images/gruzli-new-profile.webp" alt="Новый дизайн профиля исполнителя Gruzli" loading="lazy" /></div><div class="screen-caption"><b>Профиль исполнителя</b><span>Рейтинг, история заказов и доступность</span><i>02</i></div></article>
       </div>
       <div class="screens-hint"><span>←</span> ПРОКРУТИТЕ, ЧТОБЫ ПОСМОТРЕТЬ ЭКРАНЫ <span>→</span></div>
