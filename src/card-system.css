@@ -188,6 +188,18 @@ button:disabled{cursor:not-allowed}
 .feature-card h3{max-width:18ch;margin:28px 0 10px;color:#202326;font-size:clamp(20px,2.2vw,27px);line-height:1.08;letter-spacing:-.055em;text-wrap:balance}
 .feature-card p{max-width:48ch;margin:0;color:#67696b;font-size:12px;line-height:1.72}
 .feature-card>i{position:absolute;right:28px;bottom:25px;color:#a27b0a;font-size:18px;font-style:normal}
+.signature-demo{border:1px solid #d9d6cd;border-radius:38px 38px 18px 18px;background:#f8f7f1;box-shadow:0 18px 42px rgba(25,27,29,.055);overflow:hidden}
+.signature-console,.signature-stage{border:1px solid #d9d6cd;border-radius:28px;background:#f2f0e9;box-shadow:none;overflow:hidden}
+.signature-role-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:7px;border:1px solid #dedbd2;border-radius:18px;background:#ebe9e1}
+.signature-role{min-height:50px;border:1px solid transparent;border-radius:999px;background:transparent;color:#626467;box-shadow:none;transition:background var(--gruzli-motion-fast),color var(--gruzli-motion-fast),border-color var(--gruzli-motion-fast)}
+.signature-role.is-active{background:#25282b;border-color:#25282b;color:#fff;box-shadow:none}
+.signature-role.is-active span,.signature-role.is-active i{color:#f0bd18}
+.signature-perspective{border:0;border-radius:0;background:transparent;box-shadow:none}
+.stage-visual{border:1px solid #d8d5cc;border-radius:28px;background:#e8e6de;overflow:hidden}
+.stage-node{border-radius:14px;background:#25282b;box-shadow:0 8px 18px rgba(0,0,0,.12)}
+.stage-event{border:1px solid #d8d5cc;border-radius:20px;background:#fffefa;box-shadow:0 12px 28px rgba(20,22,24,.08)}
+.signature-disclaimer{border-top:1px solid #dedbd2}
+.signature-role:focus-visible,.signature-next:focus-visible,.signature-prev:focus-visible{outline-offset:3px}
 .screens-section{padding-top:90px;padding-bottom:75px;background:#ecebe6;overflow:hidden}
 .screens-head .section-heading{margin-top:42px}
 .screens-head .section-heading>p{max-width:330px}
