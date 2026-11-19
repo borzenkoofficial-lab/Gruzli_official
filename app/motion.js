@@ -119,8 +119,4 @@ document.addEventListener("click", (event) => {
   }
 });
 
-reduce.addEventListener("change", () => {
-  if (reduce.matches) gsap.globalTimeline.clear();
-});
-
 window.addEventListener("pagehide", () => mm.revert(), { once: true });
