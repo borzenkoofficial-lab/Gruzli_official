@@ -21,7 +21,7 @@
 .journey-phone-screen:after{content:"";position:absolute;inset:0;border:1px solid rgba(0,0,0,.08);border-radius:33px;pointer-events:none}
 .journey-island{position:absolute;z-index:5;top:8px;left:50%;width:31%;height:19px;border-radius:99px;background:#08090a;transform:translateX(-50%);box-shadow:0 1px 0 rgba(255,255,255,.1)}
 .journey-phone-glint{position:absolute;z-index:6;inset:0;border-radius:33px;background:linear-gradient(115deg,rgba(255,255,255,.17),transparent 25%,transparent 70%,rgba(255,255,255,.06));pointer-events:none}
-.journey-dispatch-panel{position:absolute;z-index:2;right:-1%;top:50%;width:min(46vw,550px);min-height:340px;padding:24px;border:1px solid rgba(255,255,255,.18);border-radius:24px;background:linear-gradient(145deg,rgba(42,46,49,.97),rgba(26,29,31,.96));box-shadow:0 38px 90px rgba(0,0,0,.42);transform:translateY(-50%);transform-style:preserve-3d}
+.journey-dispatch-panel{position:absolute;z-index:2;right:-1%;top:50%;width:min(46vw,550px);min-height:340px;padding:24px;border:1px solid rgba(255,255,255,.18);border-radius:24px;background:linear-gradient(145deg,rgba(42,46,49,.97),rgba(26,29,31,.96));box-shadow:0 38px 90px rgba(0,0,0,.42);top:0;bottom:0;margin:auto 0;transform-style:preserve-3d}
 .journey-panel-top,.journey-panel-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;color:rgba(255,255,255,.43);font-size:8px;font-weight:850;letter-spacing:.14em}
 .journey-panel-top b{color:#f0bd18;font-size:8px}
 .journey-panel-title{margin:27px 0 18px;color:#fff;font-size:clamp(23px,2.6vw,36px);font-weight:820;letter-spacing:-.06em;line-height:1.02}
@@ -67,7 +67,7 @@
  .journey-phone:before{inset:2px;border-radius:27px}
  .journey-phone-screen,.journey-phone-screen:after,.journey-phone-glint{border-radius:23px}
  .journey-island{top:5px;height:13px}
- .journey-dispatch-panel{top:50%;right:-7%;width:68vw;min-height:0;padding:13px;border-radius:16px}
+ .journey-dispatch-panel{top:0;bottom:0;margin:auto 0;right:-7%;width:68vw;min-height:0;padding:13px;border-radius:16px}
  .journey-panel-top,.journey-panel-bottom{font-size:6px}
  .journey-panel-title{margin:15px 0 10px;font-size:20px}
  .journey-panel-row{grid-template-columns:20px 1fr auto;gap:7px;padding:9px 0}
