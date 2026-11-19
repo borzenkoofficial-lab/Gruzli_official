@@ -269,11 +269,17 @@ document.querySelectorAll(".screen-photo img").forEach((image) => {
       gsap.set([lightbox, lightboxImage], { autoAlpha: 1, scale: 1, y: 0, clearProps: "transform" });
       return;
     }
-    gsap.fromTo(lightbox, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, ease: "power2.out", overwrite: true });
-    gsap.fromTo(lightboxImage,
-      { autoAlpha: 0, scale: 0.96, y: 8 },
-      { autoAlpha: 1, scale: 1, y: 0, duration: 0.42, ease: "power3.out", force3D: true, clearProps: "transform,opacity,visibility" },
-    );
+    lightboxTimeline = gsap.timeline();
+    lightboxTimeline
+      .fromTo(lightbox,
+        { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 0.2, ease: "power2.out", overwrite: true },
+      )
+      .fromTo(lightboxImage,
+        { autoAlpha: 0, scale: 0.96, y: 8 },
+        { autoAlpha: 1, scale: 1, y: 0, duration: 0.42, ease: "power3.out", force3D: true, clearProps: "transform,opacity,visibility" },
+        "<",
+      );
   };
   image.addEventListener("click", openImage);
   image.addEventListener("keydown", (event) => {
