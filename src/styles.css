@@ -80,8 +80,6 @@ html{scroll-padding-top:86px}
 .role-panel{border-color:#e4e4df;box-shadow:0 24px 70px rgba(23,24,27,.055)}
 .role-visual{background:radial-gradient(ellipse at 50% 45%,#fff 0%,#f6f5ef 56%,#eaeae5 100%)}
 .role-visual:before{opacity:.2;background-size:40px 40px}
-.role-panel.is-switching .role-copy,.role-panel.is-switching .role-visual{opacity:.25;transform:translateY(5px)}
-.role-copy,.role-visual{transition:opacity .22s,transform .22s}
 .workflow-card{border-radius:20px}
 .feature-card{border-radius:19px;background:rgba(255,255,255,.78);box-shadow:0 5px 20px rgba(23,24,27,.018)}
 .feature-card:hover{box-shadow:0 18px 42px rgba(23,24,27,.07)}
@@ -247,7 +245,7 @@ body.lightbox-open{overflow:hidden}
 .demo-state i{width:6px;height:6px;box-shadow:none}
 .signature-progress{padding:22px 2px 20px}
 .signature-progress-track{height:3px;border-radius:4px;background:rgba(255,255,255,.11);overflow:hidden}
-.signature-progress-track span{display:block;width:25%;height:100%;border-radius:4px;background:var(--yellow);box-shadow:0 0 14px rgba(240,189,24,.55);transition:width .55s var(--ease)}
+.signature-progress-track span{display:block;width:100%;height:100%;border-radius:4px;background:var(--yellow);box-shadow:0 0 14px rgba(240,189,24,.55);transform:scaleX(.25);transform-origin:left center}
 .signature-progress-labels{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:11px}
 .signature-progress-labels span{color:rgba(255,255,255,.32);font-size:9px;font-weight:650;transition:color .25s}
 .signature-progress-labels span:not(:first-child){text-align:center}.signature-progress-labels span:last-child{text-align:right}
@@ -260,8 +258,7 @@ body.lightbox-open{overflow:hidden}
 .signature-role{min-height:48px;display:flex;align-items:center;gap:12px;padding:0 12px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:rgba(255,255,255,.025);color:rgba(255,255,255,.55);text-align:left;transition:background .25s,border-color .25s,color .25s}
 .signature-role>span{font-size:8px;color:rgba(255,255,255,.32)}.signature-role b{font-size:11px}.signature-role i{margin-left:auto;font-style:normal;opacity:.45}
 .signature-role.is-active{border-color:rgba(240,189,24,.5);background:rgba(240,189,24,.1);color:#fff}.signature-role.is-active>span,.signature-role.is-active i{color:var(--yellow);opacity:1}
-.signature-perspective{flex:1;padding:26px 2px 22px;transition:opacity .2s,transform .2s}
-.signature-perspective.is-changing{opacity:0;transform:translateY(7px)}
+.signature-perspective{flex:1;padding:26px 2px 22px}
 .perspective-meta{display:flex;justify-content:space-between;color:var(--yellow)}
 .signature-perspective h3{margin:16px 0 10px;font-size:clamp(22px,2.4vw,30px);line-height:1.08;letter-spacing:-.055em}
 .signature-perspective>p{max-width:350px;margin:0;color:rgba(255,255,255,.52);font-size:11px;line-height:1.7}

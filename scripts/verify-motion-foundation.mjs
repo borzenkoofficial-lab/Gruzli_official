@@ -8,6 +8,7 @@ const main = read("../src/main.js");
 const core = read("../src/motion/core.js");
 const hero = read("../src/motion/hero.js");
 const scroll = read("../src/motion/scroll.js");
+const interactions = read("../src/motion/interactions.js");
 const css = read("../src/motion/motion.css");
 
 assert.ok(pkg.dependencies?.gsap, "GSAP must be a production dependency");
@@ -19,6 +20,8 @@ assert.ok(hero.includes("autoSplit: true") && hero.includes("onSplit(self)"), "S
 assert.ok(hero.includes("gsap.quickTo") && hero.includes("pointerleave"), "Pointer parallax must ease back to rest");
 assert.ok(hero.includes("context.conditions.desktop"), "Heavy scroll depth must be desktop-only");
 assert.ok(scroll.includes("ScrollTrigger.batch") && scroll.includes("once: true"), "Scroll reveals must be batched and one-shot");
+assert.ok(interactions.includes("pointerdown") && interactions.includes("pointerleave"), "Card hover and press feedback must be present");
+assert.ok(main.includes("gsap.timeline()") && !main.includes("roleSwitchTimer"), "Role and order-demo changes must use GSAP timelines");
 assert.ok(scroll.includes("force3D: true"), "Reveal transforms must use compositor-friendly properties");
 assert.ok(css.includes(".motion-ready .reveal") && css.includes("prefers-reduced-motion: reduce"), "Motion states must preserve reduced-motion and no-JS visibility");
 assert.ok(read("../src/motion/index.js").includes('prefersReducedMotion.addEventListener("change"'), "Runtime preference changes must toggle motion safely");

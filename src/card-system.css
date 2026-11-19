@@ -160,7 +160,7 @@ button:disabled{cursor:not-allowed}
 
 .workflow-card{min-height:270px;padding:28px 29px 24px;border:1px solid rgba(255,255,255,.14);border-radius:var(--card-vessel-radius-wide);background:#25282b;color:#fff;box-shadow:0 18px 42px rgba(0,0,0,.15);backdrop-filter:none;transition:transform var(--gruzli-motion-card),border-color var(--gruzli-motion-fast),background var(--gruzli-motion-fast),box-shadow var(--gruzli-motion-card)}
 .vessel-card--process{border-color:rgba(255,255,255,.14);border-radius:var(--card-vessel-radius-wide);background:#25282b;color:#fff}
-.workflow-card:hover{transform:translateY(-4px);border-color:rgba(240,189,24,.45);background:#2b2e31;box-shadow:0 22px 46px rgba(0,0,0,.22)}
+.workflow-card:hover{border-color:rgba(240,189,24,.45);background:#2b2e31;box-shadow:0 22px 46px rgba(0,0,0,.22)}
 .workflow-top{display:flex;align-items:center;justify-content:space-between;color:rgba(255,255,255,.72);font-size:8px;font-weight:850;letter-spacing:.13em}
 .workflow-top b{width:30px;height:30px;display:grid;place-items:center;border:1px solid rgba(240,189,24,.55);border-radius:50%;background:rgba(240,189,24,.1);color:#f0bd18;font-size:9px}
 .workflow-icon{width:48px;height:48px;display:grid;place-items:center;margin-top:27px;border:1px solid rgba(240,189,24,.22);border-radius:16px;background:rgba(240,189,24,.1);color:#f0bd18;font-size:22px}
@@ -380,8 +380,7 @@ button:disabled{cursor:not-allowed}
  .faq-item>div{padding-left:30px}
 }
 @media(hover:hover) and (pointer:fine){
- .vessel-card:hover{transform:translateY(-4px);box-shadow:var(--card-vessel-shadow-hover)}
- .hero-entry-card:hover{transform:translateY(-3px)}
+ .vessel-card:hover{box-shadow:var(--card-vessel-shadow-hover)}
 }
 @media(prefers-reduced-motion:reduce){
  html{scroll-behavior:auto}

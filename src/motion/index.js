@@ -5,6 +5,7 @@
 import { prefersReducedMotion } from "./core.js";
 import { initHeroMotion } from "./hero.js";
 import { initScrollMotion } from "./scroll.js";
+import { initCardInteractions } from "./interactions.js";
 
 const root = document.documentElement;
 const syncMotionPreference = () => {
@@ -17,7 +18,7 @@ const syncMotionPreference = () => {
 syncMotionPreference();
 prefersReducedMotion.addEventListener("change", syncMotionPreference);
 
-const cleanups = [initHeroMotion(), initScrollMotion()];
+const cleanups = [initHeroMotion(), initScrollMotion(), initCardInteractions()];
 let disposed = false;
 
 const dispose = () => {

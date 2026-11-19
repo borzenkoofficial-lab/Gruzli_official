@@ -1,3 +1,5 @@
+import { gsap } from "./motion/core.js";
+
 const roleContent = {
   worker: {
     eyebrow: "ДЛЯ ТЕХ, КТО ГОТОВ ВЫЙТИ НА СМЕНУ",
@@ -22,7 +24,6 @@ const roleContent = {
 };
 
 const roleTabs = Array.from(document.querySelectorAll(".role-tab"));
-const rolePanel = document.querySelector(".role-panel");
 const roleVisual = document.querySelector("#role-visual");
 const roleFields = {
   eyebrow: document.querySelector("#role-eyebrow"),
@@ -39,7 +40,7 @@ const visualMarkup = {
   dispatcher: '<div class="role-scenario dispatcher-scenario"><div class="scenario-top"><span>02 / DISPATCH DESK</span><b><i></i> РАБОЧЕЕ ПРОСТРАНСТВО</b></div><div class="scenario-title"><small>УПРАВЛЕНИЕ ЗАКАЗАМИ</small><strong>Заявки <em>и команда</em></strong><span>Единый обзор текущей работы</span></div><div class="dispatch-board"><div class="dispatch-board-head"><b>АКТИВНЫЕ ЭТАПЫ</b><span>01—03</span></div><div class="dispatch-row"><i class="dispatch-mark">01</i><span><b>Новая заявка</b><small>Проверить условия и детали</small></span><em>НОВАЯ</em></div><div class="dispatch-row"><i class="dispatch-mark">02</i><span><b>Подбор исполнителей</b><small>Отклики и состав команды</small></span><em class="is-warm">В РАБОТЕ</em></div><div class="dispatch-row"><i class="dispatch-mark">03</i><span><b>Выполнение заказа</b><small>Статус и коммуникация</small></span><em>КОНТРОЛЬ</em></div></div><div class="scenario-foot"><span>ЗАЯВКИ</span><i></i><span>ИСПОЛНИТЕЛИ</span><i></i><span>СТАТУСЫ</span></div><div class="scenario-orbit"></div></div>',
 };
 
-let roleSwitchTimer = 0;
+let roleSwitchTimeline;
 function selectRole(role) {
   const item = roleContent[role];
   if (!item) return;
@@ -49,9 +50,8 @@ function selectRole(role) {
     tab.setAttribute("aria-selected", String(active));
     tab.setAttribute("tabindex", active ? "0" : "-1");
   });
-  window.clearTimeout(roleSwitchTimer);
-  rolePanel.classList.add("is-switching");
-  roleSwitchTimer = window.setTimeout(() => {
+
+  const updateContent = () => {
     roleFields.eyebrow.textContent = item.eyebrow;
     roleFields.title.textContent = item.title;
     roleFields.accent.textContent = item.accent;
@@ -66,9 +66,46 @@ function selectRole(role) {
       return li;
     }));
     roleVisual.classList.toggle("dispatcher-mode", role === "dispatcher");
-      roleVisual.innerHTML = visualMarkup[item.visual];
-    rolePanel.classList.remove("is-switching");
-  }, 150);
+    roleVisual.innerHTML = visualMarkup[item.visual];
+  };
+
+  const targets = [
+    roleFields.eyebrow, roleFields.title, roleFields.accent,
+    roleFields.description, roleFields.points, roleFields.note,
+    roleFields.cta, roleVisual,
+  ];
+  roleSwitchTimeline?.kill();
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    updateContent();
+    gsap.set(targets, { autoAlpha: 1, y: 0, clearProps: "transform" });
+    return;
+  }
+
+  roleSwitchTimeline = gsap.timeline();
+  roleSwitchTimeline
+    .to(targets, {
+      autoAlpha: 0,
+      y: 8,
+      duration: 0.16,
+      stagger: 0.014,
+      ease: "power1.out",
+      overwrite: "auto",
+    })
+    .add(updateContent)
+    .fromTo(targets,
+      { autoAlpha: 0, y: 9 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.42,
+        stagger: 0.024,
+        ease: "power3.out",
+        force3D: true,
+        clearProps: "transform,opacity,visibility",
+      },
+      "-=0.02",
+    );
 }
 
 roleTabs.forEach((tab, index) => {
@@ -236,23 +273,71 @@ lightbox.addEventListener("close", () => document.body.classList.remove("lightbo
   const next = root.querySelector("#signature-next"), prev = root.querySelector("#signature-prev");
   const count = root.querySelector("#signature-step-count");
   let role = "dispatcher", stage = 0;
-  const render = () => {
+  const perspective = root.querySelector(".signature-perspective");
+  const stageEvent = root.querySelector("#signature-stage-event");
+  let transition;
+  gsap.set(fill, { scaleX: 0.25, transformOrigin: "left center" });
+
+  const updateContent = () => {
     const data = stages[stage][role];
-    root.querySelector(".signature-perspective").classList.add("is-changing");
-    window.setTimeout(() => {
-      title.textContent = data[0]; copy.textContent = data[1]; action.textContent = data[2];
-      roleLabel.textContent = roles[role][0]; stageLabel.textContent = "ЭТАП 0"+(stage+1);
-      icon.textContent = role==="dispatcher"?"⌘":"✓";
-      eventTitle.textContent = stages[stage][role][3]; eventCopy.textContent = stages[stage][role][4];
-      eventIndex.textContent = "0"+(stage+1); count.textContent = "0"+(stage+1)+" / 04";
-      fill.style.width = ((stage+1)*25)+"%";
-      progressLabels.forEach((el,i)=>el.classList.toggle("is-current",i===stage));
-      progressLabels.forEach((el,i)=>el.classList.toggle("is-done",i<stage));
-      Object.entries(nodes).forEach(([key,node])=>node.classList.toggle("is-active",key===role));
-      prev.disabled = stage===0;
-      next.innerHTML = stage===3 ? "Повторить сценарий <span>↻</span>" : "Следующий этап <span>→</span>";
-      root.querySelector(".signature-perspective").classList.remove("is-changing");
-    }, 120);
+    title.textContent = data[0];
+    copy.textContent = data[1];
+    action.textContent = data[2];
+    roleLabel.textContent = roles[role][0];
+    stageLabel.textContent = "ЭТАП 0" + (stage + 1);
+    icon.textContent = role === "dispatcher" ? "⌘" : "✓";
+    eventTitle.textContent = data[3];
+    eventCopy.textContent = data[4];
+    eventIndex.textContent = "0" + (stage + 1);
+    count.textContent = "0" + (stage + 1) + " / 04";
+    progressLabels.forEach((el, i) => el.classList.toggle("is-current", i === stage));
+    progressLabels.forEach((el, i) => el.classList.toggle("is-done", i < stage));
+    Object.entries(nodes).forEach(([key, node]) => node.classList.toggle("is-active", key === role));
+    prev.disabled = stage === 0;
+    next.innerHTML = stage === 3 ? "Повторить сценарий <span>↻</span>" : "Следующий этап <span>→</span>";
+  };
+
+  const render = () => {
+    transition?.kill();
+    const progress = (stage + 1) * 0.25;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      updateContent();
+      gsap.set([perspective, stageEvent], { autoAlpha: 1, y: 0, clearProps: "transform" });
+      gsap.set(fill, { scaleX: progress });
+      return;
+    }
+
+    transition = gsap.timeline();
+    transition
+      .to([perspective, stageEvent], {
+        autoAlpha: 0,
+        y: -7,
+        duration: 0.14,
+        stagger: 0.025,
+        ease: "power1.out",
+        overwrite: "auto",
+      })
+      .add(updateContent)
+      .fromTo([perspective, stageEvent],
+        { autoAlpha: 0, y: 10 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.36,
+          stagger: 0.04,
+          ease: "power3.out",
+          force3D: true,
+          clearProps: "transform,opacity,visibility",
+        },
+        "-=0.02",
+      );
+
+    gsap.to(fill, {
+      scaleX: progress,
+      duration: 0.52,
+      ease: "power3.out",
+      overwrite: "auto",
+    });
   };
   roleButtons.forEach(button=>button.addEventListener("click",()=>{
     role=button.dataset.signatureRole;
