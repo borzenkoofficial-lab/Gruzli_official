@@ -11,6 +11,8 @@ const scroll = read("../src/motion/scroll.js");
 const interactions = read("../src/motion/interactions.js");
 const css = read("../src/motion/motion.css");
 const cardCss = read("../src/card-system.css");
+const appHtml = read("../app/index.html");
+const appMotion = read("../app/motion.js");
 const baseCss = read("../src/styles.css");
 
 assert.ok(pkg.dependencies?.gsap, "GSAP must be a production dependency");
@@ -33,4 +35,6 @@ assert.ok(css.includes(".motion-ready .reveal") && css.includes("prefers-reduced
 assert.ok(read("../src/motion/index.js").includes('prefersReducedMotion.addEventListener("change"'), "Runtime preference changes must toggle motion safely");
 assert.ok(!main.includes("const revealItems") && !main.includes("workflowObserver"), "Legacy reveal observers must not compete with GSAP");
 assert.ok(!main.includes('const heroVisual = document.querySelector(".hero-visual")'), "Legacy hero pointer motion must be removed");
+assert.ok(appHtml.includes('src="/app/motion.js"') && appHtml.includes('href="/app/motion.css"'), "App guide motion assets must be loaded");
+assert.ok(appMotion.includes("SplitText.create") && appMotion.includes("ScrollTrigger.batch") && appMotion.includes("device-tab"), "App guide must animate its title, sections and device switches");
 console.log("GSAP motion foundation contract: PASS");
