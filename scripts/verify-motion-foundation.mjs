@@ -37,4 +37,5 @@ assert.ok(!main.includes("const revealItems") && !main.includes("workflowObserve
 assert.ok(!main.includes('const heroVisual = document.querySelector(".hero-visual")'), "Legacy hero pointer motion must be removed");
 assert.ok(appHtml.includes('src="/app/motion.js"') && appHtml.includes('href="/app/motion.css"'), "App guide motion assets must be loaded");
 assert.ok(appMotion.includes("SplitText.create") && appMotion.includes("ScrollTrigger.batch") && appMotion.includes("device-tab"), "App guide must animate its title, sections and device switches");
+assert.ok(!appMotion.includes("globalTimeline.clear"), "App reduced-motion handling must not clear unrelated global animations");
 console.log("GSAP motion foundation contract: PASS");
