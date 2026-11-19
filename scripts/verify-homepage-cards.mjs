@@ -24,7 +24,7 @@ assert.equal((html.match(/class="contrast-card vessel-card vessel-card--contrast
 
 assert.ok(css.includes("--card-vessel-radius:"), "Shared vessel geometry token is required");
 assert.ok(css.includes("--card-vessel-line:"), "Shared border token is required");
-assert.ok(rule(".hero-entry-card").includes("border-radius:"), "Hero entry cards need explicit vessel geometry");
+assert.ok(rule(".vessel-card--hero").includes("border-radius:"), "Hero entry cards need explicit vessel geometry");
 assert.ok(rule(".story-triad").includes("grid-template-columns:repeat(2,minmax(0,1fr))"), "Two story roles must occupy exactly two columns");
 assert.ok(rule(".story-statuses").includes("grid-template-columns:repeat(4,minmax(0,1fr))"), "Four statuses must be independent items");
 assert.ok(rule(".contrast-panel").includes("grid-template-columns:"), "Comparison layout must define its own columns");
