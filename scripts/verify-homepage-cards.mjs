@@ -8,7 +8,7 @@ const rule = (selector) => {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const match = css.match(new RegExp(escaped + "\\s*\\{([^}]*)\\}", "s"));
   assert.ok(match, `Missing card-system rule: ${selector}`);
-  return match[1].replace(/\\s+/g, "");
+  return match[1];
 };
 
 assert.ok(html.includes('href="/src/card-system.css"'), "Homepage must load the canonical card system");
@@ -19,6 +19,7 @@ assert.ok(html.includes('src="/src/motion-direction.js"'), "The authored motion 
 assert.equal((html.match(/class="feature-card vessel-card vessel-card--feature reveal"/g)||[]).length, 6, "All six feature cards must use the vessel component");
 assert.equal((html.match(/class="workflow-card vessel-card vessel-card--process reveal"/g)||[]).length, 2, "Both role process cards must use the vessel component");
 assert.equal((html.match(/class="vessel-card vessel-card--status"/g)||[]).length, 4, "All four order statuses must use the vessel component");
+assert.equal((html.match(/class="vessel-card vessel-card--role"/g)||[]).length, 2, "Both story roles must use the vessel component");
 assert.equal((html.match(/class="contrast-card vessel-card vessel-card--contrast/g)||[]).length, 2, "Both comparison cards must use the vessel component");
 
 assert.ok(css.includes("--card-vessel-radius:"), "Shared vessel geometry token is required");
@@ -32,8 +33,8 @@ assert.ok(rule(".workflow-track").includes("grid-template-columns:repeat(2,minma
 assert.ok(rule(".features-grid").includes("grid-template-columns:repeat(12,minmax(0,1fr))"), "Feature cards must use the asymmetrical 12-column grid");
 assert.ok(rule(".workflow-card").includes("background:#25282b"), "Workflow card surface must remain dark");
 assert.ok(rule(".workflow-card").includes("color:#fff"), "Workflow card text must have a defined contrast base");
-assert.ok(css.includes(".workflow-card:before,.workflow-card:after{content:none!important;display:none!important}"), "Old card glow pseudo-elements must be removed");
-assert.ok(css.includes(".feature-card:before,.feature-card:after{content:none!important;display:none!important}"), "Old feature ring pseudo-elements must be removed");
+assert.ok(css.includes(".workflow-card:before,.workflow-card:after") && css.includes("content:none!important;display:none!important}"), "Old card glow pseudo-elements must be disabled");
+assert.ok(css.includes(".feature-card:before,.feature-card:after"), "Old feature ring pseudo-elements must be disabled");
 
 assert.ok(css.includes(":focus-visible"), "Cards and controls need visible keyboard focus");
 assert.ok(css.includes("prefers-reduced-motion:reduce"), "Motion must respect reduced-motion preferences");
