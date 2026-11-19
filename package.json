@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0"
+    "build": "npm run check:homepage && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "check:homepage": "node scripts/verify-homepage-cards.mjs"
   },
   "devDependencies": {
     "vite": "^5.4.19"
