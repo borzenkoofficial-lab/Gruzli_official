@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 
 const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const css = readFileSync(new URL("../src/card-system.css", import.meta.url), "utf8");
+const mobileCss = readFileSync(new URL("../src/mobile-polish.css", import.meta.url), "utf8");
 
 const rule = (selector) => {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -16,6 +17,9 @@ assert.ok(!html.includes('href="/src/human-editorial.css"'), "Legacy editorial c
 assert.ok(!html.includes('href="/src/motion-direction.css"'), "Legacy motion/card layer must not be loaded");
 assert.ok(!html.includes('href="/src/site-polish.css"'), "Legacy finishing layer must not be loaded");
 assert.ok(html.includes('src="/src/motion-direction.js"'), "The authored motion controller must remain enabled");
+for (const legacySelector of [".hero-entry-card", ".story-triad", ".story-statuses", ".contrast-card", ".workflow-card", ".feature-card", ".role-tab", ".role-panel", ".screen-card", ".faq-item"]) {
+  assert.ok(!mobileCss.includes(legacySelector), `Mobile layout file must not redefine card component: ${legacySelector}`);
+}
 assert.equal((html.match(/class="feature-card vessel-card vessel-card--feature reveal"/g)||[]).length, 6, "All six feature cards must use the vessel component");
 assert.equal((html.match(/class="workflow-card vessel-card vessel-card--process reveal"/g)||[]).length, 2, "Both role process cards must use the vessel component");
 assert.equal((html.match(/class="vessel-card vessel-card--status"/g)||[]).length, 4, "All four order statuses must use the vessel component");
