@@ -220,20 +220,6 @@ if (!reducedMotion && "IntersectionObserver" in window) {
   workflowCards.forEach((card) => card.classList.add("is-in-view"));
 }
 
-if (!reducedMotion && window.matchMedia("(pointer:fine)").matches) {
-  document.querySelectorAll(".workflow-card,.feature-card").forEach((card) => {
-    card.addEventListener("pointermove", (event) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--card-x", (event.clientX - rect.left) + "px");
-      card.style.setProperty("--card-y", (event.clientY - rect.top) + "px");
-    }, { passive: true });
-    card.addEventListener("pointerleave", () => {
-      card.style.setProperty("--card-x", "50%");
-      card.style.setProperty("--card-y", "50%");
-    }, { passive: true });
-  });
-}
-
 const lightbox = document.querySelector(".screen-lightbox");
 const lightboxImage = lightbox.querySelector(".lightbox-image");
 const lightboxCaption = lightbox.querySelector(".lightbox-caption");
