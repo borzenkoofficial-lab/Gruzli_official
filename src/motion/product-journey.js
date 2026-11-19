@@ -38,7 +38,8 @@ export function initProductJourney() {
       (context) => {
         if (context.conditions.reduce) {
           gsap.set(copies, { autoAlpha: 1, y: 0, clearProps: "transform" });
-          gsap.set([feed, profile], { autoAlpha: 1, clearProps: "transform" });
+          gsap.set(feed, { autoAlpha: 1, clearProps: "transform" });
+          gsap.set(profile, { autoAlpha: 0, clearProps: "transform" });
           gsap.set(dispatchPanel, { autoAlpha: 0 });
           gsap.set(progress, { scaleX: 1 });
           return undefined;
