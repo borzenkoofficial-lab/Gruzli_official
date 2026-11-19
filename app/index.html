@@ -4,16 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f7f7f5" />
-  <meta name="description" content="Как пользоваться Gruzli на iPhone, Android и компьютере. Простая интерактивная инструкция по установке и работе." />
+  <meta name="description" content="Возможности GRUZLI для диспетчеров и грузчиков: заявки, отклики, команда, чаты, статусы, картотека и веб-версия." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750;800;850;900&display=swap" rel="stylesheet" />
   <link rel="icon" href="https://raw.githubusercontent.com/borzenkoofficial-lab/gruzli-b99e57fd/main/public/favicon.jpeg" type="image/jpeg" />
   <link rel="stylesheet" href="/app/styles.css" />
-  <title>Приложение Gruzli — iPhone, Android и компьютер</title>
+  <title>Возможности GRUZLI — приложение для диспетчера и грузчика</title>
   <link rel="stylesheet" href="/app/polish.css" />
   <link rel="stylesheet" href="/app/mobile-polish.css" />
   <link rel="stylesheet" href="/app/human-editorial.css" />
+  <link rel="stylesheet" href="/app/capabilities.css" />
 </head>
 <body>
   <a class="skip-link" href="#guide">Перейти к инструкции</a>
@@ -21,9 +22,10 @@
     <div class="header-inner">
       <a class="brand" href="/" aria-label="Gruzli — на главную"><span class="brand-symbol"><i></i></span><span class="brand-name">gruzli<span>.</span></span></a>
       <nav class="header-nav" aria-label="Навигация">
-        <a href="/">О платформе</a>
-        <a href="#guide">Установка</a>
-        <a href="#desktop">Версия для ПК</a>
+        <a href="/">Главная</a>
+        <a href="#capabilities">Возможности</a>
+        <a href="#guide">Устройства</a>
+        <a href="#desktop">Веб-версия</a>
       </nav>
       <a class="header-action" href="https://gruzli-b99e57fd.vercel.app/" target="_blank" rel="noreferrer">Открыть Gruzli <span>↗</span></a>
     </div>
@@ -36,29 +38,29 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <div class="eyebrow"><i></i> GRUZLI / ДОСТУП НА ЛЮБОМ УСТРОЙСТВЕ</div>
-          <h1>Один Gruzli.<br><em>Ваше устройство.</em></h1>
-          <p>Откройте Gruzli на телефоне или компьютере. Ниже — простая инструкция: выберите своё устройство и повторяйте шаги на экране.</p>
+          <h1>Одна платформа.<br><em>Два рабочих места.</em></h1>
+          <p>Инструменты для двух ролей: диспетчер управляет заявками и командой, грузчик находит смены и ведёт свои заказы. Посмотрите функции, затем выберите устройство для входа.</p>
           <a class="hero-button" href="#guide">Выбрать устройство <span>↓</span></a>
-          <div class="hero-meta"><span><b>01</b> iPhone</span><span><b>02</b> Android</span><span><b>03</b> Компьютер</span></div>
+          <div class="hero-meta"><span><b>01</b> Диспетчер</span><span><b>02</b> Грузчик</span><span><b>03</b> Web</span></div>
         </div>
         <div class="hero-art" aria-label="Экраны приложения Gruzli">
           <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
           <div class="art-phone art-phone-back"><div class="art-frame"><img src="/images/gruzli-new-profile.webp" alt="Профиль исполнителя в Gruzli" /></div></div>
           <div class="art-phone art-phone-front"><div class="art-frame"><img src="/images/gruzli-new-feed.webp" alt="Лента заявок в Gruzli" /></div></div>
-          <div class="art-note"><span class="note-dot"></span><div><b>Три роли в одной платформе</b><small>Клиент · Диспетчер · Грузчик</small></div></div>
+          <div class="art-note"><span class="note-dot"></span><div><b>Два рабочих интерфейса</b><small>Диспетчер · Грузчик</small></div></div>
           <div class="art-index">APP EXPERIENCE / 2026</div>
         </div>
       </div>
-      <div class="hero-bottom"><span>ПОНЯТНО ДЛЯ КАЖДОГО</span><i></i><span>ТЕЛЕФОН · ПЛАНШЕТ · КОМПЬЮТЕР</span></div>
+      <div class="hero-bottom"><span>ИНСТРУМЕНТЫ ДЛЯ РАБОТЫ</span><i></i><span>ТЕЛЕФОН · ПЛАНШЕТ · КОМПЬЮТЕР</span></div>
     </section>
 
     <section class="guide-section" id="guide">
       <div class="section-shell">
-        <div class="section-kicker"><span>01 / ВЫБЕРИТЕ УСТРОЙСТВО</span><span>ИНСТРУКЦИЯ ПО ШАГАМ</span></div>
-        <div class="section-heading"><h2>Как вы будете<br><em>пользоваться Gruzli?</em></h2><p>Выберите устройство. Мы покажем подходящий способ входа и установки.</p></div>
+        <div class="section-kicker"><span>01 / ДОСТУП К ПРИЛОЖЕНИЮ</span><span>ИНСТРУКЦИЯ ПО ШАГАМ</span></div>
+        <div class="section-heading"><h2>Откройте GRUZLI<br><em>на своём устройстве.</em></h2><p>Выберите устройство. Мы покажем доступный способ входа и добавления на главный экран.</p></div>
         <div class="device-tabs" role="tablist" aria-label="Выбор устройства">
           <button class="device-tab is-active" role="tab" aria-selected="true" aria-controls="device-panel" id="tab-ios" data-device="ios"><span class="device-icon"></span><span><b>iPhone</b><small>Установка PWA</small></span><i>01</i></button>
-          <button class="device-tab" role="tab" aria-selected="false" aria-controls="device-panel" id="tab-android" data-device="android"><span class="device-icon android-icon">◉</span><span><b>Android</b><small>APK для установки</small></span><i>02</i></button>
+          <button class="device-tab" role="tab" aria-selected="false" aria-controls="device-panel" id="tab-android" data-device="android"><span class="device-icon android-icon">◉</span><span><b>Android</b><small>Веб-доступ · APK не опубликован</small></span><i>02</i></button>
           <button class="device-tab" role="tab" aria-selected="false" aria-controls="device-panel" id="tab-desktop" data-device="desktop"><span class="device-icon desktop-icon">▣</span><span><b>Компьютер</b><small>Веб-версия</small></span><i>03</i></button>
         </div>
 
@@ -100,7 +102,7 @@
 
     <section class="desktop-section" id="desktop">
       <div class="section-shell">
-        <div class="section-kicker light-kicker"><span>02 / БОЛЬШОЙ ЭКРАН</span><span>GRUZLI WEB</span></div>
+        <div class="section-kicker light-kicker"><span>02 / РАБОТА ЗА КОМПЬЮТЕРОМ</span><span>GRUZLI WEB</span></div>
         <div class="desktop-heading"><div><h2>Для работы за компьютером.<br><em>Всё пространство — перед вами.</em></h2><p>Веб-версия открывается в браузере. На большом экране удобнее одновременно видеть рабочие разделы, список заказов и детали выбранной заявки.</p></div><a class="primary-button" href="https://gruzli-b99e57fd.vercel.app/" target="_blank" rel="noreferrer">Открыть веб-версию <span>↗</span></a></div>
         <div class="desktop-showcase">
           <div class="showcase-window">
@@ -120,12 +122,63 @@
       </div>
     </section>
 
+    <section class="app-capabilities" id="capabilities">
+      <div class="capabilities-shell">
+        <div class="section-kicker"><span>03 / ВОЗМОЖНОСТИ ПЛАТФОРМЫ</span><span>ПО ФАКТИЧЕСКИМ РАЗДЕЛАМ ПРИЛОЖЕНИЯ</span></div>
+        <div class="capabilities-heading"><div><p class="capabilities-overline">GRUZLI / PRODUCT MAP</p><h2>Не витрина функций.<br><em>Рабочие инструменты.</em></h2></div><p>Функции перечислены по текущему коду приложения. Доступные действия зависят от роли и состояния заказа.</p></div>
+        <div class="capability-groups">
+          <article class="capability-vessel dispatcher-vessel">
+            <div class="vessel-head"><span>01 / DISPATCH DESK</span><b>ДИСПЕТЧЕР</b></div>
+            <h3>Управление заявками<br><em>и командой.</em></h3>
+            <p class="vessel-lead">Рабочее пространство для публикации заказов, подбора исполнителей и контроля результата.</p>
+            <div class="capability-list">
+              <div><b>Заявки и предложения</b><p>Создание и публикация заявок, просмотр входящих запросов, предложение условий, редактирование, закрытие и повторная публикация.</p></div>
+              <div><b>Отклики и подбор команды</b><p>Просмотр откликов, поиск по имени, сортировка кандидатов, изучение рейтинга, опыта и навыков, принятие или отклонение откликов.</p></div>
+              <div><b>Активные заказы</b><p>Список текущих заказов, состав команды, статусы исполнителей, переход к профилю и чату, контроль выполнения и срочная замена.</p></div>
+              <div><b>Финансовое закрытие</b><p>Фиксация расходов на исполнителей и дохода диспетчера, расчёт итогов и прибыли, история завершённых заказов и выгрузка CSV-отчёта.</p></div>
+              <div><b>Картотека исполнителей</b><p>Поиск по ФИО и телефону, карточки людей, контакты, навыки и рабочие заметки; добавление, редактирование и удаление записей.</p></div>
+              <div><b>Коммуникация и сообщество</b><p>Личные диалоги по заказам, общий чат диспетчеров, обмен сообщениями и файлами, уведомления о событиях.</p></div>
+              <div><b>Договоры и документы</b><p>Просмотр условий, подписание договора внутри приложения и получение подписанного PDF.</p></div>
+              <div><b>Профиль и аналитика</b><p>Рабочий профиль, рейтинг, завершённые заказы, недельные показатели, настройки и уведомления.</p></div>
+            </div>
+            <a class="capability-link" href="https://gruzli-b99e57fd.vercel.app/" target="_blank" rel="noreferrer">Открыть рабочее пространство <span>↗</span></a>
+          </article>
+          <article class="capability-vessel worker-vessel">
+            <div class="vessel-head"><span>02 / WORKER APP</span><b>ГРУЗЧИК</b></div>
+            <h3>Поиск смен.<br><em>Работа под контролем.</em></h3>
+            <p class="vessel-lead">Мобильный сценарий для поиска заказов, общения с диспетчером и фиксации выполненной работы.</p>
+            <div class="capability-list">
+              <div><b>Лента заказов</b><p>Просмотр заявок, поиск по тексту и параметрам, умный поиск, фильтры и карточки с условиями смены.</p></div>
+              <div><b>Детали и отклики</b><p>Изучение описания, адреса, времени, ставки и количества людей; отправка отклика и его отзыв, пока это допускает статус заявки.</p></div>
+              <div><b>Мои заказы</b><p>Список принятых заказов, подтверждение участия и последовательное обновление статусов: готовность, прибытие, выполнение и завершение.</p></div>
+              <div><b>Время и заработок</b><p>Таймер работы, обратный отсчёт до смены, расчёт заработка по завершённому заказу и показатели в профиле.</p></div>
+              <div><b>Профиль исполнителя</b><p>Фото, личные данные, навыки, доступность, рейтинг, отзывы и история выполненных заказов.</p></div>
+              <div><b>Чаты и вложения</b><p>Переписка с диспетчером, изображения, видео, голосовые сообщения и голосовые комнаты.</p></div>
+              <div><b>Уведомления</b><p>Оповещения о новых заявках, сообщениях и изменениях по заказам; настройка push-уведомлений в поддерживаемом браузере.</p></div>
+              <div><b>Картотека и настройки</b><p>Доступ к рабочим разделам, профиль, безопасность, тема оформления, заблокированные пользователи и параметры приложения.</p></div>
+            </div>
+            <a class="capability-link" href="https://gruzli-b99e57fd.vercel.app/" target="_blank" rel="noreferrer">Открыть ленту заказов <span>↗</span></a>
+          </article>
+        </div>
+        <div class="capability-common">
+          <div class="common-heading"><span>03 / ОБЩИЕ РАЗДЕЛЫ</span><h3>Сервис вокруг<br><em>рабочего процесса.</em></h3></div>
+          <div class="common-items">
+            <article><b>Уведомления и поддержка</b><p>Центр уведомлений, push-настройки в поддерживаемом браузере, обращение в поддержку и системные сообщения.</p></article>
+            <article><b>Профиль и безопасность</b><p>Редактирование личных данных, смена пароля, настройки приватности, блок-лист, документы и управление сессией.</p></article>
+            <article><b>Оформление и хранилище</b><p>Настройка темы, очистка кеша, параметры данных, юридические документы и информация о приложении.</p></article>
+            <article><b>Дополнительные разделы</b><p>В приложении есть отдельные экраны Premium, тарифов и компании. Их условия и доступность зависят от роли и текущей конфигурации аккаунта.</p></article>
+          </div>
+        </div>
+        <div class="capabilities-footnote"><b>Важно.</b> Веб-версия — опубликованный способ доступа. На iPhone её можно добавить на главный экран как PWA. Проверенный Android APK пока не опубликован. Платные тарифы, верификация и отдельные корпоративные сценарии не представлены как гарантированно доступные функции.</div>
+      </div>
+    </section>
+
     <section class="access-section">
       <div class="access-inner"><div><div class="eyebrow"><i></i> НАЧАТЬ ПРОСТО</div><h2>Выберите устройство.<br><em>Остальное подскажет Gruzli.</em></h2></div><div class="access-actions"><a href="https://gruzli-b99e57fd.vercel.app/" target="_blank" rel="noreferrer">Открыть Gruzli <span>↗</span></a><a href="/" class="back-link">Вернуться на главную</a></div></div>
     </section>
   </main>
 
-  <footer class="app-footer"><a class="brand" href="/"><span class="brand-symbol"><i></i></span><span class="brand-name">gruzli<span>.</span></span></a><span>© 2026 GRUZLI. ЛЮДИ · ЗАКАЗЫ · КОМАНДЫ</span><a href="#top">НАВЕРХ ↑</a></footer>
+  <footer class="app-footer"><a class="brand" href="/"><span class="brand-symbol"><i></i></span><span class="brand-name">gruzli<span>.</span></span></a><span>© 2026 GRUZLI. ДИСПЕТЧЕР · ГРУЗЧИК · ЗАКАЗЫ</span><a href="#top">НАВЕРХ ↑</a></footer>
   <script type="module" src="/app/main.js"></script>
 </body>
 </html>

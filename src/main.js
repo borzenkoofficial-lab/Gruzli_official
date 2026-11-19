@@ -13,22 +13,12 @@ const roleContent = {
     eyebrow: "ДЛЯ ТЕХ, КТО СОБИРАЕТ КОМАНДЫ",
     title: "Больше контроля над заказами. Меньше ручной координации.",
     accent: "Ведите работу в одном пространстве.",
-    description: "Публикуйте заявки, отвечайте клиентам, подбирайте исполнителей и управляйте ходом заказа. Рабочие контакты и коммуникация остаются рядом.",
+    description: "Публикуйте заявки, обрабатывайте входящие запросы, подбирайте исполнителей и управляйте ходом заказа. Рабочие контакты и коммуникация остаются рядом.",
     points: ["Публиковать и обновлять заявки", "Работать с откликами и базой грузчиков", "Вести активные и завершённые заказы"],
     note: "Заявки, исполнители, сообщения и итог заказа связаны между собой",
     cta: "Работать в Gruzli",
     visual: "dispatcher"
   },
-  client: {
-    eyebrow: "ДЛЯ ТЕХ, КОМУ НУЖНА КОМАНДА",
-    title: "Задача начинается с вас. Команда находится в Gruzli.",
-    accent: "Без долгих поисков и десятков звонков.",
-    description: "Опишите работу, укажите адрес и нужное количество грузчиков. Диспетчеры смогут предложить условия и собрать людей под ваш заказ.",
-    points: ["Создать заявку с деталями работы", "Получить предложения диспетчеров", "Выбрать подходящий вариант и следить за статусом"],
-    note: "От запроса до согласованной команды — в одном процессе",
-    cta: "Создать заявку",
-    visual: "client"
-  }
 };
 
 const roleTabs = Array.from(document.querySelectorAll(".role-tab"));
@@ -47,7 +37,6 @@ const roleFields = {
 const visualMarkup = {
   worker: '<div class="worker-showcase"><div class="showcase-phone"><span class="showcase-island"></span><img src="/images/gruzli-new-feed.webp" alt="Лента заказов для грузчика" loading="lazy"></div><div class="showcase-toast"><span>↗</span><div><b>Новая заявка</b><small>Условия до отклика</small></div><i></i></div><div class="showcase-rate"><b>900 ₽ / час</b><small>Пример ставки в карточке</small></div><div class="visual-caption">РАБОЧАЯ ЛЕНТА / 01</div></div>',
   dispatcher: '<div class="role-scenario dispatcher-scenario"><div class="scenario-top"><span>02 / DISPATCH DESK</span><b><i></i> РАБОЧЕЕ ПРОСТРАНСТВО</b></div><div class="scenario-title"><small>УПРАВЛЕНИЕ ЗАКАЗАМИ</small><strong>Заявки <em>и команда</em></strong><span>Единый обзор текущей работы</span></div><div class="dispatch-board"><div class="dispatch-board-head"><b>АКТИВНЫЕ ЭТАПЫ</b><span>01—03</span></div><div class="dispatch-row"><i class="dispatch-mark">01</i><span><b>Новая заявка</b><small>Проверить условия и детали</small></span><em>НОВАЯ</em></div><div class="dispatch-row"><i class="dispatch-mark">02</i><span><b>Подбор исполнителей</b><small>Отклики и состав команды</small></span><em class="is-warm">В РАБОТЕ</em></div><div class="dispatch-row"><i class="dispatch-mark">03</i><span><b>Выполнение заказа</b><small>Статус и коммуникация</small></span><em>КОНТРОЛЬ</em></div></div><div class="scenario-foot"><span>ЗАЯВКИ</span><i></i><span>ИСПОЛНИТЕЛИ</span><i></i><span>СТАТУСЫ</span></div><div class="scenario-orbit"></div></div>',
-  client: '<div class="role-scenario client-scenario"><div class="scenario-top"><span>03 / CLIENT REQUEST</span><b><i></i> СОЗДАНИЕ ЗАЯВКИ</b></div><div class="client-request-card"><div class="client-request-head"><span>НОВЫЙ ЗАПРОС</span><b>G<span>·</span></b></div><strong>Какая помощь<br>вам нужна?</strong><p>Опишите задачу — диспетчеры смогут предложить условия и команду.</p><div class="request-field"><small>ТИП РАБОТЫ</small><b>Погрузка / разгрузка</b><span>⌄</span></div><div class="request-fields"><div class="request-field"><small>АДРЕС</small><b>Укажите локацию</b></div><div class="request-field"><small>ЛЮДИ</small><b>Количество</b></div></div><div class="request-submit">Продолжить <span>↗</span></div><div class="request-note">СХЕМА СЦЕНАРИЯ · НЕ СКРИНШОТ ПРИЛОЖЕНИЯ</div></div><div class="scenario-orbit"></div></div>'
 };
 
 let roleSwitchTimer = 0;
@@ -77,8 +66,7 @@ function selectRole(role) {
       return li;
     }));
     roleVisual.classList.toggle("dispatcher-mode", role === "dispatcher");
-    roleVisual.classList.toggle("client-mode", role === "client");
-    roleVisual.innerHTML = visualMarkup[item.visual];
+      roleVisual.innerHTML = visualMarkup[item.visual];
     rolePanel.classList.remove("is-switching");
   }, 150);
 }
@@ -284,12 +272,12 @@ lightbox.addEventListener("close", () => document.body.classList.remove("lightbo
   const root = document.querySelector("#signature");
   if (!root) return;
   const stages = [
-    {client:["Сформулируйте задачу.","Клиент описывает работу, указывает адрес, дату и необходимое количество людей.","Создать заявку","Клиент создал заявку","Задача передана в рабочий процесс."],dispatcher:["Проверьте запрос и условия.","Диспетчер рассматривает детали заявки и организует дальнейшую коммуникацию.","Обработать заявку","Диспетчер получил запрос","Условия и детали переходят к координации."],worker:["Увидьте условия заказа.","Исполнитель просматривает доступные условия и может отправить отклик на подходящую заявку.","Посмотреть заявку","Заявка доступна исполнителю","Можно изучить условия и принять решение об отклике."]},
-    {client:["Получите предложение.","После обработки запроса можно обсудить условия и состав команды с диспетчером.","Рассмотреть предложение","Идёт координация","Детали заказа уточняются перед подтверждением."],dispatcher:["Согласуйте состав команды.","Диспетчер работает с откликами, базой исполнителей и коммуникацией по заказу.","Подобрать исполнителей","Диспетчер координирует заказ","Отклики и участники рассматриваются в рабочем пространстве."],worker:["Отправьте отклик.","Грузчик откликается на заявку и открывает чат с назначенным диспетчером для обсуждения деталей.","Откликнуться","Исполнитель отправил отклик","Отклик и дальнейшее общение связаны с заявкой."]},
-    {client:["Следите за ходом заказа.","Участники продолжают согласование в контексте заказа и могут уточнять детали в переписке.","Открыть заказ","Участники на связи","Коммуникация остаётся рядом с заказом."],dispatcher:["Ведите заказ по этапам.","Диспетчер видит отклики, ведёт коммуникацию и контролирует работу с заказом.","Продолжить координацию","Заказ в работе","Диспетчер сопровождает взаимодействие участников."],worker:["Работайте по согласованным условиям.","Исполнитель видит свои заказы и может общаться с диспетчером по деталям выполнения.","Открыть свои заказы","Исполнитель взаимодействует с диспетчером","Рабочая информация собрана в приложении."]},
-    {client:["Оцените результат взаимодействия.","После завершения заказа остаётся история работы и обратная связь участников.","Вернуться к заказу","Сценарий завершён","История и оценки помогают учитывать предыдущий опыт."],dispatcher:["Зафиксируйте итог работы.","Завершённые заказы и оценки исполнителей помогают формировать рабочую историю.","Посмотреть историю","Заказ завершён","Результат сохраняется в истории заказов."],worker:["Сохраните историю выполненной работы.","Завершённые заказы и оценки формируют рабочую историю исполнителя.","Посмотреть профиль","Работа завершена","В профиле отражается история заказов и оценок."]}
+    {dispatcher:["Откройте входящую заявку.","Проверьте параметры, сроки и условия заказа перед началом подбора.","Открыть заявку","Диспетчер изучает заявку","Параметры собраны в рабочем пространстве."],worker:["Изучите условия смены.","Посмотрите задачу, адрес, ставку и длительность до отправки отклика.","Посмотреть заявку","Грузчик изучает условия","Можно принять решение об отклике."]},
+    {dispatcher:["Соберите команду.","Сравните отклики, опыт и рейтинг исполнителей, затем сформируйте состав команды.","Обработать отклики","Диспетчер подбирает команду","Отклики и участники связаны с заявкой."],worker:["Отправьте отклик.","Откликнитесь на подходящую заявку и продолжите общение с диспетчером в чате.","Откликнуться","Грузчик отправил отклик","Отклик и дальнейшая коммуникация связаны с заказом."]},
+    {dispatcher:["Контролируйте ход работы.","Следите за статусами исполнителей, общайтесь по заказу и при необходимости организуйте замену.","Открыть активный заказ","Заказ в работе","Диспетчер видит ход выполнения и состав команды."],worker:["Отмечайте этапы работы.","Подтвердите готовность, прибытие, начало и завершение смены.","Обновить статус","Грузчик обновляет статус","Рабочие этапы фиксируются в заказе."]},
+    {dispatcher:["Зафиксируйте результат.","Проверьте завершение, внесите расходы и доход, оставьте отзыв и сохраните историю.","Закрыть заказ","Заказ завершён","Итог и история остаются в рабочем кабинете."],worker:["Сохраните историю смены.","Завершённые заказы, заработок и отзывы остаются в вашем профиле.","Посмотреть профиль","Работа завершена","В профиле отражается история заказов и оценок."]}
   ];
-  const roles = {client:["CLIENT VIEW / 01","Клиент"],dispatcher:["DISPATCH VIEW / 02","Диспетчер"],worker:["WORKER VIEW / 03","Грузчик"]};
+  const roles = {dispatcher:["DISPATCH VIEW / 01","Диспетчер"],worker:["WORKER VIEW / 02","Грузчик"]};
   const roleButtons = [...root.querySelectorAll("[data-signature-role]")];
   const title = root.querySelector("#signature-perspective-title");
   const copy = root.querySelector("#signature-perspective-copy");
@@ -302,17 +290,17 @@ lightbox.addEventListener("close", () => document.body.classList.remove("lightbo
   const eventIndex = root.querySelector("#signature-stage-event .event-index");
   const fill = root.querySelector("#signature-progress-fill");
   const progressLabels = [...root.querySelectorAll("[data-progress-label]")];
-  const nodes = {client:root.querySelector(".node-client"),dispatcher:root.querySelector(".node-dispatcher"),worker:root.querySelector(".node-worker")};
+  const nodes = {dispatcher:root.querySelector(".node-dispatcher"),worker:root.querySelector(".node-worker")};
   const next = root.querySelector("#signature-next"), prev = root.querySelector("#signature-prev");
   const count = root.querySelector("#signature-step-count");
-  let role = "client", stage = 0;
+  let role = "dispatcher", stage = 0;
   const render = () => {
     const data = stages[stage][role];
     root.querySelector(".signature-perspective").classList.add("is-changing");
     window.setTimeout(() => {
       title.textContent = data[0]; copy.textContent = data[1]; action.textContent = data[2];
       roleLabel.textContent = roles[role][0]; stageLabel.textContent = "ЭТАП 0"+(stage+1);
-      icon.textContent = role==="client"?"↗":role==="dispatcher"?"⌘":"✓";
+      icon.textContent = role==="dispatcher"?"⌘":"✓";
       eventTitle.textContent = stages[stage][role][3]; eventCopy.textContent = stages[stage][role][4];
       eventIndex.textContent = "0"+(stage+1); count.textContent = "0"+(stage+1)+" / 04";
       fill.style.width = ((stage+1)*25)+"%";
@@ -352,12 +340,6 @@ lightbox.addEventListener("close", () => document.body.classList.remove("lightbo
       afterTitle: "Работа ведётся вокруг заявки.",
       after: ["Публиковать заказ и работать с откликами", "Подбирать исполнителей через рабочий интерфейс", "Использовать статусы и историю заказа при координации"]
     },
-    client: {
-      beforeTitle: "Один запрос приходится повторять.",
-      before: ["Объяснять задачу в звонках и разных чатах", "Собирать предложения и условия вручную", "Самостоятельно уточнять, что происходит с заказом"],
-      afterTitle: "Запрос становится точкой сборки.",
-      after: ["Описать задачу и указать необходимые детали", "Рассмотреть предложения диспетчеров", "Следить за ходом согласованного заказа по статусам"]
-    }
   };
   const buttons = [...root.querySelectorAll("[data-compare-role]")];
   const beforeTitle = root.querySelector("#contrast-before-title");
@@ -406,7 +388,7 @@ lightbox.addEventListener("close", () => document.body.classList.remove("lightbo
 (() => {
   const sectionMeta = [
     ["platform","Платформа","Как устроен GRUZLI"],["about","История","Почему появилась платформа"],
-    ["contrast","Сравнение","Чаты и единый процесс"],["roles","Три роли","Клиент · Диспетчер · Грузчик"],
+    ["contrast","Сравнение","Чаты и единый процесс"],["roles","Две роли","Диспетчер · Грузчик"],
     ["workflow","Рабочий процесс","Как движется заказ"],["signature","Интерактивный сценарий","Пройдите путь заказа"],
     ["screens","Интерфейс","Экраны приложения"],["download","Приложение","iPhone · Android · ПК"],
     ["faq","Вопросы","Ответы о GRUZLI"]
