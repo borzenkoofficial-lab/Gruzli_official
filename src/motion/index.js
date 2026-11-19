@@ -6,19 +6,25 @@ import { prefersReducedMotion } from "./core.js";
 import { initHeroMotion } from "./hero.js";
 import { initScrollMotion } from "./scroll.js";
 
-if (prefersReducedMotion.matches) {
-  document.documentElement.classList.add("motion-reduced");
-} else {
-  document.documentElement.classList.add("motion-ready");
+const root = document.documentElement;
+const syncMotionPreference = () => {
+  const reduced = prefersReducedMotion.matches;
+  root.classList.toggle("motion-ready", !reduced);
+  root.classList.toggle("motion-reduced", reduced);
+};
 
-  const cleanups = [initHeroMotion(), initScrollMotion()];
-  let disposed = false;
+// GSAP matchMedia instances also react to this preference change and revert their work.
+syncMotionPreference();
+prefersReducedMotion.addEventListener("change", syncMotionPreference);
 
-  const dispose = () => {
-    if (disposed) return;
-    disposed = true;
-    cleanups.reverse().forEach((cleanup) => cleanup?.());
-  };
+const cleanups = [initHeroMotion(), initScrollMotion()];
+let disposed = false;
 
-  window.addEventListener("pagehide", dispose, { once: true });
-}
+const dispose = () => {
+  if (disposed) return;
+  disposed = true;
+  prefersReducedMotion.removeEventListener("change", syncMotionPreference);
+  cleanups.reverse().forEach((cleanup) => cleanup?.());
+};
+
+window.addEventListener("pagehide", dispose, { once: true });

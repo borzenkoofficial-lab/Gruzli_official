@@ -2,7 +2,7 @@
  * GRUZLI / HERO MOTION
  * One controlled entrance sequence, responsive typography and restrained depth.
  */
-import { gsap, ScrollTrigger, SplitText } from "./core.js";
+import { gsap, SplitText } from "./core.js";
 
 export function initHeroMotion() {
   const hero = document.querySelector(".hero");

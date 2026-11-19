@@ -21,6 +21,7 @@ assert.ok(hero.includes("context.conditions.desktop"), "Heavy scroll depth must 
 assert.ok(scroll.includes("ScrollTrigger.batch") && scroll.includes("once: true"), "Scroll reveals must be batched and one-shot");
 assert.ok(scroll.includes("force3D: true"), "Reveal transforms must use compositor-friendly properties");
 assert.ok(css.includes(".motion-ready .reveal") && css.includes("prefers-reduced-motion: reduce"), "Motion states must preserve reduced-motion and no-JS visibility");
+assert.ok(read("../src/motion/index.js").includes('prefersReducedMotion.addEventListener("change"'), "Runtime preference changes must toggle motion safely");
 assert.ok(!main.includes("const revealItems") && !main.includes("workflowObserver"), "Legacy reveal observers must not compete with GSAP");
 assert.ok(!main.includes('const heroVisual = document.querySelector(".hero-visual")'), "Legacy hero pointer motion must be removed");
 console.log("GSAP motion foundation contract: PASS");
