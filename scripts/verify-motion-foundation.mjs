@@ -20,9 +20,9 @@ assert.ok(html.includes('href="/src/motion/motion.css"'), "Motion CSS must be lo
 assert.ok(html.includes('src="/src/motion/index.js"'), "Motion runtime must be loaded");
 assert.ok(!html.includes("motion-direction.js"), "Legacy motion runtime must be removed");
 assert.ok(core.includes("gsap.registerPlugin(ScrollTrigger, SplitText)"), "Required GSAP plugins must be registered centrally");
-assert.ok(hero.includes("autoSplit: true") && hero.includes("onSplit(self)"), "SplitText must support responsive re-splitting");
-assert.ok(hero.includes("gsap.quickTo") && hero.includes("pointerleave"), "Pointer parallax must ease back to rest");
-assert.ok(hero.includes("context.conditions.desktop"), "Heavy scroll depth must be desktop-only");
+assert.ok(hero.includes(".hero--mosaic") && hero.includes(".hero-mosaic-content"), "Hero entrance must target the new HoloMosaic composition");
+assert.ok(hero.includes("hero-mosaic-action") && hero.includes("gsap.from"), "Hero typography and entry actions must have a controlled entrance");
+assert.ok(!hero.includes("hero-visual") && !hero.includes("hero-phone"), "Legacy phone mockup motion must be removed");
 assert.ok(scroll.includes("ScrollTrigger.batch") && scroll.includes("once: true"), "Scroll reveals must be batched and one-shot");
 assert.ok(interactions.includes("pointerdown") && interactions.includes("pointerleave"), "Card hover and press feedback must be present");
 const vesselRule = cardCss.match(/\.vessel-card\{([^}]*)\}/s)?.[1] ?? "";
