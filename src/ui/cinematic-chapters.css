@@ -89,3 +89,12 @@
 @media(prefers-reduced-motion:reduce){
  .story-section:before,.contrast-section:before,.roles-section:before,.workflow-section:before,.signature-section:before,.features-section:before,.screens-section:before,.download-section:before,.faq-section:before{mask-image:none}
 }
+
+
+.chapter-sparkfield{position:absolute;z-index:0;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .7s ease}
+.chapter-is-active>.chapter-sparkfield{opacity:1}
+.chapter-spark{position:absolute;left:var(--sx);top:var(--sy);width:var(--ss);height:var(--ss);border-radius:50%;background:#e8ebf1;box-shadow:0 0 8px rgba(232,235,241,.85),0 0 20px rgba(172,153,196,.35);opacity:0;transform:translate3d(0,18px,0) scale(.4)}
+.chapter-is-active .chapter-spark{animation:chapter-spark-rise 2.8s ease-in-out var(--sd) infinite}
+@keyframes chapter-spark-rise{0%,100%{opacity:0;transform:translate3d(0,20px,0) scale(.35)}35%{opacity:.8}70%{opacity:.28;transform:translate3d(-12px,-26px,0) scale(1)}}
+.cinematic-chapter>*:not(.chapter-sparkfield){position:relative;z-index:1}
+@media(prefers-reduced-motion:reduce){.chapter-sparkfield{display:none!important}}
