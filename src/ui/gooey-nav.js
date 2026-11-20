@@ -105,23 +105,25 @@ function initButtons() {
   const selectors = [
     ".button", ".nav-cta", ".hero-mosaic-action", ".header-action",
     ".hero-button", ".primary-button", ".footer-cta", ".capability-link",
-    ".contrast-link", ".back-link"
+    ".contrast-link", ".back-link", ".signature-prev", ".signature-next"
   ].join(",");
-  const controls = [...document.querySelectorAll(selectors)];
-  controls.forEach((control) => {
-    control.classList.add("gooey-button");
-    if (control.tagName === "BUTTON" || control.getAttribute("role") === "button") {
-      control.addEventListener("pointerdown", () => control.classList.add("is-pressed"));
-      ["pointerup", "pointercancel", "pointerleave", "blur"].forEach((eventName) => {
-        control.addEventListener(eventName, () => control.classList.remove("is-pressed"));
-      });
-    }
+  const decorate = (root) => {
+    if (root instanceof Element && root.matches(selectors)) root.classList.add("gooey-button");
+    root.querySelectorAll?.(selectors).forEach((control) => control.classList.add("gooey-button"));
+  };
+  decorate(document);
+  const observer = new MutationObserver((records) => {
+    records.forEach((record) => record.addedNodes.forEach((node) => {
+      if (node instanceof Element) decorate(node);
+    }));
   });
+  observer.observe(document.body, { childList: true, subtree: true });
+  return () => observer.disconnect();
 }
 
 export function initGooeyUI() {
   ensureFilter();
   const cleanups = [...document.querySelectorAll(".nav-links, .header-nav")].map(initOneNav).filter(Boolean);
-  initButtons();
+  cleanups.push(initButtons());
   return () => cleanups.reverse().forEach((cleanup) => cleanup());
 }
