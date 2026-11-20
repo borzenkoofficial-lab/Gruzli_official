@@ -49,14 +49,32 @@ export function initProductJourney() {
     media.add(
       { reduce: "(prefers-reduced-motion: reduce)", compact: "(max-width: 760px)" },
       (context) => {
+        const compact = context.conditions.compact;
         if (context.conditions.reduce) {
-          gsap.set(copies, { autoAlpha: 1, y: 0, filter: "blur(0px)", clearProps: "transform" });
+          // Reduced-motion devices still receive a real scroll-linked presentation:
+          // no camera orbit, parallax or particle bursts, but chapters and screens advance.
+          gsap.set(copies, { autoAlpha: 0, y: 0, filter: "none" });
+          gsap.set(copies[0], { autoAlpha: 1 });
           gsap.set(screens, { autoAlpha: 0 });
           gsap.set(screens[0], { autoAlpha: 1 });
-          gsap.set(progress, { scaleX: 1 });
-          return undefined;
+          const reducedTl = gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: { trigger: root, start: "top top", end: "bottom bottom", scrub: 0.25, invalidateOnRefresh: true },
+          });
+          for (let index = 0; index < 7; index += 1) {
+            const at = index;
+            if (index > 0) reducedTl.to(copies[index - 1], { autoAlpha: 0, duration: 0.12 }, at);
+            reducedTl.to(copies[index], { autoAlpha: 1, duration: 0.18 }, at + 0.04);
+            if (counter) reducedTl.call(() => { counter.textContent = String(index + 1).padStart(2, "0"); }, [], at + 0.04);
+            reducedTl.to(progress, { scaleX: (index + 1) / 7, duration: 0.2 }, at);
+            const screenIndex = [0, 0, 1, 2, 0, 3, 1][index];
+            screens.forEach((screen, i) => {
+              if (i !== screenIndex) reducedTl.to(screen, { autoAlpha: 0, duration: 0.08 }, at);
+            });
+            reducedTl.to(screens[screenIndex], { autoAlpha: 1, duration: 0.12 }, at + 0.04);
+          }
+          return () => reducedTl.scrollTrigger && reducedTl.scrollTrigger.kill();
         }
-        const compact = context.conditions.compact;
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: { trigger: root, start: "top top", end: "bottom bottom", scrub: compact ? 0.5 : 0.75, invalidateOnRefresh: true },
