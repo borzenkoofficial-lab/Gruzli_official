@@ -183,3 +183,20 @@
  .journey-spark{display:none}
  .journey-client-screen,.journey-order-screen{display:none!important}
 }
+
+/* Safe static presentation if the motion runtime is unavailable. */
+#product-journey.journey-fallback{height:auto;min-height:0}
+#product-journey.journey-fallback .journey-stage{position:relative;top:auto;height:auto;min-height:0;display:grid;grid-template-columns:minmax(0,.9fr) minmax(320px,1.1fr);padding:clamp(36px,6vw,84px)}
+#product-journey.journey-fallback .journey-copy-wrap{min-height:390px}
+#product-journey.journey-fallback .journey-copy{position:relative;inset:auto;opacity:1!important;visibility:visible!important;transform:none!important;filter:none!important}
+#product-journey.journey-fallback .journey-copy:not(:first-child){display:none}
+#product-journey.journey-fallback .journey-visual{height:620px}
+#product-journey.journey-fallback .journey-client-screen,#product-journey.journey-fallback .journey-order-screen{display:none!important}
+#product-journey.journey-fallback .journey-phone-screen img:first-of-type{opacity:1!important;visibility:visible!important}
+#product-journey.journey-fallback .journey-hud{display:none}
+@media(max-width:760px){
+ #product-journey.journey-fallback .journey-stage{display:block;padding:72px 24px}
+ #product-journey.journey-fallback .journey-copy-wrap{min-height:0}
+ #product-journey.journey-fallback .journey-visual{height:440px;margin-top:20px}
+ #product-journey.journey-fallback .journey-phone{width:190px}
+}
