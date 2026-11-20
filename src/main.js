@@ -1,7 +1,9 @@
+import { initChapterAtmosphere } from "./ui/chapter-atmosphere.js";
 import { initGooeyUI } from "./ui/gooey-nav.js";
 import { gsap } from "./motion/core.js";
 
 initGooeyUI();
+initChapterAtmosphere();
 
 const roleContent = {
   worker: {
