@@ -580,3 +580,34 @@ body.lightbox-open{overflow:hidden}
 }
 @media(max-width:390px){.hero-mosaic-topline span:last-child{display:none}.hero--mosaic h1{font-size:52px}.hero-mosaic-action b{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.hero-mosaic-action{transition:none}.hero-mosaic-action:hover{transform:none}}
+
+
+/* GRUZLI / GooeyNav interaction system — shared across marketing and app guide */
+.gooey-filter-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.nav-links,.header-nav{position:relative;isolation:isolate}
+.nav-links{gap:5px}
+.nav-links>a:not(.nav-cta),.header-nav>a{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 14px;border-radius:999px;white-space:nowrap;transition:color .24s ease}
+.gooey-nav-visual{position:absolute;inset:0;z-index:0;pointer-events:none;filter:url(#gooey-nav-filter);overflow:visible}
+.gooey-nav-indicator{position:absolute;top:0;left:0;display:block;border:1px solid rgba(232,235,241,.34);border-radius:999px;background:linear-gradient(135deg,rgba(232,235,241,.19),rgba(232,235,241,.075));box-shadow:0 5px 22px rgba(0,0,0,.13),inset 0 1px rgba(255,255,255,.16);transition:transform 600ms cubic-bezier(.22,1,.36,1),width 600ms cubic-bezier(.22,1,.36,1),height 600ms cubic-bezier(.22,1,.36,1);will-change:transform,width}
+.nav-links>a.gooey-active:not(.nav-cta),.header-nav>a.gooey-active{color:#fff}
+.nav-links>a:not(.nav-cta):hover,.header-nav>a:hover{color:#fff}
+.gooey-nav-particle{position:absolute;left:var(--px);top:var(--py);width:var(--size);height:var(--size);border-radius:50%;background:#e8ebf1;box-shadow:0 0 9px rgba(232,235,241,.9);animation:gooey-particle-flight var(--duration) cubic-bezier(.15,.75,.25,1) forwards}
+@keyframes gooey-particle-flight{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}12%{opacity:1}75%{opacity:.85}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.05)}}
+.gooey-button{position:relative;isolation:isolate;overflow:hidden;transform:translateZ(0);transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s,border-color .28s,background-color .28s}
+.gooey-button:before{content:"";position:absolute;z-index:-1;inset:-1px;pointer-events:none;opacity:0;background:linear-gradient(112deg,transparent 18%,rgba(255,255,255,.32) 47%,transparent 72%);transform:translateX(-115%);transition:transform .65s cubic-bezier(.22,1,.36,1),opacity .2s}
+.gooey-button:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.16)}
+.gooey-button:hover:before{opacity:1;transform:translateX(115%)}
+.gooey-button:active,.gooey-button.is-pressed{transform:translateY(0) scale(.975)}
+.gooey-button:focus-visible,.gooey-nav a:focus-visible{outline:2px solid #e8c95f;outline-offset:4px}
+.nav-cta.gooey-button,.header-action.gooey-button{border-radius:999px}
+@media(max-width:780px){
+ .nav-links{gap:3px}
+ .nav-links>a:not(.nav-cta){justify-content:flex-start;min-height:46px;padding:0 15px}
+ .nav-links .gooey-nav-visual{inset:8px 12px}
+ .nav-cta{min-height:46px}
+}
+@media(prefers-reduced-motion:reduce){
+ .gooey-nav-indicator,.gooey-button,.gooey-button:before{transition:none!important}
+ .gooey-nav-particle{display:none!important}
+ .gooey-button:hover{transform:none}
+}
