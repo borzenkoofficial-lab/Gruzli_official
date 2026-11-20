@@ -17,7 +17,8 @@ assert.match(motion, /scrub:/, "Scroll position must control the camera timeline
 assert.match(motion, /prefers-reduced-motion/, "Reduced-motion preference must be handled");
 assert.match(motion, /journey-spark/, "Scroll-linked particles must be initialized");
 assert.match(motion, /initProductJourney/, "The journey initializer must be exported");
-assert.match(runtime, /initProductJourney\(\)/, "The motion runtime must initialize the journey");
+assert.match(runtime, /safelyInit\("product journey", initProductJourney\)/, "The motion runtime must safely initialize the journey first");
+assert.match(runtime, /safelyInit\("hero", initHeroMotion\)/, "Other motion modules must initialize independently");
 assert.match(css, /\.journey-stage\s*\{[^}]*position:sticky/s, "The 3D stage must remain continuous while scrolling");
 assert.match(css, /@media\(prefers-reduced-motion:reduce\)/, "The layout must have a reduced-motion fallback");
 console.log("Product journey contract: 14 checks passed");
