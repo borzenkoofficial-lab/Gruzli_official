@@ -1,4 +1,7 @@
+import { initGooeyUI } from "./ui/gooey-nav.js";
 import { gsap } from "./motion/core.js";
+
+initGooeyUI();
 
 const roleContent = {
   worker: {
