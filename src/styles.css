@@ -523,3 +523,60 @@ body.lightbox-open{overflow:hidden}
 .hero-entry-service .hero-entry-arrow{color:#17191b!important;}
 .hero-entry-service .hero-entry-icon{background:rgba(23,24,27,.09)!important;border-color:rgba(23,24,27,.18)!important;color:#17191b!important;}
 @media(max-width:430px){.hero-release{background:#242629!important}.hero-entry-app{background:#f1f0eb!important}}
+
+
+/* ─────────────────────────────────────────────────────────────
+   GRUZLI / HOLOMOSAIC HERO — clean replacement for legacy hero
+   ───────────────────────────────────────────────────────────── */
+.hero.hero--mosaic{
+  --mosaic-ink:#120f17;position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;
+  min-height:min(900px,calc(100svh - 76px));height:min(900px,calc(100svh - 76px));max-height:none;overflow:hidden;
+  padding:clamp(86px,10vh,126px) 24px 76px;background:var(--mosaic-ink);color:#f7f7f8;
+}
+.hero--mosaic:before,.hero--mosaic:after{content:none!important}
+.hero-mosaic-field{position:absolute;inset:0;z-index:-2;overflow:hidden;background:#120f17}
+.holo-mosaic-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair}
+.hero-mosaic-vignette{position:absolute;inset:0;pointer-events:none;background:
+ radial-gradient(ellipse at 50% 46%,rgba(18,15,23,.04) 0%,rgba(18,15,23,.18) 38%,rgba(18,15,23,.82) 100%),
+ linear-gradient(90deg,rgba(18,15,23,.72),rgba(18,15,23,.08) 50%,rgba(18,15,23,.72)),
+ linear-gradient(0deg,#120f17 0%,transparent 24%,transparent 76%,rgba(18,15,23,.48) 100%)}
+.hero-mosaic-grain{position:absolute;inset:0;pointer-events:none;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E")}
+.hero-mosaic-topline,.hero-mosaic-footer{position:absolute;left:clamp(22px,5vw,76px);right:clamp(22px,5vw,76px);display:flex;justify-content:space-between;align-items:center;color:rgba(238,239,244,.52);font-size:9px;font-weight:750;letter-spacing:.17em;z-index:2}
+.hero-mosaic-topline{top:30px}
+.hero-mosaic-topline span:last-child{display:flex;align-items:center;gap:9px}
+.hero-mosaic-topline i,.hero-mosaic-eyebrow span{width:6px;height:6px;border-radius:50%;background:#d7bd78;box-shadow:0 0 14px rgba(215,189,120,.75)}
+.hero-mosaic-content{position:relative;z-index:1;width:min(1060px,100%);margin:-1vh auto 0;text-align:center;display:flex;align-items:center;flex-direction:column}
+.hero-mosaic-eyebrow{display:flex;align-items:center;gap:11px;margin:0 0 26px;color:rgba(242,241,245,.68);font-size:10px;letter-spacing:.19em;font-weight:750}
+.hero--mosaic h1{max-width:1050px;margin:0;color:#f2f1f4;font-size:clamp(58px,9.3vw,132px);line-height:.88;letter-spacing:-.092em;font-weight:760;text-wrap:balance;text-shadow:0 12px 55px rgba(0,0,0,.28)}
+.hero--mosaic h1 em{font-style:normal;color:#d5d8e0;background:linear-gradient(100deg,#f0f1f5 4%,#9ea4b2 36%,#f7f7fa 58%,#aeb4c0 88%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-mosaic-lead{max-width:590px;margin:27px auto 0;color:rgba(234,233,239,.72);font-size:clamp(14px,1.35vw,17px);line-height:1.7;letter-spacing:-.02em}
+.hero-mosaic-actions{display:grid;grid-template-columns:repeat(2,minmax(220px,1fr));gap:10px;width:min(610px,100%);margin-top:34px}
+.hero-mosaic-action{position:relative;display:flex;align-items:center;gap:14px;min-height:76px;padding:13px 17px;border:1px solid rgba(232,235,241,.24);border-radius:14px;background:rgba(21,18,27,.58);color:#f5f4f7;text-align:left;text-decoration:none;transition:transform .28s ease,border-color .28s ease,background .28s ease;backdrop-filter:blur(12px)}
+.hero-mosaic-action:hover{transform:translateY(-4px);border-color:rgba(232,235,241,.62);background:rgba(232,235,241,.1)}
+.hero-mosaic-action--primary{border-color:rgba(215,189,120,.7);background:rgba(215,189,120,.12)}
+.hero-mosaic-action--primary:hover{border-color:#e9d49c;background:rgba(215,189,120,.2)}
+.hero-mosaic-action-index{align-self:flex-start;padding-top:3px;color:#c7b27e;font-size:10px;font-weight:800;letter-spacing:.08em}
+.hero-mosaic-action>span:nth-child(2){display:grid;gap:6px}
+.hero-mosaic-action small{color:rgba(239,238,243,.54);font-size:8px;font-weight:800;letter-spacing:.14em}
+.hero-mosaic-action b{font-size:14px;font-weight:700;letter-spacing:-.025em}
+.hero-mosaic-action>i{margin-left:auto;color:#d8c58f;font-size:19px;font-style:normal}
+.hero-mosaic-footer{bottom:25px}
+.hero-mosaic-footer>span:first-child{color:rgba(238,239,244,.42)}
+.hero-mosaic-footer i{color:#c7b27e;font-style:normal}
+.hero-mosaic-scroll{display:flex;align-items:center;gap:12px;color:rgba(238,239,244,.62)}
+.hero-mosaic-scroll b{font-size:16px;font-weight:400;color:#d5c18b}
+@media(max-width:760px){
+ .hero.hero--mosaic{height:auto;min-height:calc(100svh - 68px);padding:116px 20px 94px}
+ .hero-mosaic-topline{top:20px;font-size:7px;letter-spacing:.11em}
+ .hero-mosaic-content{margin:0 auto}
+ .hero-mosaic-eyebrow{font-size:8px;letter-spacing:.12em;text-align:center;line-height:1.6;margin-bottom:22px}
+ .hero--mosaic h1{font-size:clamp(54px,13vw,84px);line-height:.92}
+ .hero-mosaic-lead{max-width:420px;margin-top:21px;font-size:14px}
+ .hero-mosaic-actions{grid-template-columns:1fr;max-width:420px;margin-top:27px;gap:8px}
+ .hero-mosaic-action{min-height:67px;padding:11px 14px}
+ .hero-mosaic-footer{bottom:17px;font-size:7px;letter-spacing:.1em}
+ .hero-mosaic-footer>span:last-child{display:none}
+ .hero-mosaic-vignette{background:radial-gradient(ellipse at 50% 48%,rgba(18,15,23,.06),rgba(18,15,23,.68) 80%),linear-gradient(0deg,#120f17 0%,transparent 35%,rgba(18,15,23,.35) 100%)}
+}
+@media(max-width:390px){.hero-mosaic-topline span:last-child{display:none}.hero--mosaic h1{font-size:52px}.hero-mosaic-action b{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.hero-mosaic-action{transition:none}.hero-mosaic-action:hover{transform:none}}
