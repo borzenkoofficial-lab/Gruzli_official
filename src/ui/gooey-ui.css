@@ -46,3 +46,5 @@
  .gooey-nav-particle{display:none!important}
  .gooey-button:hover{transform:none}
 }
+
+.site-header .nav-links .gooey-nav-visual,.app-header .header-nav .gooey-nav-visual{inset:0}
