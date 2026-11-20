@@ -7,6 +7,7 @@ import { initHeroMotion } from "./hero.js";
 import { initScrollMotion } from "./scroll.js";
 import { initCardInteractions } from "./interactions.js";
 import { initProductJourney } from "./product-journey.js";
+import { initHoloMosaic } from "./holo-mosaic.js";
 
 const root = document.documentElement;
 const syncMotionPreference = () => {
@@ -40,6 +41,7 @@ const safelyInit = (name, init) => {
 };
 
 // Start the main presentation first; unrelated reveal effects cannot prevent it from mounting.
+safelyInit("HoloMosaic", initHoloMosaic);
 safelyInit("product journey", initProductJourney);
 safelyInit("hero", initHeroMotion);
 safelyInit("scroll reveals", initScrollMotion);
