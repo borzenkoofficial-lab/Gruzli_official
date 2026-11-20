@@ -42,67 +42,39 @@
   </header>
 
   <main id="main">
-    <section class="hero">
-      <div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <div class="eyebrow hero-eyebrow"><span class="live-dot"></span> В РАЗРАБОТКЕ</div>
-          <div class="hero-project-type">ЕДИНАЯ ПЛАТФОРМА ДЛЯ ГРУЗОВЫХ РАБОТ</div>
-          <h1>Две роли.<br><em>Один процесс.</em></h1>
-          <p class="hero-lead">Gruzli связывает диспетчерскую работу и исполнителей в одной системе: заявки, отклики, коммуникация и статусы больше не разбросаны по чатам.</p>
-          <div class="hero-release" aria-label="Планируемая дата запуска GRUZLI — 15 января 2027 года">
-            <span class="hero-release-label">ПЛАНИРУЕМЫЙ ЗАПУСК</span>
-            <strong>15.01.<em>2027</em></strong>
-            <span class="hero-release-note">GRUZLI <i></i> 15 ЯНВАРЯ 2027</span>
-          </div>
-          <div class="hero-entry-choice" aria-label="Выберите способ работы с Gruzli">
-            <a class="hero-entry-card vessel-card vessel-card--hero hero-entry-service" href="#roles">
-              <span class="hero-entry-icon" aria-hidden="true">↗</span>
-              <span class="hero-entry-content">
-                <span class="hero-entry-kicker">ДЛЯ ДИСПЕТЧЕРА</span>
-                <strong>Управлять заказами</strong>
-                <small>Заявки, отклики, подбор команды и контроль выполнения</small>
-              </span>
-              <span class="hero-entry-arrow" aria-hidden="true">↘</span>
-            </a>
-            <a class="hero-entry-card vessel-card vessel-card--hero hero-entry-app" href="/app/">
-              <span class="hero-entry-icon" aria-hidden="true">▣</span>
-              <span class="hero-entry-content">
-                <span class="hero-entry-kicker">ДЛЯ ГРУЗЧИКА</span>
-                <strong>Найти работу</strong>
-                <small>Лента смен, условия до отклика, свои заказы и статусы</small>
-              </span>
-              <span class="hero-entry-arrow" aria-hidden="true">↗</span>
-            </a>
-          </div>
-          <div class="hero-meta">
-            <span><b>01</b> Диспетчер</span><span><b>02</b> Грузчик</span>
-          </div>
-        </div>
-        <div class="hero-visual" aria-label="Экраны приложения Gruzli">
-          <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
-          <div class="hero-phone hero-phone-main">
-            <div class="phone-frame"><span class="phone-island"></span>
-              <img src="/images/gruzli-new-feed.webp" alt="Лента заявок в приложении Gruzli" fetchpriority="high" />
-            </div>
-          </div>
-          <div class="hero-phone hero-phone-back phone-back-top">
-            <div class="phone-frame"><span class="phone-island"></span>
-              <img src="/images/gruzli-new-profile.webp" alt="Профиль исполнителя Gruzli" loading="lazy" />
-            </div>
-          </div>
-          <div class="floating-card floating-card-a"><span class="floating-icon">↗</span><span><b>Один рабочий процесс</b><small>От заявки до результата</small></span></div>
-          <div class="floating-card floating-card-b"><span class="floating-check">✓</span><span><b>Две роли</b><small>Одна платформа</small></span></div>
-          <div class="hero-visual-label"><span>APP INTERFACE</span><b>01—02</b><i></i><small>РЕАЛЬНЫЕ ЭКРАНЫ</small></div>
+    <section class="hero hero--mosaic" aria-labelledby="hero-title">
+      <div class="hero-mosaic-field" aria-hidden="true">
+        <canvas id="holo-mosaic" class="holo-mosaic-canvas"></canvas>
+        <div class="hero-mosaic-vignette"></div>
+        <div class="hero-mosaic-grain"></div>
+      </div>
+      <div class="hero-mosaic-topline" aria-hidden="true">
+        <span>GRUZLI / DIGITAL WORK PLATFORM</span>
+        <span><i></i> MOSCOW · 2026</span>
+      </div>
+      <div class="hero-mosaic-content">
+        <p class="hero-mosaic-eyebrow"><span></span> ЕДИНАЯ ПЛАТФОРМА ДЛЯ РАБОЧИХ ПРОЦЕССОВ</p>
+        <h1 id="hero-title">Работа.<br><em>Собранная вместе.</em></h1>
+        <p class="hero-mosaic-lead">GRUZLI объединяет клиентов, диспетчеров и исполнителей вокруг одного процесса — от заявки до выхода на объект.</p>
+        <div class="hero-mosaic-actions" aria-label="Выберите свой сценарий">
+          <a class="hero-mosaic-action hero-mosaic-action--primary" href="#roles">
+            <span class="hero-mosaic-action-index">01</span>
+            <span><small>ДЛЯ ДИСПЕТЧЕРА</small><b>Управлять заказами</b></span>
+            <i aria-hidden="true">↗</i>
+          </a>
+          <a class="hero-mosaic-action" href="/app/">
+            <span class="hero-mosaic-action-index">02</span>
+            <span><small>ДЛЯ ИСПОЛНИТЕЛЯ</small><b>Найти работу</b></span>
+            <i aria-hidden="true">↗</i>
+          </a>
         </div>
       </div>
-      <div class="hero-bottom"><span>СОЗДАНО ДЛЯ РЕАЛЬНОЙ РАБОТЫ</span><i></i><span>ЛЮДИ · ЗАКАЗЫ · КОМАНДЫ</span></div>
+      <div class="hero-mosaic-footer" aria-hidden="true">
+        <span>PEOPLE <i>·</i> ORDERS <i>·</i> TEAMS</span>
+        <span class="hero-mosaic-scroll">SCROLL TO EXPLORE <b>↓</b></span>
+        <span>01 — 07 / PRODUCT FILM</span>
+      </div>
     </section>
-
-
-
 
     <section class="product-journey" id="product-journey" aria-label="Кинематографическая презентация приложения GRUZLI">
       <div class="journey-stage">
