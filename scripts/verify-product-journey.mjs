@@ -20,4 +20,4 @@ assert.match(motion, /initProductJourney/, "The journey initializer must be expo
 assert.match(runtime, /initProductJourney\(\)/, "The motion runtime must initialize the journey");
 assert.match(css, /\.journey-stage\s*\{[^}]*position:sticky/s, "The 3D stage must remain continuous while scrolling");
 assert.match(css, /@media\(prefers-reduced-motion:reduce\)/, "The layout must have a reduced-motion fallback");
-console.log("Product journey contract: 11 checks passed");
+console.log("Product journey contract: 14 checks passed");
