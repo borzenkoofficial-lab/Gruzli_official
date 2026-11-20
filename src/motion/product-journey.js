@@ -64,7 +64,7 @@ export function initProductJourney() {
         const showChapter = (index, at) => {
           if (index > 0) tl.to(copies[index - 1], { autoAlpha: 0, y: -24, filter: "blur(7px)", duration: 0.13 }, at);
           tl.to(copies[index], { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.24, ease: "power3.out" }, at + 0.06);
-          if (counter) tl.set(counter, { textContent: String(index + 1).padStart(2, "0") }, at + 0.06);
+          if (counter) tl.call(() => { counter.textContent = String(index + 1).padStart(2, "0"); }, [], at + 0.06);
           tl.to(progress, { scaleX: (index + 1) / 7, duration: 0.28 }, at);
         };
         const revealScreen = (active, at) => {
@@ -131,8 +131,14 @@ export function initProductJourney() {
       },
     );
   }, root);
-  const refresh = () => ScrollTrigger.refresh();
+  const refresh = () => {
+    // Refresh only after layout settles; a failed refresh must not leave the page inert.
+    try { ScrollTrigger.refresh(); } catch (error) { console.error("[GRUZLI journey] ScrollTrigger refresh failed.", error); }
+  };
   document.fonts?.ready?.then(refresh);
   window.addEventListener("load", refresh, { once: true });
-  return () => { window.removeEventListener("load", refresh); media.revert(); scope.revert(); };
+  return () => {
+    window.removeEventListener("load", refresh);
+    try { media.revert(); } finally { scope.revert(); }
+  };
 }
