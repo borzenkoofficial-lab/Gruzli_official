@@ -36,6 +36,11 @@ function initOneNav(nav) {
   let active = links.findIndex((link) => link.getAttribute("aria-current") === "location" || link.classList.contains("is-active"));
   if (active < 0) active = 0;
   let resizeFrame = 0;
+  const activeObserver = new MutationObserver(() => {
+    const current = links.findIndex((link) => link.getAttribute("aria-current") === "location");
+    if (current >= 0 && current !== active) paint(current);
+  });
+  links.forEach((link) => activeObserver.observe(link, { attributes: true, attributeFilter: ["aria-current"] }));
 
   const paint = (index, burst = false) => {
     const link = links[index];
@@ -95,6 +100,7 @@ function initOneNav(nav) {
   return () => {
     cancelAnimationFrame(resizeFrame);
     window.removeEventListener("resize", onResize);
+    activeObserver.disconnect();
     visual.remove();
     nav.classList.remove("gooey-nav");
     links.forEach((link) => link.classList.remove("gooey-active"));
