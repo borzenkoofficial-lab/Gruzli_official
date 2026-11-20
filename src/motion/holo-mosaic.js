@@ -14,6 +14,7 @@ export function initHoloMosaic() {
   const config = {
     color: "#120f17",
     metalColor: "#e8ebf1",
+    spectrum: "full",
     tileSize: 1,
     gap: 0.08,
     scatter: 0.3,
@@ -69,7 +70,7 @@ export function initHoloMosaic() {
     if (disposed || (!force && now - lastFrame < 30)) return;
     lastFrame = now;
     const elapsed = (now - started) / 1000;
-    const intro = config.intro ? Math.min(1, elapsed / 1.9) : 1;
+    const intro = config.intro && !reduceMotion.matches ? Math.min(1, elapsed / 1.9) : 1;
     const easeIntro = 1 - Math.pow(1 - intro, 3);
     pointer.x += (pointer.tx - pointer.x) * 0.055;
     pointer.y += (pointer.ty - pointer.y) * 0.055;
