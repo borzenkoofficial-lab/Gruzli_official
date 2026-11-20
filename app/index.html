@@ -15,12 +15,15 @@
   <link rel="stylesheet" href="/app/mobile-polish.css" />
   <link rel="stylesheet" href="/app/human-editorial.css" />
   <link rel="stylesheet" href="/app/capabilities.css" />
+  <link rel="stylesheet" href="/app/motion.css" />
+  <link rel="stylesheet" href="/src/ui/gooey-ui.css" />
 </head>
 <body>
   <a class="skip-link" href="#guide">Перейти к инструкции</a>
   <header class="app-header" id="top">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="Gruzli — на главную"><span class="brand-symbol"><i></i></span><span class="brand-name">gruzli<span>.</span></span></a>
+      <button class="app-menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
       <nav class="header-nav" aria-label="Навигация">
         <a href="/">Главная</a>
         <a href="#capabilities">Возможности</a>
@@ -180,5 +183,6 @@
 
   <footer class="app-footer"><a class="brand" href="/"><span class="brand-symbol"><i></i></span><span class="brand-name">gruzli<span>.</span></span></a><span>© 2026 GRUZLI. ДИСПЕТЧЕР · ГРУЗЧИК · ЗАКАЗЫ</span><a href="#top">НАВЕРХ ↑</a></footer>
   <script type="module" src="/app/main.js"></script>
+  <script type="module" src="/app/motion.js"></script>
 </body>
 </html>

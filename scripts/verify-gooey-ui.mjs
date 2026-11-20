@@ -1,0 +1,30 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+
+const read = (path) => readFileSync(path, "utf8");
+const moduleSource = read("src/ui/gooey-nav.js");
+const css = read("src/ui/gooey-ui.css");
+const mainHtml = read("index.html");
+const appHtml = read("app/index.html");
+const mainRuntime = read("src/main.js");
+const appRuntime = read("app/main.js");
+
+assert.match(moduleSource, /particleCount:\s*15/);
+assert.match(moduleSource, /spread:\s*56/);
+assert.match(moduleSource, /animationTime:\s*600/);
+assert.match(moduleSource, /timeVariance:\s*300/);
+assert.match(moduleSource, /gooey-nav-filter/);
+assert.match(moduleSource, /MutationObserver/);
+assert.match(moduleSource, /prefers-reduced-motion/);
+assert.match(moduleSource, /gooey-button/);
+assert.match(css, /\.gooey-nav-indicator/);
+assert.match(css, /gooey-particle-flight/);
+assert.match(css, /\.gooey-button:hover/);
+assert.match(css, /\.app-header \.header-nav\.is-open/);
+assert.ok(mainHtml.includes('/src/ui/gooey-ui.css'), "Main page must load shared Gooey styles");
+assert.ok(appHtml.includes('/src/ui/gooey-ui.css'), "App guide must load shared Gooey styles");
+assert.ok(appHtml.includes('class="app-menu-toggle"'), "App guide must have a mobile menu toggle");
+assert.ok(mainRuntime.includes('initGooeyUI()'), "Main page must initialize Gooey UI");
+assert.ok(appRuntime.includes('initGooeyUI()'), "App guide must initialize Gooey UI");
+assert.ok(appRuntime.includes('app-menu-toggle'), "App guide mobile menu must be wired");
+console.log("Gooey UI contract: 19 checks passed");

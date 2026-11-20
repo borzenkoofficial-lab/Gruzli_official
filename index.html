@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f7f7f5" />
+  <meta name="theme-color" content="#120f17" />
   <meta name="description" content="GRUZLI — рабочая платформа для диспетчеров и грузчиков: заявки, отклики, команды, статусы, чаты и история заказов." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Gruzli — две роли. Один процесс." />
@@ -16,10 +16,11 @@
   <link rel="icon" href="https://raw.githubusercontent.com/borzenkoofficial-lab/gruzli-b99e57fd/main/public/favicon.jpeg" type="image/jpeg" />
   <link rel="stylesheet" href="/src/styles.css" />
   <title>Gruzli — платформа для диспетчеров и грузчиков</title>
-  <link rel="stylesheet" href="/src/site-polish.css" />
   <link rel="stylesheet" href="/src/mobile-polish.css" />
-  <link rel="stylesheet" href="/src/human-editorial.css" />
-  <link rel="stylesheet" href="/src/motion-direction.css" />
+  <link rel="stylesheet" href="/src/card-system.css" />
+  <link rel="stylesheet" href="/src/motion/motion.css" />
+  <link rel="stylesheet" href="/src/ui/gooey-ui.css" />
+  <link rel="stylesheet" href="/src/ui/cinematic-chapters.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержанию</a>
@@ -31,7 +32,7 @@
       </a>
       <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
       <nav class="nav-links" aria-label="Основная навигация">
-        <a href="#platform">Платформа</a>
+        <a href="#product-journey">Платформа</a>
         <a href="#about">Наша история</a>
         <a href="#roles">Роли</a>
         <a href="#workflow">Процесс</a>
@@ -43,76 +44,87 @@
   </header>
 
   <main id="main">
-    <section class="hero">
-      <div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <div class="eyebrow hero-eyebrow"><span class="live-dot"></span> В РАЗРАБОТКЕ</div>
-          <div class="hero-project-type">ЕДИНАЯ ПЛАТФОРМА ДЛЯ ГРУЗОВЫХ РАБОТ</div>
-          <h1>Две роли.<br><em>Один процесс.</em></h1>
-          <p class="hero-lead">Gruzli связывает диспетчерскую работу и исполнителей в одной системе: заявки, отклики, коммуникация и статусы больше не разбросаны по чатам.</p>
-          <div class="hero-release" aria-label="Планируемая дата запуска GRUZLI — 15 января 2027 года">
-            <span class="hero-release-label">ПЛАНИРУЕМЫЙ ЗАПУСК</span>
-            <strong>15.01.<em>2027</em></strong>
-            <span class="hero-release-note">GRUZLI <i></i> 15 ЯНВАРЯ 2027</span>
-          </div>
-          <div class="hero-entry-choice" aria-label="Выберите способ работы с Gruzli">
-            <a class="hero-entry-card hero-entry-service" href="#roles">
-              <span class="hero-entry-icon" aria-hidden="true">↗</span>
-              <span class="hero-entry-content">
-                <span class="hero-entry-kicker">ДЛЯ ДИСПЕТЧЕРА</span>
-                <strong>Управлять заказами</strong>
-                <small>Заявки, отклики, подбор команды и контроль выполнения</small>
-              </span>
-              <span class="hero-entry-arrow" aria-hidden="true">↘</span>
-            </a>
-            <a class="hero-entry-card hero-entry-app" href="/app/">
-              <span class="hero-entry-icon" aria-hidden="true">▣</span>
-              <span class="hero-entry-content">
-                <span class="hero-entry-kicker">ДЛЯ ГРУЗЧИКА</span>
-                <strong>Найти работу</strong>
-                <small>Лента смен, условия до отклика, свои заказы и статусы</small>
-              </span>
-              <span class="hero-entry-arrow" aria-hidden="true">↗</span>
-            </a>
-          </div>
-          <div class="hero-meta">
-            <span><b>01</b> Диспетчер</span><span><b>02</b> Грузчик</span>
-          </div>
-        </div>
-        <div class="hero-visual" aria-label="Экраны приложения Gruzli">
-          <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
-          <div class="hero-phone hero-phone-main">
-            <div class="phone-frame"><span class="phone-island"></span>
-              <img src="/images/gruzli-new-feed.webp" alt="Лента заявок в приложении Gruzli" fetchpriority="high" />
-            </div>
-          </div>
-          <div class="hero-phone hero-phone-back phone-back-top">
-            <div class="phone-frame"><span class="phone-island"></span>
-              <img src="/images/gruzli-new-profile.webp" alt="Профиль исполнителя Gruzli" loading="lazy" />
-            </div>
-          </div>
-          <div class="floating-card floating-card-a"><span class="floating-icon">↗</span><span><b>Один рабочий процесс</b><small>От заявки до результата</small></span></div>
-          <div class="floating-card floating-card-b"><span class="floating-check">✓</span><span><b>Две роли</b><small>Одна платформа</small></span></div>
-          <div class="hero-visual-label"><span>APP INTERFACE</span><b>01—02</b><i></i><small>РЕАЛЬНЫЕ ЭКРАНЫ</small></div>
+    <section class="hero hero--mosaic" aria-labelledby="hero-title">
+      <div class="hero-mosaic-field" aria-hidden="true">
+        <canvas id="holo-mosaic" class="holo-mosaic-canvas"></canvas>
+        <div class="hero-mosaic-vignette"></div>
+        <div class="hero-mosaic-grain"></div>
+      </div>
+      <div class="hero-mosaic-topline" aria-hidden="true">
+        <span>GRUZLI / DIGITAL WORK PLATFORM</span>
+        <span><i></i> MOSCOW · 2026</span>
+      </div>
+      <div class="hero-mosaic-content">
+        <p class="hero-mosaic-eyebrow"><span></span> ЕДИНАЯ ПЛАТФОРМА ДЛЯ РАБОЧИХ ПРОЦЕССОВ</p>
+        <h1 id="hero-title">Работа.<br><em>Собранная вместе.</em></h1>
+        <p class="hero-mosaic-lead">GRUZLI объединяет клиентов, диспетчеров и исполнителей вокруг одного процесса — от заявки до выхода на объект.</p>
+        <div class="hero-mosaic-actions" aria-label="Выберите свой сценарий">
+          <a class="hero-mosaic-action hero-mosaic-action--primary" href="#roles">
+            <span class="hero-mosaic-action-index">01</span>
+            <span><small>ДЛЯ ДИСПЕТЧЕРА</small><b>Управлять заказами</b></span>
+            <i aria-hidden="true">↗</i>
+          </a>
+          <a class="hero-mosaic-action" href="/app/">
+            <span class="hero-mosaic-action-index">02</span>
+            <span><small>ДЛЯ ИСПОЛНИТЕЛЯ</small><b>Найти работу</b></span>
+            <i aria-hidden="true">↗</i>
+          </a>
         </div>
       </div>
-      <div class="hero-bottom"><span>СОЗДАНО ДЛЯ РЕАЛЬНОЙ РАБОТЫ</span><i></i><span>ЛЮДИ · ЗАКАЗЫ · КОМАНДЫ</span></div>
-    </section>
-
-    <section class="intro-section" id="platform">
-      <div class="intro-inner reveal">
-        <div class="section-index"><span>01 / СИСТЕМА</span><b>G</b></div>
-        <div class="intro-copy">
-          <h2>Не просто лента заявок.<br><em>Связанный процесс работы.</em></h2>
-          <p>Диспетчер управляет заявками и командой, грузчик видит подходящие смены и отмечает этапы работы. Вся история остаётся внутри одной платформы.</p>
-        </div>
+      <div class="hero-mosaic-footer" aria-hidden="true">
+        <span>PEOPLE <i>·</i> ORDERS <i>·</i> TEAMS</span>
+        <span class="hero-mosaic-scroll">SCROLL TO EXPLORE <b>↓</b></span>
+        <span>01 — 07 / PRODUCT FILM</span>
       </div>
     </section>
 
-    <section class="story-section section-pad" id="about" aria-labelledby="story-title">
+    <section class="product-journey" id="product-journey" aria-label="Кинематографическая презентация приложения GRUZLI">
+      <div class="journey-stage">
+        <div class="journey-starfield" aria-hidden="true"></div>
+        <div class="journey-copy-wrap" aria-live="polite">
+          <article class="journey-copy" data-journey-copy="0"><p class="journey-overline"><i></i> 01 / GRUZLI APP</p><h2>Одна система.<br><em>Два взгляда.</em></h2><p>Камера входит в цифровое пространство GRUZLI. Здесь встречаются исполнители, клиенты и диспетчеры — каждый со своим рабочим сценарием.</p><div class="journey-foot">PRODUCT FILM / 2026</div></article>
+          <article class="journey-copy" data-journey-copy="1"><p class="journey-overline"><i></i> 02 / ИСПОЛНИТЕЛЬ</p><h2>Найти смену.<br><em>Понять условия.</em></h2><p>Лента помогает увидеть задачу, ставку и место работы до отклика. Телефон разворачивается к камере, открывая интерфейс приложения.</p><div class="journey-foot">FEED · SHIFT DISCOVERY</div></article>
+          <article class="journey-copy" data-journey-copy="2"><p class="journey-overline"><i></i> 03 / КЛИЕНТ</p><h2>Все заявки.<br><em>В одном месте.</em></h2><p>Клиент видит свои заказы, назначенного диспетчера и текущий статус. Не нужно собирать картину по разным перепискам.</p><div class="journey-foot">CLIENT · MY REQUESTS</div></article>
+          <article class="journey-copy" data-journey-copy="3"><p class="journey-overline"><i></i> 04 / ДЕТАЛИ ЗАКАЗА</p><h2>Условия ясны.<br><em>До выхода на объект.</em></h2><p>Внутри заявки собраны адрес, ставка, заработок, состав команды, время выхода и описание задачи — всё, что нужно участникам для понимания работы.</p><div class="journey-foot">ORDER · DETAILS · TEAM</div></article>
+          <article class="journey-copy" data-journey-copy="4"><p class="journey-overline"><i></i> 05 / ДИСПЕТЧЕР</p><h2>Заявка.<br><em>Люди. Контроль.</em></h2><p>Диспетчер работает с входящими заявками, откликами и составом команды. Мобильные сценарии связаны с общей логикой заказа.</p><div class="journey-foot">DISPATCH WORKFLOW</div></article>
+          <article class="journey-copy" data-journey-copy="5"><p class="journey-overline"><i></i> 06 / ИСТОРИЯ</p><h2>Работа движется.<br><em>История остаётся.</em></h2><p>Профиль и история помогают сохранить контекст взаимодействия, а этапы заказа дают участникам общее понимание происходящего.</p><div class="journey-foot">PROFILE · STATUS · HISTORY</div></article>
+          <article class="journey-copy" data-journey-copy="6"><p class="journey-overline"><i></i> 07 / ЕДИНАЯ СРЕДА</p><h2>Разные роли.<br><em>Общий результат.</em></h2><p>От поиска смены до управления заказом — GRUZLI собирает рабочий процесс в одной платформе.</p><div class="journey-foot">GRUZLI / PEOPLE · ORDERS · TEAMS</div></article>
+        </div>
+        <div class="journey-visual" aria-label="Объёмная презентация экранов GRUZLI">
+          <div class="journey-camera">
+            <div class="journey-phone">
+              <div class="journey-phone-screen">
+                <span class="journey-island" aria-hidden="true"></span>
+                <img data-journey-screen="feed" src="/images/gruzli-new-feed.webp" alt="Лента смен исполнителя GRUZLI" fetchpriority="high" />
+                <img data-journey-screen="profile" src="/images/gruzli-new-profile.webp" alt="Профиль исполнителя GRUZLI" loading="lazy" />
+                <div class="journey-client-screen" data-journey-screen="client" aria-label="Экран клиента: мои заявки">
+                  <div class="mock-status"><b>20:24</b><span>▮▮ LTE&nbsp; 22ϟ</span></div><div class="mock-head"><small>GRUZLI / CLIENT</small><strong>Мои заявки</strong><span>Статус заказов и назначенный диспетчер.</span><i></i></div>
+                  <div class="mock-request"><small>ЗАКАЗ / DEMO-J</small><b>Разгрузка стройматериалов</b><div><span>Адрес<strong>Москва, ул. Лесная, 12</strong></span><span>Ставка<strong>850 ₽/ч</strong></span></div><footer>ДИСПЕТЧЕР ВЫБРАН · Алексей Смирнов</footer></div>
+                  <div class="mock-request"><small>ЗАКАЗ / DEMO-J</small><b>Переезд офиса</b><div><span>Адрес<strong>Москва, Пресненская наб., 8</strong></span><span>Ставка<strong>900 ₽/ч</strong></span></div><footer>ДИСПЕТЧЕР ВЫБРАН · Алексей Смирнов</footer></div>
+                  <div class="mock-tabbar"><span>⌂<small>Заказать</small></span><b>▤<small>Заявки</small></b><span>◯<small>Чаты</small></span><span>♙<small>Профиль</small></span></div>
+                </div>
+                <div class="journey-order-screen" data-journey-screen="order" aria-label="Экран деталей заявки">
+                  <div class="mock-status"><b>20:24</b><span>▮▮ LTE&nbsp; 23ϟ</span></div><div class="mock-order-nav"><span>←</span><div><small>GRUZLI / ORDER</small><b>Детали заявки</b></div><i>ОТКРЫТА</i></div>
+                  <div class="mock-order-hero"><small>№ DEMO-J</small><h3>Разгрузка стройматериалов</h3><div class="mock-dispatcher"><i></i><span>ДИСПЕТЧЕР<strong>Алексей Смирнов</strong></span></div><div class="mock-stats"><span>ЗАРАБОТОК<strong>4 250 ₽</strong><small>850 ₽/ч × 5 ч</small></span><span>КОМАНДА<strong>3 чел.</strong><small>Нужно на объект</small></span></div></div>
+                  <div class="mock-when"><small>КОГДА И ГДЕ</small><b>Выход на объект</b><strong>Москва, ул. Лесная, 12</strong><span>30 сентября · 20:19</span><small>5 часов работы</small></div>
+                  <div class="mock-task"><b>☰ &nbsp; Что нужно сделать</b><p>Разгрузить материалы на объекте.</p></div>
+                </div>
+                <span class="journey-phone-glint" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="journey-dispatch-panel" aria-label="Схема диспетчерского процесса">
+              <div class="journey-panel-top"><span>GRUZLI / DISPATCH</span><b>WORKFLOW MAP</b></div><div class="journey-panel-title">Заказ в центре.<br><em>Команда в контексте.</em></div>
+              <div class="journey-panel-row"><i>01</i><span><b>Новая заявка</b><small>Параметры и условия</small></span><em>ВХОДЯЩАЯ</em></div><div class="journey-panel-row"><i>02</i><span><b>Отклики и подбор</b><small>Исполнители и состав</small></span><em>ПОДБОР</em></div><div class="journey-panel-row"><i>03</i><span><b>Выполнение</b><small>Статусы и коммуникация</small></span><em>КОНТРОЛЬ</em></div><div class="journey-panel-bottom"><span>СХЕМА ПРОЦЕССА</span><span>01 — 03</span></div>
+            </div>
+            <div class="journey-float journey-float-a" data-journey-float><span><b>Реальные экраны</b><small>Интерфейс приложения</small></span></div><div class="journey-float journey-float-b" data-journey-float><span><b>Две рабочие роли</b><small>Общий заказ и история</small></span></div><div class="journey-float journey-float-c" data-journey-float><span><b>Один процесс</b><small>От заявки до результата</small></span></div>
+          </div>
+        </div>
+        <div class="journey-hud" aria-hidden="true"><span class="journey-counter"><strong class="journey-counter-current">01</strong> / 07</span><span class="journey-progress"><i class="journey-progress-fill"></i></span><span class="journey-hud-label">SCROLL TO EXPLORE</span></div>
+        <div class="journey-scroll-hint" aria-hidden="true"><i></i> ПРОКРУТИТЕ, ЧТОБЫ ПРОДОЛЖИТЬ</div>
+      </div>
+    </section>
+
+    <section class="story-section section-pad cinematic-chapter" id="about" aria-labelledby="story-title">
       <div class="story-topline"><span>02 / ПОЧЕМУ ПОЯВИЛСЯ GRUZLI</span><span>ИСТОРИЯ ПЛАТФОРМЫ</span></div>
       <div class="story-intro">
         <div class="story-index reveal"><span>THE IDEA</span><b>G.</b><small>ОТ ЧАТА<br>К СИСТЕМЕ</small></div>
@@ -139,8 +151,8 @@
             <p>GRUZLI объединяет два рабочих сценария. Диспетчер публикует и ведёт заявки, обрабатывает отклики и собирает команду. Грузчик находит смены, изучает условия, откликается и отмечает ход выполнения. Участники работают вокруг заказа, а не пытаются собрать его историю из десятков сообщений.</p>
             <p>Это не попытка запретить людям общаться привычным способом. Это способ перестать использовать переписку как единственное место, где хранится вся работа.</p>
             <div class="story-triad">
-              <div><span>01</span><b>Диспетчер</b><small>Ведёт заявки и команду</small></div>
-              <div><span>02</span><b>Грузчик</b><small>Находит смены и работает</small></div>
+              <div class="vessel-card vessel-card--role"><span>01</span><b>Диспетчер</b><small>Ведёт заявки и команду</small></div>
+              <div class="vessel-card vessel-card--role"><span>02</span><b>Грузчик</b><small>Находит смены и работает</small></div>
             </div>
           </div>
         </article>
@@ -150,13 +162,13 @@
             <h3>Статус говорит<br><em>вместо десятка звонков.</em></h3>
             <p>В GRUZLI движение заказа можно отмечать понятными действиями: «Готов», «Приехал», «Выполняю», «Выполнил». Это простые слова, но за ними — важная привычка: фиксировать этап работы там, где заказ и был создан. Диспетчеру легче понимать, что происходит на объекте, а грузчику не нужно каждый раз объяснять одно и то же в личных сообщениях.</p>
             <div class="story-statuses" aria-label="Этапы выполнения заказа">
-              <div><i>01</i><b>Готов</b><small>Подтверждаю готовность</small></div>
+              <div class="vessel-card vessel-card--status"><i>01</i><b>Готов</b><small>Подтверждаю готовность</small></div>
               <span>→</span>
-              <div><i>02</i><b>Приехал</b><small>На месте</small></div>
+              <div class="vessel-card vessel-card--status"><i>02</i><b>Приехал</b><small>На месте</small></div>
               <span>→</span>
-              <div><i>03</i><b>Выполняю</b><small>Работа началась</small></div>
+              <div class="vessel-card vessel-card--status"><i>03</i><b>Выполняю</b><small>Работа началась</small></div>
               <span>→</span>
-              <div><i>04</i><b>Выполнил</b><small>Работа завершена</small></div>
+              <div class="vessel-card vessel-card--status"><i>04</i><b>Выполнил</b><small>Работа завершена</small></div>
             </div>
           </div>
         </article>
@@ -192,7 +204,7 @@
       </div>
     </section>
 
-    <section class="contrast-section section-pad" id="contrast" aria-labelledby="contrast-title">
+    <section class="contrast-section section-pad cinematic-chapter" id="contrast" aria-labelledby="contrast-title">
       <div class="contrast-topline"><span>ПРИНЦИП В РАБОТЕ</span><span>ОТ РАЗРОЗНЕННЫХ ДЕЙСТВИЙ К ЕДИНОМУ ПРОЦЕССУ</span></div>
       <div class="contrast-heading">
         <div><p class="contrast-overline"><i></i> ЧТО МЕНЯЕТСЯ С GRUZLI</p><h2 id="contrast-title">Не обещания.<br><em>Другой порядок действий.</em></h2></div>
@@ -204,7 +216,7 @@
         
       </div>
       <div class="contrast-panel" id="contrast-panel" role="tabpanel" tabindex="0" aria-live="polite">
-        <article class="contrast-card contrast-card-before">
+        <article class="contrast-card vessel-card vessel-card--contrast contrast-card-before">
           <div class="contrast-card-head"><span>КАК ЧАСТО БЫВАЕТ</span><b>РАЗРОЗНЕННЫЙ ПРОЦЕСС</b></div>
           <h3 id="contrast-before-title">Поиск смены в потоке сообщений.</h3>
           <ul id="contrast-before-list">
@@ -215,7 +227,7 @@
           <div class="contrast-card-foot"><span>ИНФОРМАЦИЯ РАСПРЕДЕЛЕНА</span><i>↗</i></div>
         </article>
         <div class="contrast-transition" aria-hidden="true"><span>→</span><small>СМЕНА ПОДХОДА</small></div>
-        <article class="contrast-card contrast-card-after">
+        <article class="contrast-card vessel-card vessel-card--contrast contrast-card-after">
           <div class="contrast-card-head"><span>СЦЕНАРИЙ GRUZLI</span><b><i></i> В ОДНОЙ ПЛАТФОРМЕ</b></div>
           <h3 id="contrast-after-title">Заявки собраны в рабочей ленте.</h3>
           <ul id="contrast-after-list">
@@ -229,7 +241,7 @@
       <div class="contrast-bottom"><p><b>Важно:</b> GRUZLI не гарантирует наличие заказа или мгновенный подбор команды. Платформа помогает участникам организовать заявку, отклики, коммуникацию и статусы в одном месте.</p><a class="contrast-link" href="/app/">Посмотреть приложение <span>↗</span></a></div>
     </section>
 
-    <section class="roles-section section-pad" id="roles">
+    <section class="roles-section section-pad cinematic-chapter" id="roles">
       <div class="section-kicker"><span>03 / ВЫБЕРИТЕ СВОЮ РОЛЬ</span><span>ДВА РАБОЧИХ СЦЕНАРИЯ</span></div>
       <div class="section-heading">
         <h2 class="reveal">Каждому —<br><em>свой инструмент.</em></h2>
@@ -269,7 +281,7 @@
       <div class="role-footnote"><span>ОДНО ПРИЛОЖЕНИЕ</span><i></i><span>ДИСПЕТЧЕР · ГРУЗЧИК</span></div>
     </section>
 
-    <section class="workflow-section section-pad" id="workflow">
+    <section class="workflow-section section-pad cinematic-chapter" id="workflow">
       <div class="workflow-watermark">G</div>
       <div class="section-kicker section-kicker-light"><span>04 / КАК ЭТО РАБОТАЕТ</span><span>ОТ ЗАПРОСА ДО ВЫПОЛНЕНИЯ</span></div>
       <div class="section-heading workflow-heading">
@@ -278,14 +290,14 @@
       </div>
       <div class="workflow-track">
         <div class="workflow-line"><span></span></div>
-        <article class="workflow-card reveal"><div class="workflow-top"><b>01</b><span>ДИСПЕТЧЕР</span></div><div class="workflow-icon">⌘</div><h3>Организует заказ</h3><p>Публикует заявку, рассматривает отклики, подбирает людей и управляет ходом выполнения.</p><div class="workflow-foot"><span>КООРДИНАЦИЯ</span><b>01 / 02</b></div></article>
-        <article class="workflow-card reveal"><div class="workflow-top"><b>02</b><span>ГРУЗЧИК</span></div><div class="workflow-icon">↗</div><h3>Выходит на смену</h3><p>Изучает условия, откликается, общается с диспетчером и отмечает статусы работы.</p><div class="workflow-foot"><span>ВЫПОЛНЕНИЕ</span><b>02 / 02</b></div></article>
+        <article class="workflow-card vessel-card vessel-card--process reveal"><div class="workflow-top"><b>01</b><span>ДИСПЕТЧЕР</span></div><div class="workflow-icon">⌘</div><h3>Организует заказ</h3><p>Публикует заявку, рассматривает отклики, подбирает людей и управляет ходом выполнения.</p><div class="workflow-foot"><span>КООРДИНАЦИЯ</span><b>01 / 02</b></div></article>
+        <article class="workflow-card vessel-card vessel-card--process reveal"><div class="workflow-top"><b>02</b><span>ГРУЗЧИК</span></div><div class="workflow-icon">↗</div><h3>Выходит на смену</h3><p>Изучает условия, откликается, общается с диспетчером и отмечает статусы работы.</p><div class="workflow-foot"><span>ВЫПОЛНЕНИЕ</span><b>02 / 02</b></div></article>
       </div>
       <div class="workflow-bottom"><span>СВЯЗЬ МЕЖДУ ЭТАПАМИ</span><p>Отклики, сообщения, статусы и документы не живут отдельно от заказа.</p></div>
     </section>
 
 
-    <section class="signature-section" id="signature" aria-labelledby="signature-title">
+    <section class="signature-section cinematic-chapter" id="signature" aria-labelledby="signature-title">
       <div class="signature-shell">
         <div class="signature-kicker"><span>05 / GRUZLI SIGNATURE EXPERIENCE</span><span>ИНТЕРАКТИВНЫЙ СЦЕНАРИЙ</span></div>
         <div class="signature-heading">
@@ -338,32 +350,32 @@
       </div>
     </section>
 
-    <section class="features-section section-pad">
+    <section class="features-section section-pad cinematic-chapter">
       <div class="section-kicker"><span>04 / ВОЗМОЖНОСТИ</span><span>ИНСТРУМЕНТЫ НА КАЖДОМ ЭТАПЕ</span></div>
       <div class="section-heading"><h2 class="reveal">Всё важное —<br><em>под рукой.</em></h2><p class="reveal">Лента, отклики, команда, картотека, чаты, документы и статусы собраны вокруг реальной работы.</p></div>
       <div class="features-grid">
-        <article class="feature-card reveal"><div class="feature-card-top"><span>⌕</span><b>01</b></div><h3>Лента и заявки</h3><p>Публикация заказов, поиск подходящих смен и понятные карточки с условиями.</p><i>↗</i></article>
-        <article class="feature-card reveal"><div class="feature-card-top"><span>◌</span><b>02</b></div><h3>Общение по делу</h3><p>Чаты между участниками помогают уточнять детали и держать связь по заказу.</p><i>↗</i></article>
-        <article class="feature-card reveal"><div class="feature-card-top"><span>▤</span><b>03</b></div><h3>Договоры и документы</h3><p>Для нужных заказов предусмотрены договоры, онлайн-подписание и PDF.</p><i>↗</i></article>
-        <article class="feature-card reveal"><div class="feature-card-top"><span>◈</span><b>04</b></div><h3>Профили и репутация</h3><p>Профили, рейтинги и история заказов помогают принимать более взвешенные решения.</p><i>↗</i></article>
-        <article class="feature-card reveal"><div class="feature-card-top"><span>◷</span><b>05</b></div><h3>Статусы и этапы</h3><p>Активные, завершаемые и выполненные заказы не смешиваются в одну ленту.</p><i>↗</i></article>
-        <article class="feature-card reveal"><div class="feature-card-top"><span>₽</span><b>06</b></div><h3>Условия и расчёты</h3><p>Ставка, длительность, начисленный заработок и финансовый итог заказа отображаются в контексте работы.</p><i>↗</i></article>
+        <article class="feature-card vessel-card vessel-card--feature reveal"><div class="feature-card-top"><span>⌕</span><b>01</b></div><h3>Лента и заявки</h3><p>Публикация заказов, поиск подходящих смен и понятные карточки с условиями.</p><i>↗</i></article>
+        <article class="feature-card vessel-card vessel-card--feature reveal"><div class="feature-card-top"><span>◌</span><b>02</b></div><h3>Общение по делу</h3><p>Чаты между участниками помогают уточнять детали и держать связь по заказу.</p><i>↗</i></article>
+        <article class="feature-card vessel-card vessel-card--feature reveal"><div class="feature-card-top"><span>▤</span><b>03</b></div><h3>Договоры и документы</h3><p>Для нужных заказов предусмотрены договоры, онлайн-подписание и PDF.</p><i>↗</i></article>
+        <article class="feature-card vessel-card vessel-card--feature reveal"><div class="feature-card-top"><span>◈</span><b>04</b></div><h3>Профили и репутация</h3><p>Профили, рейтинги и история заказов помогают принимать более взвешенные решения.</p><i>↗</i></article>
+        <article class="feature-card vessel-card vessel-card--feature reveal"><div class="feature-card-top"><span>◷</span><b>05</b></div><h3>Статусы и этапы</h3><p>Активные, завершаемые и выполненные заказы не смешиваются в одну ленту.</p><i>↗</i></article>
+        <article class="feature-card vessel-card vessel-card--feature reveal"><div class="feature-card-top"><span>₽</span><b>06</b></div><h3>Условия и расчёты</h3><p>Ставка, длительность, начисленный заработок и финансовый итог заказа отображаются в контексте работы.</p><i>↗</i></article>
       </div>
     </section>
 
-    <section class="screens-section" id="screens">
+    <section class="screens-section cinematic-chapter" id="screens">
       <div class="section-pad screens-head">
         <div class="section-kicker"><span>05 / ВНУТРИ ПРИЛОЖЕНИЯ</span><span>РЕАЛЬНЫЕ ЭКРАНЫ GRUZLI</span></div>
         <div class="section-heading"><h2 class="reveal">Знакомый интерфейс.<br><em>Понятный рабочий день.</em></h2><p class="reveal">Два реальных экрана нового интерфейса. Остальные сценарии показываем отдельно, не выдавая концепты за скриншоты.</p></div>
       </div>
       <div class="screens-rail screens-rail-new">
-        <article class="screen-card screen-card-main"><div class="screen-photo"><div class="screen-photo-index">01 / WORK FEED</div><img src="/images/gruzli-new-feed.webp" alt="Новый дизайн ленты заявок Gruzli" loading="lazy" /></div><div class="screen-caption"><b>Лента заявок</b><span>Новая карточка заказа, ставка и условия смены</span><i>01</i></div></article>
+        <article class="screen-card vessel-card vessel-card--screen screen-card-main"><div class="screen-photo"><div class="screen-photo-index">01 / WORK FEED</div><img src="/images/gruzli-new-feed.webp" alt="Новый дизайн ленты заявок Gruzli" loading="lazy" /></div><div class="screen-caption"><b>Лента заявок</b><span>Новая карточка заказа, ставка и условия смены</span><i>01</i></div></article>
         <article class="screen-card screen-card-main"><div class="screen-photo"><div class="screen-photo-index">02 / WORKER PROFILE</div><img src="/images/gruzli-new-profile.webp" alt="Новый дизайн профиля исполнителя Gruzli" loading="lazy" /></div><div class="screen-caption"><b>Профиль исполнителя</b><span>Рейтинг, история заказов и доступность</span><i>02</i></div></article>
       </div>
       <div class="screens-hint"><span>←</span> ПРОКРУТИТЕ, ЧТОБЫ ПОСМОТРЕТЬ ЭКРАНЫ <span>→</span></div>
     </section>
 
-    <section class="download-section section-pad" id="download">
+    <section class="download-section section-pad cinematic-chapter" id="download">
       <div class="download-glow"></div>
       <div class="download-top"><span>06 / НАЧАТЬ РАБОТУ</span><span>GRUZLI / ONE WORKFLOW</span></div>
       <div class="download-layout">
@@ -383,7 +395,7 @@
       <div class="download-wordmark">GRUZLI<span>®</span></div>
     </section>
 
-    <section class="faq-section section-pad" id="faq">
+    <section class="faq-section section-pad cinematic-chapter" id="faq">
       <div class="section-kicker"><span>07 / ВОПРОСЫ</span><span>КОРОТКО О ГЛАВНОМ</span></div>
       <div class="faq-layout">
         <div class="faq-intro reveal"><h2>Перед<br /><em>стартом.</em></h2><p>Ответы на вопросы диспетчеров и исполнителей.</p></div>
@@ -413,6 +425,6 @@
     <div class="lightbox-caption"></div>
   </dialog>
   <script type="module" src="/src/main.js"></script>
-  <script type="module" src="/src/motion-direction.js"></script>
+  <script type="module" src="/src/motion/index.js"></script>
 </body>
 </html>

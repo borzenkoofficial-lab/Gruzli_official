@@ -1,3 +1,5 @@
+import { initGooeyUI } from "../src/ui/gooey-nav.js";
+
 const deviceData={
  ios:{
   eyebrow:"IPHONE / PWA",
@@ -94,3 +96,21 @@ dots.forEach((dot,index)=>dot.addEventListener("click",()=>{currentStep=index;re
 document.querySelectorAll(".guide-step").forEach(button=>button.addEventListener("click",()=>{currentStep=Number(button.dataset.step);renderStep()}));
 document.querySelectorAll(".header-nav a[href^='#']").forEach(link=>link.addEventListener("click",()=>document.querySelector(link.getAttribute("href"))?.scrollIntoView({behavior:"smooth"})));
 document.querySelectorAll(".guide-step").forEach(button=>button.addEventListener("click",()=>{currentStep=Number(button.dataset.step);renderStep()}));
+
+
+initGooeyUI();
+const appMenuButton = document.querySelector(".app-menu-toggle");
+const appNav = document.querySelector(".header-nav");
+if (appMenuButton && appNav) {
+  appMenuButton.addEventListener("click", () => {
+    const expanded = appMenuButton.getAttribute("aria-expanded") === "true";
+    appMenuButton.setAttribute("aria-expanded", String(!expanded));
+    appMenuButton.setAttribute("aria-label", expanded ? "Открыть меню" : "Закрыть меню");
+    appNav.classList.toggle("is-open", !expanded);
+  });
+  appNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+    appNav.classList.remove("is-open");
+    appMenuButton.setAttribute("aria-expanded", "false");
+    appMenuButton.setAttribute("aria-label", "Открыть меню");
+  }));
+}

@@ -1,3 +1,10 @@
+import { initChapterAtmosphere } from "./ui/chapter-atmosphere.js";
+import { initGooeyUI } from "./ui/gooey-nav.js";
+import { gsap } from "./motion/core.js";
+
+initGooeyUI();
+initChapterAtmosphere();
+
 const roleContent = {
   worker: {
     eyebrow: "ДЛЯ ТЕХ, КТО ГОТОВ ВЫЙТИ НА СМЕНУ",
@@ -22,7 +29,6 @@ const roleContent = {
 };
 
 const roleTabs = Array.from(document.querySelectorAll(".role-tab"));
-const rolePanel = document.querySelector(".role-panel");
 const roleVisual = document.querySelector("#role-visual");
 const roleFields = {
   eyebrow: document.querySelector("#role-eyebrow"),
@@ -39,7 +45,7 @@ const visualMarkup = {
   dispatcher: '<div class="role-scenario dispatcher-scenario"><div class="scenario-top"><span>02 / DISPATCH DESK</span><b><i></i> РАБОЧЕЕ ПРОСТРАНСТВО</b></div><div class="scenario-title"><small>УПРАВЛЕНИЕ ЗАКАЗАМИ</small><strong>Заявки <em>и команда</em></strong><span>Единый обзор текущей работы</span></div><div class="dispatch-board"><div class="dispatch-board-head"><b>АКТИВНЫЕ ЭТАПЫ</b><span>01—03</span></div><div class="dispatch-row"><i class="dispatch-mark">01</i><span><b>Новая заявка</b><small>Проверить условия и детали</small></span><em>НОВАЯ</em></div><div class="dispatch-row"><i class="dispatch-mark">02</i><span><b>Подбор исполнителей</b><small>Отклики и состав команды</small></span><em class="is-warm">В РАБОТЕ</em></div><div class="dispatch-row"><i class="dispatch-mark">03</i><span><b>Выполнение заказа</b><small>Статус и коммуникация</small></span><em>КОНТРОЛЬ</em></div></div><div class="scenario-foot"><span>ЗАЯВКИ</span><i></i><span>ИСПОЛНИТЕЛИ</span><i></i><span>СТАТУСЫ</span></div><div class="scenario-orbit"></div></div>',
 };
 
-let roleSwitchTimer = 0;
+let roleSwitchTimeline;
 function selectRole(role) {
   const item = roleContent[role];
   if (!item) return;
@@ -49,9 +55,8 @@ function selectRole(role) {
     tab.setAttribute("aria-selected", String(active));
     tab.setAttribute("tabindex", active ? "0" : "-1");
   });
-  window.clearTimeout(roleSwitchTimer);
-  rolePanel.classList.add("is-switching");
-  roleSwitchTimer = window.setTimeout(() => {
+
+  const updateContent = () => {
     roleFields.eyebrow.textContent = item.eyebrow;
     roleFields.title.textContent = item.title;
     roleFields.accent.textContent = item.accent;
@@ -66,9 +71,46 @@ function selectRole(role) {
       return li;
     }));
     roleVisual.classList.toggle("dispatcher-mode", role === "dispatcher");
-      roleVisual.innerHTML = visualMarkup[item.visual];
-    rolePanel.classList.remove("is-switching");
-  }, 150);
+    roleVisual.innerHTML = visualMarkup[item.visual];
+  };
+
+  const targets = [
+    roleFields.eyebrow, roleFields.title, roleFields.accent,
+    roleFields.description, roleFields.points, roleFields.note,
+    roleFields.cta, roleVisual,
+  ];
+  roleSwitchTimeline?.kill();
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    updateContent();
+    gsap.set(targets, { autoAlpha: 1, y: 0, clearProps: "transform" });
+    return;
+  }
+
+  roleSwitchTimeline = gsap.timeline();
+  roleSwitchTimeline
+    .to(targets, {
+      autoAlpha: 0,
+      y: 8,
+      duration: 0.16,
+      stagger: 0.014,
+      ease: "power1.out",
+      overwrite: "auto",
+    })
+    .add(updateContent)
+    .fromTo(targets,
+      { autoAlpha: 0, y: 9 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.42,
+        stagger: 0.024,
+        ease: "power3.out",
+        force3D: true,
+        clearProps: "transform,opacity,visibility",
+      },
+      "-=0.02",
+    );
 }
 
 roleTabs.forEach((tab, index) => {
@@ -90,15 +132,34 @@ document.querySelectorAll(".faq-item > button").forEach((button) => {
   button.addEventListener("click", () => {
     const item = button.closest(".faq-item");
     const shouldOpen = !item.classList.contains("is-open");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     document.querySelectorAll(".faq-item").forEach((entry) => {
+      const answer = entry.querySelector(".faq-answer p");
+      const wasOpen = entry.classList.contains("is-open");
       entry.classList.remove("is-open");
       entry.querySelector("button").setAttribute("aria-expanded", "false");
       entry.querySelector("button i").textContent = "+";
+      if (wasOpen && !reduce) {
+        gsap.to(answer, { autoAlpha: 0, y: -4, duration: 0.12, ease: "power1.out", overwrite: true });
+      } else if (reduce) {
+        gsap.set(answer, { autoAlpha: 1, y: 0, clearProps: "transform" });
+      }
     });
+
     if (shouldOpen) {
       item.classList.add("is-open");
       button.setAttribute("aria-expanded", "true");
       button.querySelector("i").textContent = "−";
+      const answer = item.querySelector(".faq-answer p");
+      if (reduce) {
+        gsap.set(answer, { autoAlpha: 1, y: 0, clearProps: "transform" });
+      } else {
+        gsap.fromTo(answer,
+          { autoAlpha: 0, y: 7 },
+          { autoAlpha: 1, y: 0, duration: 0.32, delay: 0.1, ease: "power3.out", clearProps: "transform,opacity,visibility" },
+        );
+      }
     }
   });
 });
@@ -119,22 +180,6 @@ nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () =>
 
 document.querySelector("#year").textContent = String(new Date().getFullYear());
 
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const revealItems = document.querySelectorAll(".reveal");
-if (!reducedMotion && "IntersectionObserver" in window) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  revealItems.forEach((item) => observer.observe(item));
-} else {
-  revealItems.forEach((item) => item.classList.add("is-visible"));
-}
-
 const header = document.querySelector(".site-header");
 let scrollFrame = 0;
 const updateHeader = () => {
@@ -145,21 +190,6 @@ window.addEventListener("scroll", () => {
   if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateHeader);
 }, { passive: true });
 updateHeader();
-
-const heroVisual = document.querySelector(".hero-visual");
-if (!reducedMotion && window.matchMedia("(pointer:fine)").matches) {
-  heroVisual.addEventListener("pointermove", (event) => {
-    const rect = heroVisual.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - .5) * 2;
-    const y = ((event.clientY - rect.top) / rect.height - .5) * 2;
-    heroVisual.style.setProperty("--pointer-x", x.toFixed(3));
-    heroVisual.style.setProperty("--pointer-y", y.toFixed(3));
-  }, { passive: true });
-  heroVisual.addEventListener("pointerleave", () => {
-    heroVisual.style.setProperty("--pointer-x", "0");
-    heroVisual.style.setProperty("--pointer-y", "0");
-  }, { passive: true });
-}
 
 document.querySelectorAll(".screen-card").forEach((card) => {
   const image = card.querySelector("img");
@@ -207,51 +237,54 @@ if ("IntersectionObserver" in window) {
   sectionLinks.forEach((link) => sectionObserver.observe(document.querySelector(link.getAttribute("href"))));
 }
 
-const workflowCards = Array.from(document.querySelectorAll(".workflow-card"));
-if (!reducedMotion && "IntersectionObserver" in window) {
-  const workflowObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("is-in-view");
-      else entry.target.classList.remove("is-in-view");
-    });
-  }, { threshold: .58 });
-  workflowCards.forEach((card) => workflowObserver.observe(card));
-} else {
-  workflowCards.forEach((card) => card.classList.add("is-in-view"));
-}
-
-if (!reducedMotion && window.matchMedia("(pointer:fine)").matches) {
-  document.querySelectorAll(".workflow-card,.feature-card").forEach((card) => {
-    card.addEventListener("pointermove", (event) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--card-x", (event.clientX - rect.left) + "px");
-      card.style.setProperty("--card-y", (event.clientY - rect.top) + "px");
-    }, { passive: true });
-    card.addEventListener("pointerleave", () => {
-      card.style.setProperty("--card-x", "50%");
-      card.style.setProperty("--card-y", "50%");
-    }, { passive: true });
-  });
-}
-
 const lightbox = document.querySelector(".screen-lightbox");
 const lightboxImage = lightbox.querySelector(".lightbox-image");
 const lightboxCaption = lightbox.querySelector(".lightbox-caption");
-const closeLightbox = () => {
+let lightboxTimeline;
+const finishLightboxClose = () => {
   if (lightbox.open) lightbox.close();
   document.body.classList.remove("lightbox-open");
   lightboxImage.removeAttribute("src");
+  gsap.set([lightbox, lightboxImage], { clearProps: "all" });
+};
+const closeLightbox = () => {
+  if (!lightbox.open) return;
+  lightboxTimeline?.kill();
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    finishLightboxClose();
+    return;
+  }
+  lightboxTimeline = gsap.timeline({ onComplete: finishLightboxClose });
+  lightboxTimeline
+    .to(lightboxImage, { autoAlpha: 0, scale: 0.97, duration: 0.16, ease: "power2.in" })
+    .to(lightbox, { autoAlpha: 0, duration: 0.16, ease: "power1.in" }, 0);
 };
 document.querySelectorAll(".screen-photo img").forEach((image) => {
   image.setAttribute("tabindex", "0");
   image.setAttribute("role", "button");
   image.setAttribute("aria-label", "Увеличить: " + image.alt);
   const openImage = () => {
+    lightboxTimeline?.kill();
     lightboxImage.src = image.currentSrc || image.src;
     lightboxImage.alt = image.alt;
     lightboxCaption.textContent = image.alt;
     if (!lightbox.open) lightbox.showModal();
     document.body.classList.add("lightbox-open");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set([lightbox, lightboxImage], { autoAlpha: 1, scale: 1, y: 0, clearProps: "transform" });
+      return;
+    }
+    lightboxTimeline = gsap.timeline();
+    lightboxTimeline
+      .fromTo(lightbox,
+        { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 0.2, ease: "power2.out", overwrite: true },
+      )
+      .fromTo(lightboxImage,
+        { autoAlpha: 0, scale: 0.96, y: 8 },
+        { autoAlpha: 1, scale: 1, y: 0, duration: 0.42, ease: "power3.out", force3D: true, clearProps: "transform,opacity,visibility" },
+        "<",
+      );
   };
   image.addEventListener("click", openImage);
   image.addEventListener("keydown", (event) => {
@@ -264,6 +297,10 @@ document.querySelectorAll(".screen-photo img").forEach((image) => {
 lightbox.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
 lightbox.addEventListener("click", (event) => {
   if (event.target === lightbox) closeLightbox();
+});
+lightbox.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeLightbox();
 });
 lightbox.addEventListener("close", () => document.body.classList.remove("lightbox-open"));
 
@@ -294,23 +331,71 @@ lightbox.addEventListener("close", () => document.body.classList.remove("lightbo
   const next = root.querySelector("#signature-next"), prev = root.querySelector("#signature-prev");
   const count = root.querySelector("#signature-step-count");
   let role = "dispatcher", stage = 0;
-  const render = () => {
+  const perspective = root.querySelector(".signature-perspective");
+  const stageEvent = root.querySelector("#signature-stage-event");
+  let transition;
+  gsap.set(fill, { scaleX: 0.25, transformOrigin: "left center" });
+
+  const updateContent = () => {
     const data = stages[stage][role];
-    root.querySelector(".signature-perspective").classList.add("is-changing");
-    window.setTimeout(() => {
-      title.textContent = data[0]; copy.textContent = data[1]; action.textContent = data[2];
-      roleLabel.textContent = roles[role][0]; stageLabel.textContent = "ЭТАП 0"+(stage+1);
-      icon.textContent = role==="dispatcher"?"⌘":"✓";
-      eventTitle.textContent = stages[stage][role][3]; eventCopy.textContent = stages[stage][role][4];
-      eventIndex.textContent = "0"+(stage+1); count.textContent = "0"+(stage+1)+" / 04";
-      fill.style.width = ((stage+1)*25)+"%";
-      progressLabels.forEach((el,i)=>el.classList.toggle("is-current",i===stage));
-      progressLabels.forEach((el,i)=>el.classList.toggle("is-done",i<stage));
-      Object.entries(nodes).forEach(([key,node])=>node.classList.toggle("is-active",key===role));
-      prev.disabled = stage===0;
-      next.innerHTML = stage===3 ? "Повторить сценарий <span>↻</span>" : "Следующий этап <span>→</span>";
-      root.querySelector(".signature-perspective").classList.remove("is-changing");
-    }, 120);
+    title.textContent = data[0];
+    copy.textContent = data[1];
+    action.textContent = data[2];
+    roleLabel.textContent = roles[role][0];
+    stageLabel.textContent = "ЭТАП 0" + (stage + 1);
+    icon.textContent = role === "dispatcher" ? "⌘" : "✓";
+    eventTitle.textContent = data[3];
+    eventCopy.textContent = data[4];
+    eventIndex.textContent = "0" + (stage + 1);
+    count.textContent = "0" + (stage + 1) + " / 04";
+    progressLabels.forEach((el, i) => el.classList.toggle("is-current", i === stage));
+    progressLabels.forEach((el, i) => el.classList.toggle("is-done", i < stage));
+    Object.entries(nodes).forEach(([key, node]) => node.classList.toggle("is-active", key === role));
+    prev.disabled = stage === 0;
+    next.innerHTML = stage === 3 ? "Повторить сценарий <span>↻</span>" : "Следующий этап <span>→</span>";
+  };
+
+  const render = () => {
+    transition?.kill();
+    const progress = (stage + 1) * 0.25;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      updateContent();
+      gsap.set([perspective, stageEvent], { autoAlpha: 1, y: 0, clearProps: "transform" });
+      gsap.set(fill, { scaleX: progress });
+      return;
+    }
+
+    transition = gsap.timeline();
+    transition
+      .to([perspective, stageEvent], {
+        autoAlpha: 0,
+        y: -7,
+        duration: 0.14,
+        stagger: 0.025,
+        ease: "power1.out",
+        overwrite: "auto",
+      })
+      .add(updateContent)
+      .fromTo([perspective, stageEvent],
+        { autoAlpha: 0, y: 10 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.36,
+          stagger: 0.04,
+          ease: "power3.out",
+          force3D: true,
+          clearProps: "transform,opacity,visibility",
+        },
+        "-=0.02",
+      );
+
+    gsap.to(fill, {
+      scaleX: progress,
+      duration: 0.52,
+      ease: "power3.out",
+      overwrite: "auto",
+    });
   };
   roleButtons.forEach(button=>button.addEventListener("click",()=>{
     role=button.dataset.signatureRole;
